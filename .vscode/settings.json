@@ -1,0 +1,8 @@
+{
+    "files.associations": {
+        "fm_init_project.h": "c",
+        "fm_rtc.h": "c",
+        "stm32f1xx_hal_rtc.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
+}

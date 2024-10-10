@@ -1,0 +1,147 @@
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cc2Xo7oX.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"fm_init_project.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.file 1 "Core/Src/fm_init_project.c"
+  18              		.section	.rodata.fm_fc_init.str1.4,"aMS",%progbits,1
+  19              		.align	2
+  20              	.LC0:
+  21 0000 2A2A2A3D 		.ascii	"***==> LOG: Initlized Project======================"
+  21      3D3E204C 
+  21      4F473A20 
+  21      496E6974 
+  21      6C697A65 
+  22 0033 3D3D3D3D 		.ascii	"========***\015\000"
+  22      3D3D3D3D 
+  22      2A2A2A0D 
+  22      00
+  23              		.align	2
+  24              	.LC1:
+  25 0040 2A2A2A3D 		.ascii	"***==> Project: FM V0.3                            "
+  25      3D3E2050 
+  25      726F6A65 
+  25      63743A20 
+  25      464D2056 
+  26 0073 20202020 		.ascii	"        ***\015\000"
+  26      20202020 
+  26      2A2A2A0D 
+  26      00
+  27              		.align	2
+  28              	.LC2:
+  29 0080 2A2A2A3D 		.ascii	"***==> Company: DP.Greens                          "
+  29      3D3E2043 
+  29      6F6D7061 
+  29      6E793A20 
+  29      44502E47 
+  30 00b3 20202020 		.ascii	"        ***\015\000"
+  30      20202020 
+  30      2A2A2A0D 
+  30      00
+  31              		.align	2
+  32              	.LC3:
+  33 00c0 2A2A2A3D 		.ascii	"***==> Developed by: CDP                           "
+  33      3D3E2044 
+  33      6576656C 
+  33      6F706564 
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cc2Xo7oX.s 			page 2
+
+
+  33      2062793A 
+  34 00f3 20202020 		.ascii	"        ***\015\000"
+  34      20202020 
+  34      2A2A2A0D 
+  34      00
+  35              		.section	.text.fm_fc_init,"ax",%progbits
+  36              		.align	1
+  37              		.global	fm_fc_init
+  38              		.syntax unified
+  39              		.thumb
+  40              		.thumb_func
+  42              	fm_fc_init:
+  43              	.LFB68:
+   1:Core/Src/fm_init_project.c **** #include "fm_init_project.h"
+   2:Core/Src/fm_init_project.c **** 
+   3:Core/Src/fm_init_project.c **** void fm_fc_init(){
+  44              		.loc 1 3 18 view -0
+  45              		.cfi_startproc
+  46              		@ args = 0, pretend = 0, frame = 0
+  47              		@ frame_needed = 0, uses_anonymous_args = 0
+  48 0000 08B5     		push	{r3, lr}
+  49              	.LCFI0:
+  50              		.cfi_def_cfa_offset 8
+  51              		.cfi_offset 3, -8
+  52              		.cfi_offset 14, -4
+   4:Core/Src/fm_init_project.c ****         HAL_Delay(2000);
+  53              		.loc 1 4 9 view .LVU1
+  54 0002 4FF4FA60 		mov	r0, #2000
+  55 0006 FFF7FEFF 		bl	HAL_Delay
+  56              	.LVL0:
+   5:Core/Src/fm_init_project.c ****         printf("***==> LOG: Initlized Project==============================***\r\n"); 
+  57              		.loc 1 5 9 view .LVU2
+  58 000a 0648     		ldr	r0, .L3
+  59 000c FFF7FEFF 		bl	puts
+  60              	.LVL1:
+   6:Core/Src/fm_init_project.c ****         printf("***==> Project: FM V0.3                                    ***\r\n");
+  61              		.loc 1 6 9 view .LVU3
+  62 0010 0548     		ldr	r0, .L3+4
+  63 0012 FFF7FEFF 		bl	puts
+  64              	.LVL2:
+   7:Core/Src/fm_init_project.c ****         printf("***==> Company: DP.Greens                                  ***\r\n");
+  65              		.loc 1 7 9 view .LVU4
+  66 0016 0548     		ldr	r0, .L3+8
+  67 0018 FFF7FEFF 		bl	puts
+  68              	.LVL3:
+   8:Core/Src/fm_init_project.c ****         printf("***==> Developed by: CDP                                   ***\r\n");
+  69              		.loc 1 8 9 view .LVU5
+  70 001c 0448     		ldr	r0, .L3+12
+  71 001e FFF7FEFF 		bl	puts
+  72              	.LVL4:
+   9:Core/Src/fm_init_project.c **** }...
+  73              		.loc 1 9 1 is_stmt 0 view .LVU6
+  74 0022 08BD     		pop	{r3, pc}
+  75              	.L4:
+  76              		.align	2
+  77              	.L3:
+  78 0024 00000000 		.word	.LC0
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cc2Xo7oX.s 			page 3
+
+
+  79 0028 40000000 		.word	.LC1
+  80 002c 80000000 		.word	.LC2
+  81 0030 C0000000 		.word	.LC3
+  82              		.cfi_endproc
+  83              	.LFE68:
+  85              		.text
+  86              	.Letext0:
+  87              		.file 2 "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.2 Rel1/arm-none-eabi/include/ma
+  88              		.file 3 "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.2 Rel1/arm-none-eabi/include/sy
+  89              		.file 4 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+  90              		.file 5 "<built-in>"
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cc2Xo7oX.s 			page 4
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 fm_init_project.c
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cc2Xo7oX.s:19     .rodata.fm_fc_init.str1.4:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cc2Xo7oX.s:36     .text.fm_fc_init:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cc2Xo7oX.s:42     .text.fm_fc_init:00000000 fm_fc_init
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cc2Xo7oX.s:78     .text.fm_fc_init:00000024 $d
+
+UNDEFINED SYMBOLS
+HAL_Delay
+puts

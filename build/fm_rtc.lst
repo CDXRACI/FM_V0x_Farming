@@ -1,0 +1,1402 @@
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"fm_rtc.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.file 1 "Core/Src/fm_rtc.c"
+  18              		.section	.rodata.FM_V0x_RTC_Set_Time.str1.4,"aMS",%progbits,1
+  19              		.align	2
+  20              	.LC0:
+  21 0000 0D0A5254 		.ascii	"\015\012RTC STATE: RTC was set time. Mode is: %d\015"
+  21      43205354 
+  21      4154453A 
+  21      20525443 
+  21      20776173 
+  22 002b 0A00     		.ascii	"\012\000"
+  23              		.section	.text.FM_V0x_RTC_Set_Time,"ax",%progbits
+  24              		.align	1
+  25              		.global	FM_V0x_RTC_Set_Time
+  26              		.syntax unified
+  27              		.thumb
+  28              		.thumb_func
+  30              	FM_V0x_RTC_Set_Time:
+  31              	.LFB69:
+   1:Core/Src/fm_rtc.c **** /* __FM_RTC_C */
+   2:Core/Src/fm_rtc.c **** 
+   3:Core/Src/fm_rtc.c **** #include "fm_rtc.h"
+   4:Core/Src/fm_rtc.c **** 
+   5:Core/Src/fm_rtc.c **** FM_V0x_Parameters_RTC_t              FM_V0x_RTC_Pars  ;
+   6:Core/Src/fm_rtc.c **** FM_V0x_Parameters_RTC_t              FM_V0x_Get_RTC   ;
+   7:Core/Src/fm_rtc.c **** FM_V0x_Alarm_RTC_t                   FM_V0x_Alarm_RTC ;
+   8:Core/Src/fm_rtc.c **** FM_V0x_RTC_States_t                  FM_V0x_RTC_States;
+   9:Core/Src/fm_rtc.c **** RTC_TimeTypeDef                                  pTime;
+  10:Core/Src/fm_rtc.c **** RTC_HandleTypeDef                                 hrtc;
+  11:Core/Src/fm_rtc.c **** RTC_TimeTypeDef                                  sTime;
+  12:Core/Src/fm_rtc.c **** RTC_DateTypeDef                           DateToUpdate;
+  13:Core/Src/fm_rtc.c **** 
+  14:Core/Src/fm_rtc.c **** 
+  15:Core/Src/fm_rtc.c **** extern void Error_Handler(void);
+  16:Core/Src/fm_rtc.c **** 
+  17:Core/Src/fm_rtc.c **** uint8_t FM_V0x_Rtc_Init( void ){
+  18:Core/Src/fm_rtc.c ****         FM_V0x_RTC_States = FM_V0x_RTC_STATE_FLAG_IS_OFF;
+  19:Core/Src/fm_rtc.c ****         printf("--> \"FM_RTC_V0x is Initializing... \" \r\n");
+  20:Core/Src/fm_rtc.c ****         printf("--> Time and Data were initialized is: 7h-21min-00s \r\n");
+  21:Core/Src/fm_rtc.c ****     
+  22:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Hour   = 0X05;
+  23:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Min    = 0x59;
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 2
+
+
+  24:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Second =    0;
+  25:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Day    = 0x12;
+  26:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Mon    = 0x09;
+  27:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Year   = 0x24;
+  28:Core/Src/fm_rtc.c ****     
+  29:Core/Src/fm_rtc.c ****         FM_V0x_RTC_States = FM_V0x_RTC_STATE_FLAG_IS_ON;
+  30:Core/Src/fm_rtc.c ****         printf("RTC STATE: RTC Was intialized. Mode is: %d\r\n", FM_V0x_RTC_States);
+  31:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Set_Time(FM_V0x_RTC_Pars );
+  32:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Set_Date(FM_V0x_RTC_Pars );
+  33:Core/Src/fm_rtc.c ****         return FM_V0x_RTC_States;
+  34:Core/Src/fm_rtc.c **** }
+  35:Core/Src/fm_rtc.c **** 
+  36:Core/Src/fm_rtc.c **** uint8_t FM_V0x_RTC_Set_Time (FM_V0x_Parameters_RTC_t  RTC_SetTime ){
+  32              		.loc 1 36 68 view -0
+  33              		.cfi_startproc
+  34              		@ args = 0, pretend = 0, frame = 16
+  35              		@ frame_needed = 0, uses_anonymous_args = 0
+  36 0000 00B5     		push	{lr}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 4
+  39              		.cfi_offset 14, -4
+  40 0002 85B0     		sub	sp, sp, #20
+  41              	.LCFI1:
+  42              		.cfi_def_cfa_offset 24
+  43 0004 0DF1100C 		add	ip, sp, #16
+  44 0008 0CE90F00 		stmdb	ip, {r0, r1, r2, r3}
+  37:Core/Src/fm_rtc.c **** 
+  38:Core/Src/fm_rtc.c ****         if( FM_V0x_RTC_States == FM_V0x_RTC_STATE_FLAG_IS_ON ){
+  45              		.loc 1 38 9 view .LVU1
+  46              		.loc 1 38 31 is_stmt 0 view .LVU2
+  47 000c 1F4B     		ldr	r3, .L11
+  48 000e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  49              		.loc 1 38 11 view .LVU3
+  50 0010 012B     		cmp	r3, #1
+  51 0012 04D0     		beq	.L7
+  52              	.L2:
+  39:Core/Src/fm_rtc.c ****             hrtc.Instance = RTC;   
+  40:Core/Src/fm_rtc.c ****             if (( RTC_SetTime.Set_Hour >= FM_V0x_CHECK_TIME_IS_24HOUR ) && ( RTC_SetTime.Set_Hour <
+  41:Core/Src/fm_rtc.c ****                 printf("-->BUG: Hour in RTC's Setting is not seted \r\n");
+  42:Core/Src/fm_rtc.c ****                 return false;
+  43:Core/Src/fm_rtc.c ****             }
+  44:Core/Src/fm_rtc.c ****         //    if( HAL_RTCEx_BKUPRead( &hrtc, RTC_BKP_DR1 ) != 0x32F2 ){
+  45:Core/Src/fm_rtc.c ****             hrtc.Init.AsynchPrediv = RTC_AUTO_1_SECOND;
+  46:Core/Src/fm_rtc.c ****             hrtc.Init.OutPut = RTC_OUTPUTSOURCE_ALARM;
+  47:Core/Src/fm_rtc.c ****             if (HAL_RTC_Init( &hrtc ) != HAL_OK ){
+  48:Core/Src/fm_rtc.c ****                 Error_Handler( ); }
+  49:Core/Src/fm_rtc.c ****         if( HAL_RTCEx_BKUPRead( &hrtc, RTC_BKP_DR1 ) != 0x32F2 ){
+  50:Core/Src/fm_rtc.c ****             sTime.Hours   =  RTC_SetTime.Set_Hour;
+  51:Core/Src/fm_rtc.c ****             sTime.Minutes =  RTC_SetTime.Set_Min;
+  52:Core/Src/fm_rtc.c ****             sTime.Seconds =  RTC_SetTime.Set_Second; 
+  53:Core/Src/fm_rtc.c **** 
+  54:Core/Src/fm_rtc.c ****             if (HAL_RTC_SetTime( &hrtc, &sTime, RTC_FORMAT_BCD ) != HAL_OK ){
+  55:Core/Src/fm_rtc.c ****                 Error_Handler( );}
+  56:Core/Src/fm_rtc.c ****       
+  57:Core/Src/fm_rtc.c ****          HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x32F2 );}
+  58:Core/Src/fm_rtc.c ****             FM_V0x_RTC_States  = FM_V0x_RTC_STATE_FLAG_IS_2;
+  59:Core/Src/fm_rtc.c ****             printf("\r\nRTC STATE: RTC was set time. Mode is: %d\r\n", FM_V0x_RTC_States);
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 3
+
+
+  60:Core/Src/fm_rtc.c ****         }
+  61:Core/Src/fm_rtc.c ****         if (( sTime.Hours >= FM_V0x_CHECK_TIME_IS_24HOUR ) && ( sTime.Hours < FM_V0x_CHECK_TIME_IS_
+  53              		.loc 1 61 9 is_stmt 1 view .LVU4
+  62:Core/Src/fm_rtc.c ****                 printf( "-->BUG: Hour in RTC isn't set!\r\n" );
+  63:Core/Src/fm_rtc.c ****                 return false;
+  64:Core/Src/fm_rtc.c ****         } else {
+  65:Core/Src/fm_rtc.c ****                 return FM_V0x_RTC_States;
+  54              		.loc 1 65 17 view .LVU5
+  66:Core/Src/fm_rtc.c ****         }
+  67:Core/Src/fm_rtc.c **** }
+  55              		.loc 1 67 1 is_stmt 0 view .LVU6
+  56 0014 1D4B     		ldr	r3, .L11
+  57 0016 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+  58 0018 05B0     		add	sp, sp, #20
+  59              	.LCFI2:
+  60              		.cfi_remember_state
+  61              		.cfi_def_cfa_offset 4
+  62              		@ sp needed
+  63 001a 5DF804FB 		ldr	pc, [sp], #4
+  64              	.L7:
+  65              	.LCFI3:
+  66              		.cfi_restore_state
+  39:Core/Src/fm_rtc.c ****             if (( RTC_SetTime.Set_Hour >= FM_V0x_CHECK_TIME_IS_24HOUR ) && ( RTC_SetTime.Set_Hour <
+  67              		.loc 1 39 13 is_stmt 1 view .LVU7
+  39:Core/Src/fm_rtc.c ****             if (( RTC_SetTime.Set_Hour >= FM_V0x_CHECK_TIME_IS_24HOUR ) && ( RTC_SetTime.Set_Hour <
+  68              		.loc 1 39 27 is_stmt 0 view .LVU8
+  69 001e 1C48     		ldr	r0, .L11+4
+  70 0020 1C4B     		ldr	r3, .L11+8
+  71 0022 0360     		str	r3, [r0]
+  40:Core/Src/fm_rtc.c ****                 printf("-->BUG: Hour in RTC's Setting is not seted \r\n");
+  72              		.loc 1 40 13 is_stmt 1 view .LVU9
+  45:Core/Src/fm_rtc.c ****             hrtc.Init.OutPut = RTC_OUTPUTSOURCE_ALARM;
+  73              		.loc 1 45 13 view .LVU10
+  45:Core/Src/fm_rtc.c ****             hrtc.Init.OutPut = RTC_OUTPUTSOURCE_ALARM;
+  74              		.loc 1 45 36 is_stmt 0 view .LVU11
+  75 0024 4FF0FF33 		mov	r3, #-1
+  76 0028 4360     		str	r3, [r0, #4]
+  46:Core/Src/fm_rtc.c ****             if (HAL_RTC_Init( &hrtc ) != HAL_OK ){
+  77              		.loc 1 46 13 is_stmt 1 view .LVU12
+  46:Core/Src/fm_rtc.c ****             if (HAL_RTC_Init( &hrtc ) != HAL_OK ){
+  78              		.loc 1 46 30 is_stmt 0 view .LVU13
+  79 002a 4FF48073 		mov	r3, #256
+  80 002e 8360     		str	r3, [r0, #8]
+  47:Core/Src/fm_rtc.c ****                 Error_Handler( ); }
+  81              		.loc 1 47 13 is_stmt 1 view .LVU14
+  47:Core/Src/fm_rtc.c ****                 Error_Handler( ); }
+  82              		.loc 1 47 17 is_stmt 0 view .LVU15
+  83 0030 FFF7FEFF 		bl	HAL_RTC_Init
+  84              	.LVL0:
+  47:Core/Src/fm_rtc.c ****                 Error_Handler( ); }
+  85              		.loc 1 47 16 discriminator 1 view .LVU16
+  86 0034 70B9     		cbnz	r0, .L8
+  87              	.L3:
+  49:Core/Src/fm_rtc.c ****             sTime.Hours   =  RTC_SetTime.Set_Hour;
+  88              		.loc 1 49 9 is_stmt 1 view .LVU17
+  49:Core/Src/fm_rtc.c ****             sTime.Hours   =  RTC_SetTime.Set_Hour;
+  89              		.loc 1 49 13 is_stmt 0 view .LVU18
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 4
+
+
+  90 0036 0121     		movs	r1, #1
+  91 0038 1548     		ldr	r0, .L11+4
+  92 003a FFF7FEFF 		bl	HAL_RTCEx_BKUPRead
+  93              	.LVL1:
+  49:Core/Src/fm_rtc.c ****             sTime.Hours   =  RTC_SetTime.Set_Hour;
+  94              		.loc 1 49 11 discriminator 1 view .LVU19
+  95 003e 43F2F223 		movw	r3, #13042
+  96 0042 9842     		cmp	r0, r3
+  97 0044 09D1     		bne	.L9
+  98              	.L4:
+  58:Core/Src/fm_rtc.c ****             printf("\r\nRTC STATE: RTC was set time. Mode is: %d\r\n", FM_V0x_RTC_States);
+  99              		.loc 1 58 13 is_stmt 1 view .LVU20
+  58:Core/Src/fm_rtc.c ****             printf("\r\nRTC STATE: RTC was set time. Mode is: %d\r\n", FM_V0x_RTC_States);
+ 100              		.loc 1 58 32 is_stmt 0 view .LVU21
+ 101 0046 0221     		movs	r1, #2
+ 102 0048 104B     		ldr	r3, .L11
+ 103 004a 1970     		strb	r1, [r3]
+  59:Core/Src/fm_rtc.c ****         }
+ 104              		.loc 1 59 13 is_stmt 1 view .LVU22
+ 105 004c 1248     		ldr	r0, .L11+12
+ 106 004e FFF7FEFF 		bl	printf
+ 107              	.LVL2:
+ 108 0052 DFE7     		b	.L2
+ 109              	.L8:
+  48:Core/Src/fm_rtc.c ****         if( HAL_RTCEx_BKUPRead( &hrtc, RTC_BKP_DR1 ) != 0x32F2 ){
+ 110              		.loc 1 48 17 view .LVU23
+ 111 0054 FFF7FEFF 		bl	Error_Handler
+ 112              	.LVL3:
+ 113 0058 EDE7     		b	.L3
+ 114              	.L9:
+  50:Core/Src/fm_rtc.c ****             sTime.Minutes =  RTC_SetTime.Set_Min;
+ 115              		.loc 1 50 13 view .LVU24
+  50:Core/Src/fm_rtc.c ****             sTime.Minutes =  RTC_SetTime.Set_Min;
+ 116              		.loc 1 50 41 is_stmt 0 view .LVU25
+ 117 005a 9DF80230 		ldrb	r3, [sp, #2]	@ zero_extendqisi2
+  50:Core/Src/fm_rtc.c ****             sTime.Minutes =  RTC_SetTime.Set_Min;
+ 118              		.loc 1 50 27 view .LVU26
+ 119 005e 0F49     		ldr	r1, .L11+16
+ 120 0060 0B70     		strb	r3, [r1]
+  51:Core/Src/fm_rtc.c ****             sTime.Seconds =  RTC_SetTime.Set_Second; 
+ 121              		.loc 1 51 13 is_stmt 1 view .LVU27
+  51:Core/Src/fm_rtc.c ****             sTime.Seconds =  RTC_SetTime.Set_Second; 
+ 122              		.loc 1 51 41 is_stmt 0 view .LVU28
+ 123 0062 9DF80130 		ldrb	r3, [sp, #1]	@ zero_extendqisi2
+  51:Core/Src/fm_rtc.c ****             sTime.Seconds =  RTC_SetTime.Set_Second; 
+ 124              		.loc 1 51 27 view .LVU29
+ 125 0066 4B70     		strb	r3, [r1, #1]
+  52:Core/Src/fm_rtc.c **** 
+ 126              		.loc 1 52 13 is_stmt 1 view .LVU30
+  52:Core/Src/fm_rtc.c **** 
+ 127              		.loc 1 52 41 is_stmt 0 view .LVU31
+ 128 0068 9DF80030 		ldrb	r3, [sp]	@ zero_extendqisi2
+  52:Core/Src/fm_rtc.c **** 
+ 129              		.loc 1 52 27 view .LVU32
+ 130 006c 8B70     		strb	r3, [r1, #2]
+  54:Core/Src/fm_rtc.c ****                 Error_Handler( );}
+ 131              		.loc 1 54 13 is_stmt 1 view .LVU33
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 5
+
+
+  54:Core/Src/fm_rtc.c ****                 Error_Handler( );}
+ 132              		.loc 1 54 17 is_stmt 0 view .LVU34
+ 133 006e 0122     		movs	r2, #1
+ 134 0070 0748     		ldr	r0, .L11+4
+ 135 0072 FFF7FEFF 		bl	HAL_RTC_SetTime
+ 136              	.LVL4:
+  54:Core/Src/fm_rtc.c ****                 Error_Handler( );}
+ 137              		.loc 1 54 16 discriminator 1 view .LVU35
+ 138 0076 30B9     		cbnz	r0, .L10
+ 139              	.L5:
+  57:Core/Src/fm_rtc.c ****             FM_V0x_RTC_States  = FM_V0x_RTC_STATE_FLAG_IS_2;
+ 140              		.loc 1 57 10 is_stmt 1 view .LVU36
+ 141 0078 43F2F222 		movw	r2, #13042
+ 142 007c 0121     		movs	r1, #1
+ 143 007e 0448     		ldr	r0, .L11+4
+ 144 0080 FFF7FEFF 		bl	HAL_RTCEx_BKUPWrite
+ 145              	.LVL5:
+ 146 0084 DFE7     		b	.L4
+ 147              	.L10:
+  55:Core/Src/fm_rtc.c ****       
+ 148              		.loc 1 55 17 view .LVU37
+ 149 0086 FFF7FEFF 		bl	Error_Handler
+ 150              	.LVL6:
+ 151 008a F5E7     		b	.L5
+ 152              	.L12:
+ 153              		.align	2
+ 154              	.L11:
+ 155 008c 00000000 		.word	FM_V0x_RTC_States
+ 156 0090 00000000 		.word	hrtc
+ 157 0094 00280040 		.word	1073752064
+ 158 0098 00000000 		.word	.LC0
+ 159 009c 00000000 		.word	sTime
+ 160              		.cfi_endproc
+ 161              	.LFE69:
+ 163              		.section	.rodata.FM_V0x_RTC_Set_Date.str1.4,"aMS",%progbits,1
+ 164              		.align	2
+ 165              	.LC1:
+ 166 0000 0D0A5254 		.ascii	"\015\012RTC STATE: RTC Was set date. Mode is: %d\015"
+ 166      43205354 
+ 166      4154453A 
+ 166      20525443 
+ 166      20576173 
+ 167 002b 0A00     		.ascii	"\012\000"
+ 168              		.section	.text.FM_V0x_RTC_Set_Date,"ax",%progbits
+ 169              		.align	1
+ 170              		.global	FM_V0x_RTC_Set_Date
+ 171              		.syntax unified
+ 172              		.thumb
+ 173              		.thumb_func
+ 175              	FM_V0x_RTC_Set_Date:
+ 176              	.LFB70:
+  68:Core/Src/fm_rtc.c **** 
+  69:Core/Src/fm_rtc.c **** uint8_t FM_V0x_RTC_Set_Date (FM_V0x_Parameters_RTC_t  RTC_SetDate  ){
+ 177              		.loc 1 69 69 view -0
+ 178              		.cfi_startproc
+ 179              		@ args = 0, pretend = 0, frame = 16
+ 180              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 6
+
+
+ 181 0000 00B5     		push	{lr}
+ 182              	.LCFI4:
+ 183              		.cfi_def_cfa_offset 4
+ 184              		.cfi_offset 14, -4
+ 185 0002 85B0     		sub	sp, sp, #20
+ 186              	.LCFI5:
+ 187              		.cfi_def_cfa_offset 24
+ 188 0004 0DF1100C 		add	ip, sp, #16
+ 189 0008 0CE90F00 		stmdb	ip, {r0, r1, r2, r3}
+  70:Core/Src/fm_rtc.c **** 
+  71:Core/Src/fm_rtc.c ****         if( FM_V0x_RTC_States == FM_V0x_RTC_STATE_FLAG_IS_2 ){
+ 190              		.loc 1 71 9 view .LVU39
+ 191              		.loc 1 71 31 is_stmt 0 view .LVU40
+ 192 000c 184B     		ldr	r3, .L21
+ 193 000e 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 194              		.loc 1 71 11 view .LVU41
+ 195 0010 022B     		cmp	r3, #2
+ 196 0012 04D0     		beq	.L18
+ 197              	.L14:
+  72:Core/Src/fm_rtc.c **** 
+  73:Core/Src/fm_rtc.c ****             hrtc.Instance = RTC;     
+  74:Core/Src/fm_rtc.c **** 
+  75:Core/Src/fm_rtc.c ****             if (( RTC_SetDate.Set_Day   > 31 )  && ( RTC_SetDate.Set_Day < 0 )){
+  76:Core/Src/fm_rtc.c ****                 printf("-->BUG: Day in RTC  is not seted \r\n");  
+  77:Core/Src/fm_rtc.c ****                 return false; }
+  78:Core/Src/fm_rtc.c ****             hrtc.Init.AsynchPrediv = RTC_AUTO_1_SECOND;
+  79:Core/Src/fm_rtc.c ****             hrtc.Init.OutPut = RTC_OUTPUTSOURCE_ALARM;
+  80:Core/Src/fm_rtc.c ****           
+  81:Core/Src/fm_rtc.c ****             if (HAL_RTC_Init( &hrtc ) != HAL_OK ){
+  82:Core/Src/fm_rtc.c ****                 Error_Handler( ); }
+  83:Core/Src/fm_rtc.c **** 
+  84:Core/Src/fm_rtc.c ****             DateToUpdate.Month   = RTC_SetDate.Set_Mon ;
+  85:Core/Src/fm_rtc.c ****             DateToUpdate.Date    = RTC_SetDate.Set_Day ;
+  86:Core/Src/fm_rtc.c ****             DateToUpdate.Year    = RTC_SetDate.Set_Year;
+  87:Core/Src/fm_rtc.c **** 
+  88:Core/Src/fm_rtc.c ****             if (HAL_RTC_SetDate(&hrtc, &DateToUpdate, RTC_FORMAT_BCD) != HAL_OK){
+  89:Core/Src/fm_rtc.c ****                 Error_Handler(); }
+  90:Core/Src/fm_rtc.c ****           
+  91:Core/Src/fm_rtc.c ****             FM_V0x_RTC_States  = FM_V0x_RTC_STATE_FLAG_IS_3;
+  92:Core/Src/fm_rtc.c ****             printf("\r\nRTC STATE: RTC Was set date. Mode is: %d\r\n",FM_V0x_RTC_States );         
+  93:Core/Src/fm_rtc.c ****            
+  94:Core/Src/fm_rtc.c ****         }  
+  95:Core/Src/fm_rtc.c ****         if (( DateToUpdate.Date >= FM_V0x_CHECK_TIME_IS_24HOUR ) && ( DateToUpdate.Date < FM_V0x_CH
+ 198              		.loc 1 95 9 is_stmt 1 view .LVU42
+  96:Core/Src/fm_rtc.c ****                 printf( "-->BUG: Hour in RTC isn't set!\r\n" );
+  97:Core/Src/fm_rtc.c ****                 return false;
+  98:Core/Src/fm_rtc.c ****         } else { return  FM_V0x_RTC_States; }       
+ 199              		.loc 1 98 18 view .LVU43
+  99:Core/Src/fm_rtc.c **** }
+ 200              		.loc 1 99 1 is_stmt 0 view .LVU44
+ 201 0014 164B     		ldr	r3, .L21
+ 202 0016 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 203 0018 05B0     		add	sp, sp, #20
+ 204              	.LCFI6:
+ 205              		.cfi_remember_state
+ 206              		.cfi_def_cfa_offset 4
+ 207              		@ sp needed
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 7
+
+
+ 208 001a 5DF804FB 		ldr	pc, [sp], #4
+ 209              	.L18:
+ 210              	.LCFI7:
+ 211              		.cfi_restore_state
+  73:Core/Src/fm_rtc.c **** 
+ 212              		.loc 1 73 13 is_stmt 1 view .LVU45
+  73:Core/Src/fm_rtc.c **** 
+ 213              		.loc 1 73 27 is_stmt 0 view .LVU46
+ 214 001e 1548     		ldr	r0, .L21+4
+ 215 0020 154B     		ldr	r3, .L21+8
+ 216 0022 0360     		str	r3, [r0]
+  75:Core/Src/fm_rtc.c ****                 printf("-->BUG: Day in RTC  is not seted \r\n");  
+ 217              		.loc 1 75 13 is_stmt 1 view .LVU47
+  78:Core/Src/fm_rtc.c ****             hrtc.Init.OutPut = RTC_OUTPUTSOURCE_ALARM;
+ 218              		.loc 1 78 13 view .LVU48
+  78:Core/Src/fm_rtc.c ****             hrtc.Init.OutPut = RTC_OUTPUTSOURCE_ALARM;
+ 219              		.loc 1 78 36 is_stmt 0 view .LVU49
+ 220 0024 4FF0FF33 		mov	r3, #-1
+ 221 0028 4360     		str	r3, [r0, #4]
+  79:Core/Src/fm_rtc.c ****           
+ 222              		.loc 1 79 13 is_stmt 1 view .LVU50
+  79:Core/Src/fm_rtc.c ****           
+ 223              		.loc 1 79 30 is_stmt 0 view .LVU51
+ 224 002a 4FF48073 		mov	r3, #256
+ 225 002e 8360     		str	r3, [r0, #8]
+  81:Core/Src/fm_rtc.c ****                 Error_Handler( ); }
+ 226              		.loc 1 81 13 is_stmt 1 view .LVU52
+  81:Core/Src/fm_rtc.c ****                 Error_Handler( ); }
+ 227              		.loc 1 81 17 is_stmt 0 view .LVU53
+ 228 0030 FFF7FEFF 		bl	HAL_RTC_Init
+ 229              	.LVL7:
+  81:Core/Src/fm_rtc.c ****                 Error_Handler( ); }
+ 230              		.loc 1 81 16 discriminator 1 view .LVU54
+ 231 0034 A8B9     		cbnz	r0, .L19
+ 232              	.L15:
+  84:Core/Src/fm_rtc.c ****             DateToUpdate.Date    = RTC_SetDate.Set_Day ;
+ 233              		.loc 1 84 13 is_stmt 1 view .LVU55
+  84:Core/Src/fm_rtc.c ****             DateToUpdate.Date    = RTC_SetDate.Set_Day ;
+ 234              		.loc 1 84 47 is_stmt 0 view .LVU56
+ 235 0036 9DF80530 		ldrb	r3, [sp, #5]	@ zero_extendqisi2
+  84:Core/Src/fm_rtc.c ****             DateToUpdate.Date    = RTC_SetDate.Set_Day ;
+ 236              		.loc 1 84 34 view .LVU57
+ 237 003a 1049     		ldr	r1, .L21+12
+ 238 003c 4B70     		strb	r3, [r1, #1]
+  85:Core/Src/fm_rtc.c ****             DateToUpdate.Year    = RTC_SetDate.Set_Year;
+ 239              		.loc 1 85 13 is_stmt 1 view .LVU58
+  85:Core/Src/fm_rtc.c ****             DateToUpdate.Year    = RTC_SetDate.Set_Year;
+ 240              		.loc 1 85 47 is_stmt 0 view .LVU59
+ 241 003e 9DF80330 		ldrb	r3, [sp, #3]	@ zero_extendqisi2
+  85:Core/Src/fm_rtc.c ****             DateToUpdate.Year    = RTC_SetDate.Set_Year;
+ 242              		.loc 1 85 34 view .LVU60
+ 243 0042 8B70     		strb	r3, [r1, #2]
+  86:Core/Src/fm_rtc.c **** 
+ 244              		.loc 1 86 13 is_stmt 1 view .LVU61
+  86:Core/Src/fm_rtc.c **** 
+ 245              		.loc 1 86 47 is_stmt 0 view .LVU62
+ 246 0044 9DF80630 		ldrb	r3, [sp, #6]	@ zero_extendqisi2
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 8
+
+
+  86:Core/Src/fm_rtc.c **** 
+ 247              		.loc 1 86 34 view .LVU63
+ 248 0048 CB70     		strb	r3, [r1, #3]
+  88:Core/Src/fm_rtc.c ****                 Error_Handler(); }
+ 249              		.loc 1 88 13 is_stmt 1 view .LVU64
+  88:Core/Src/fm_rtc.c ****                 Error_Handler(); }
+ 250              		.loc 1 88 17 is_stmt 0 view .LVU65
+ 251 004a 0122     		movs	r2, #1
+ 252 004c 0948     		ldr	r0, .L21+4
+ 253 004e FFF7FEFF 		bl	HAL_RTC_SetDate
+ 254              	.LVL8:
+  88:Core/Src/fm_rtc.c ****                 Error_Handler(); }
+ 255              		.loc 1 88 16 discriminator 1 view .LVU66
+ 256 0052 48B9     		cbnz	r0, .L20
+ 257              	.L16:
+  91:Core/Src/fm_rtc.c ****             printf("\r\nRTC STATE: RTC Was set date. Mode is: %d\r\n",FM_V0x_RTC_States );         
+ 258              		.loc 1 91 13 is_stmt 1 view .LVU67
+  91:Core/Src/fm_rtc.c ****             printf("\r\nRTC STATE: RTC Was set date. Mode is: %d\r\n",FM_V0x_RTC_States );         
+ 259              		.loc 1 91 32 is_stmt 0 view .LVU68
+ 260 0054 0321     		movs	r1, #3
+ 261 0056 064B     		ldr	r3, .L21
+ 262 0058 1970     		strb	r1, [r3]
+  92:Core/Src/fm_rtc.c ****            
+ 263              		.loc 1 92 13 is_stmt 1 view .LVU69
+ 264 005a 0948     		ldr	r0, .L21+16
+ 265 005c FFF7FEFF 		bl	printf
+ 266              	.LVL9:
+ 267 0060 D8E7     		b	.L14
+ 268              	.L19:
+  82:Core/Src/fm_rtc.c **** 
+ 269              		.loc 1 82 17 view .LVU70
+ 270 0062 FFF7FEFF 		bl	Error_Handler
+ 271              	.LVL10:
+ 272 0066 E6E7     		b	.L15
+ 273              	.L20:
+  89:Core/Src/fm_rtc.c ****           
+ 274              		.loc 1 89 17 view .LVU71
+ 275 0068 FFF7FEFF 		bl	Error_Handler
+ 276              	.LVL11:
+ 277 006c F2E7     		b	.L16
+ 278              	.L22:
+ 279 006e 00BF     		.align	2
+ 280              	.L21:
+ 281 0070 00000000 		.word	FM_V0x_RTC_States
+ 282 0074 00000000 		.word	hrtc
+ 283 0078 00280040 		.word	1073752064
+ 284 007c 00000000 		.word	DateToUpdate
+ 285 0080 00000000 		.word	.LC1
+ 286              		.cfi_endproc
+ 287              	.LFE70:
+ 289              		.section	.rodata.FM_V0x_Rtc_Init.str1.4,"aMS",%progbits,1
+ 290              		.align	2
+ 291              	.LC2:
+ 292 0000 2D2D3E20 		.ascii	"--> \"FM_RTC_V0x is Initializing... \" \015\000"
+ 292      22464D5F 
+ 292      5254435F 
+ 292      56307820 
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 9
+
+
+ 292      69732049 
+ 293 0027 00       		.align	2
+ 294              	.LC3:
+ 295 0028 2D2D3E20 		.ascii	"--> Time and Data were initialized is: 7h-21min-00s"
+ 295      54696D65 
+ 295      20616E64 
+ 295      20446174 
+ 295      61207765 
+ 296 005b 200D00   		.ascii	" \015\000"
+ 297 005e 0000     		.align	2
+ 298              	.LC4:
+ 299 0060 52544320 		.ascii	"RTC STATE: RTC Was intialized. Mode is: %d\015\012\000"
+ 299      53544154 
+ 299      453A2052 
+ 299      54432057 
+ 299      61732069 
+ 300              		.section	.text.FM_V0x_Rtc_Init,"ax",%progbits
+ 301              		.align	1
+ 302              		.global	FM_V0x_Rtc_Init
+ 303              		.syntax unified
+ 304              		.thumb
+ 305              		.thumb_func
+ 307              	FM_V0x_Rtc_Init:
+ 308              	.LFB68:
+  17:Core/Src/fm_rtc.c ****         FM_V0x_RTC_States = FM_V0x_RTC_STATE_FLAG_IS_OFF;
+ 309              		.loc 1 17 32 view -0
+ 310              		.cfi_startproc
+ 311              		@ args = 0, pretend = 0, frame = 0
+ 312              		@ frame_needed = 0, uses_anonymous_args = 0
+ 313 0000 70B5     		push	{r4, r5, r6, lr}
+ 314              	.LCFI8:
+ 315              		.cfi_def_cfa_offset 16
+ 316              		.cfi_offset 4, -16
+ 317              		.cfi_offset 5, -12
+ 318              		.cfi_offset 6, -8
+ 319              		.cfi_offset 14, -4
+  18:Core/Src/fm_rtc.c ****         printf("--> \"FM_RTC_V0x is Initializing... \" \r\n");
+ 320              		.loc 1 18 9 view .LVU73
+  18:Core/Src/fm_rtc.c ****         printf("--> \"FM_RTC_V0x is Initializing... \" \r\n");
+ 321              		.loc 1 18 27 is_stmt 0 view .LVU74
+ 322 0002 124D     		ldr	r5, .L25
+ 323 0004 0026     		movs	r6, #0
+ 324 0006 2E70     		strb	r6, [r5]
+  19:Core/Src/fm_rtc.c ****         printf("--> Time and Data were initialized is: 7h-21min-00s \r\n");
+ 325              		.loc 1 19 9 is_stmt 1 view .LVU75
+ 326 0008 1148     		ldr	r0, .L25+4
+ 327 000a FFF7FEFF 		bl	puts
+ 328              	.LVL12:
+  20:Core/Src/fm_rtc.c ****     
+ 329              		.loc 1 20 9 view .LVU76
+ 330 000e 1148     		ldr	r0, .L25+8
+ 331 0010 FFF7FEFF 		bl	puts
+ 332              	.LVL13:
+  22:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Min    = 0x59;
+ 333              		.loc 1 22 9 view .LVU77
+  22:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Min    = 0x59;
+ 334              		.loc 1 22 36 is_stmt 0 view .LVU78
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 10
+
+
+ 335 0014 104C     		ldr	r4, .L25+12
+ 336 0016 0523     		movs	r3, #5
+ 337 0018 A370     		strb	r3, [r4, #2]
+  23:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Second =    0;
+ 338              		.loc 1 23 9 is_stmt 1 view .LVU79
+  23:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Second =    0;
+ 339              		.loc 1 23 36 is_stmt 0 view .LVU80
+ 340 001a 5923     		movs	r3, #89
+ 341 001c 6370     		strb	r3, [r4, #1]
+  24:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Day    = 0x12;
+ 342              		.loc 1 24 9 is_stmt 1 view .LVU81
+  24:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Day    = 0x12;
+ 343              		.loc 1 24 36 is_stmt 0 view .LVU82
+ 344 001e 2670     		strb	r6, [r4]
+  25:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Mon    = 0x09;
+ 345              		.loc 1 25 9 is_stmt 1 view .LVU83
+  25:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Mon    = 0x09;
+ 346              		.loc 1 25 36 is_stmt 0 view .LVU84
+ 347 0020 1223     		movs	r3, #18
+ 348 0022 E370     		strb	r3, [r4, #3]
+  26:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Year   = 0x24;
+ 349              		.loc 1 26 9 is_stmt 1 view .LVU85
+  26:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Year   = 0x24;
+ 350              		.loc 1 26 36 is_stmt 0 view .LVU86
+ 351 0024 0923     		movs	r3, #9
+ 352 0026 6371     		strb	r3, [r4, #5]
+  27:Core/Src/fm_rtc.c ****     
+ 353              		.loc 1 27 9 is_stmt 1 view .LVU87
+  27:Core/Src/fm_rtc.c ****     
+ 354              		.loc 1 27 36 is_stmt 0 view .LVU88
+ 355 0028 2423     		movs	r3, #36
+ 356 002a A371     		strb	r3, [r4, #6]
+  29:Core/Src/fm_rtc.c ****         printf("RTC STATE: RTC Was intialized. Mode is: %d\r\n", FM_V0x_RTC_States);
+ 357              		.loc 1 29 9 is_stmt 1 view .LVU89
+  29:Core/Src/fm_rtc.c ****         printf("RTC STATE: RTC Was intialized. Mode is: %d\r\n", FM_V0x_RTC_States);
+ 358              		.loc 1 29 27 is_stmt 0 view .LVU90
+ 359 002c 0121     		movs	r1, #1
+ 360 002e 2970     		strb	r1, [r5]
+  30:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Set_Time(FM_V0x_RTC_Pars );
+ 361              		.loc 1 30 9 is_stmt 1 view .LVU91
+ 362 0030 0A48     		ldr	r0, .L25+16
+ 363 0032 FFF7FEFF 		bl	printf
+ 364              	.LVL14:
+  31:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Set_Date(FM_V0x_RTC_Pars );
+ 365              		.loc 1 31 9 view .LVU92
+ 366 0036 94E80F00 		ldm	r4, {r0, r1, r2, r3}
+ 367 003a FFF7FEFF 		bl	FM_V0x_RTC_Set_Time
+ 368              	.LVL15:
+  32:Core/Src/fm_rtc.c ****         return FM_V0x_RTC_States;
+ 369              		.loc 1 32 9 view .LVU93
+ 370 003e 94E80F00 		ldm	r4, {r0, r1, r2, r3}
+ 371 0042 FFF7FEFF 		bl	FM_V0x_RTC_Set_Date
+ 372              	.LVL16:
+  33:Core/Src/fm_rtc.c **** }
+ 373              		.loc 1 33 9 view .LVU94
+  34:Core/Src/fm_rtc.c **** 
+ 374              		.loc 1 34 1 is_stmt 0 view .LVU95
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 11
+
+
+ 375 0046 2878     		ldrb	r0, [r5]	@ zero_extendqisi2
+ 376 0048 70BD     		pop	{r4, r5, r6, pc}
+ 377              	.L26:
+ 378 004a 00BF     		.align	2
+ 379              	.L25:
+ 380 004c 00000000 		.word	FM_V0x_RTC_States
+ 381 0050 00000000 		.word	.LC2
+ 382 0054 28000000 		.word	.LC3
+ 383 0058 00000000 		.word	FM_V0x_RTC_Pars
+ 384 005c 60000000 		.word	.LC4
+ 385              		.cfi_endproc
+ 386              	.LFE68:
+ 388              		.section	.rodata.FM_V0x_RTC_Get_Time.str1.4,"aMS",%progbits,1
+ 389              		.align	2
+ 390              	.LC5:
+ 391 0000 0D0A5254 		.ascii	"\015\012RTC STATE: RTC gets time. Mode is: %d. \000"
+ 391      43205354 
+ 391      4154453A 
+ 391      20525443 
+ 391      20676574 
+ 392 002a 0000     		.align	2
+ 393              	.LC6:
+ 394 002c 54696D65 		.ascii	"Time is: %d %d %d\015\012\000"
+ 394      2069733A 
+ 394      20256420 
+ 394      25642025 
+ 394      640D0A00 
+ 395              		.section	.text.FM_V0x_RTC_Get_Time,"ax",%progbits
+ 396              		.align	1
+ 397              		.global	FM_V0x_RTC_Get_Time
+ 398              		.syntax unified
+ 399              		.thumb
+ 400              		.thumb_func
+ 402              	FM_V0x_RTC_Get_Time:
+ 403              	.LVL17:
+ 404              	.LFB71:
+ 100:Core/Src/fm_rtc.c **** 
+ 101:Core/Src/fm_rtc.c **** 
+ 102:Core/Src/fm_rtc.c **** uint8_t FM_V0x_RTC_Get_Time ( FM_V0x_Parameters_RTC_t  *RTC_GetTime ){
+ 405              		.loc 1 102 70 is_stmt 1 view -0
+ 406              		.cfi_startproc
+ 407              		@ args = 0, pretend = 0, frame = 0
+ 408              		@ frame_needed = 0, uses_anonymous_args = 0
+ 409              		.loc 1 102 70 is_stmt 0 view .LVU97
+ 410 0000 38B5     		push	{r3, r4, r5, lr}
+ 411              	.LCFI9:
+ 412              		.cfi_def_cfa_offset 16
+ 413              		.cfi_offset 3, -16
+ 414              		.cfi_offset 4, -12
+ 415              		.cfi_offset 5, -8
+ 416              		.cfi_offset 14, -4
+ 103:Core/Src/fm_rtc.c ****         
+ 104:Core/Src/fm_rtc.c ****         if( FM_V0x_RTC_States == FM_V0x_RTC_STATE_FLAG_IS_3 ){
+ 417              		.loc 1 104 9 is_stmt 1 view .LVU98
+ 418              		.loc 1 104 31 is_stmt 0 view .LVU99
+ 419 0002 104B     		ldr	r3, .L31
+ 420 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 12
+
+
+ 421              		.loc 1 104 11 view .LVU100
+ 422 0006 032B     		cmp	r3, #3
+ 423 0008 02D0     		beq	.L30
+ 424              	.LVL18:
+ 425              	.L28:
+ 105:Core/Src/fm_rtc.c **** 
+ 106:Core/Src/fm_rtc.c ****             HAL_RTC_GetTime(&hrtc, &pTime, RTC_FORMAT_BIN);
+ 107:Core/Src/fm_rtc.c ****             RTC_GetTime->FM_V0x_Get_TimeDate.Get_Hour   = pTime.Hours;
+ 108:Core/Src/fm_rtc.c ****             RTC_GetTime->FM_V0x_Get_TimeDate.Get_Min    = pTime.Minutes;
+ 109:Core/Src/fm_rtc.c ****             RTC_GetTime->FM_V0x_Get_TimeDate.Get_Second = pTime.Seconds;
+ 110:Core/Src/fm_rtc.c ****            // FM_V0x_RTC_WakeUp(FM_V0x_Get_RTC); 
+ 111:Core/Src/fm_rtc.c ****             FM_V0x_RTC_States  = FM_V0x_RTC_STATE_FLAG_IS_4;
+ 112:Core/Src/fm_rtc.c ****             printf("\r\nRTC STATE: RTC gets time. Mode is: %d. ",FM_V0x_RTC_States );
+ 113:Core/Src/fm_rtc.c ****             printf("Time is: %d %d %d\r\n",    RTC_GetTime->FM_V0x_Get_TimeDate.Get_Hour  ,  RTC_Ge
+ 114:Core/Src/fm_rtc.c ****         }
+ 115:Core/Src/fm_rtc.c ****         if ((   RTC_GetTime->FM_V0x_Get_TimeDate.Get_Hour     >= FM_V0x_CHECK_TIME_IS_24HOUR )   &&
+ 426              		.loc 1 115 9 is_stmt 1 view .LVU101
+ 116:Core/Src/fm_rtc.c ****                 printf( "-->BUG: Hour in RTC isn't set!\r\n" );
+ 117:Core/Src/fm_rtc.c ****                 return false;
+ 118:Core/Src/fm_rtc.c ****         } else { return   FM_V0x_RTC_States  ;}
+ 427              		.loc 1 118 18 view .LVU102
+ 119:Core/Src/fm_rtc.c **** }
+ 428              		.loc 1 119 1 is_stmt 0 view .LVU103
+ 429 000a 0E4B     		ldr	r3, .L31
+ 430 000c 1878     		ldrb	r0, [r3]	@ zero_extendqisi2
+ 431 000e 38BD     		pop	{r3, r4, r5, pc}
+ 432              	.LVL19:
+ 433              	.L30:
+ 434              		.loc 1 119 1 view .LVU104
+ 435 0010 0446     		mov	r4, r0
+ 106:Core/Src/fm_rtc.c ****             RTC_GetTime->FM_V0x_Get_TimeDate.Get_Hour   = pTime.Hours;
+ 436              		.loc 1 106 13 is_stmt 1 view .LVU105
+ 437 0012 0D4D     		ldr	r5, .L31+4
+ 438 0014 0022     		movs	r2, #0
+ 439 0016 2946     		mov	r1, r5
+ 440 0018 0C48     		ldr	r0, .L31+8
+ 441              	.LVL20:
+ 106:Core/Src/fm_rtc.c ****             RTC_GetTime->FM_V0x_Get_TimeDate.Get_Hour   = pTime.Hours;
+ 442              		.loc 1 106 13 is_stmt 0 view .LVU106
+ 443 001a FFF7FEFF 		bl	HAL_RTC_GetTime
+ 444              	.LVL21:
+ 107:Core/Src/fm_rtc.c ****             RTC_GetTime->FM_V0x_Get_TimeDate.Get_Min    = pTime.Minutes;
+ 445              		.loc 1 107 13 is_stmt 1 view .LVU107
+ 107:Core/Src/fm_rtc.c ****             RTC_GetTime->FM_V0x_Get_TimeDate.Get_Min    = pTime.Minutes;
+ 446              		.loc 1 107 64 is_stmt 0 view .LVU108
+ 447 001e 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 107:Core/Src/fm_rtc.c ****             RTC_GetTime->FM_V0x_Get_TimeDate.Get_Min    = pTime.Minutes;
+ 448              		.loc 1 107 57 view .LVU109
+ 449 0020 6372     		strb	r3, [r4, #9]
+ 108:Core/Src/fm_rtc.c ****             RTC_GetTime->FM_V0x_Get_TimeDate.Get_Second = pTime.Seconds;
+ 450              		.loc 1 108 13 is_stmt 1 view .LVU110
+ 108:Core/Src/fm_rtc.c ****             RTC_GetTime->FM_V0x_Get_TimeDate.Get_Second = pTime.Seconds;
+ 451              		.loc 1 108 64 is_stmt 0 view .LVU111
+ 452 0022 6B78     		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 108:Core/Src/fm_rtc.c ****             RTC_GetTime->FM_V0x_Get_TimeDate.Get_Second = pTime.Seconds;
+ 453              		.loc 1 108 57 view .LVU112
+ 454 0024 2372     		strb	r3, [r4, #8]
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 13
+
+
+ 109:Core/Src/fm_rtc.c ****            // FM_V0x_RTC_WakeUp(FM_V0x_Get_RTC); 
+ 455              		.loc 1 109 13 is_stmt 1 view .LVU113
+ 109:Core/Src/fm_rtc.c ****            // FM_V0x_RTC_WakeUp(FM_V0x_Get_RTC); 
+ 456              		.loc 1 109 64 is_stmt 0 view .LVU114
+ 457 0026 AB78     		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 109:Core/Src/fm_rtc.c ****            // FM_V0x_RTC_WakeUp(FM_V0x_Get_RTC); 
+ 458              		.loc 1 109 57 view .LVU115
+ 459 0028 E371     		strb	r3, [r4, #7]
+ 111:Core/Src/fm_rtc.c ****             printf("\r\nRTC STATE: RTC gets time. Mode is: %d. ",FM_V0x_RTC_States );
+ 460              		.loc 1 111 13 is_stmt 1 view .LVU116
+ 111:Core/Src/fm_rtc.c ****             printf("\r\nRTC STATE: RTC gets time. Mode is: %d. ",FM_V0x_RTC_States );
+ 461              		.loc 1 111 32 is_stmt 0 view .LVU117
+ 462 002a 0421     		movs	r1, #4
+ 463 002c 054B     		ldr	r3, .L31
+ 464 002e 1970     		strb	r1, [r3]
+ 112:Core/Src/fm_rtc.c ****             printf("Time is: %d %d %d\r\n",    RTC_GetTime->FM_V0x_Get_TimeDate.Get_Hour  ,  RTC_Ge
+ 465              		.loc 1 112 13 is_stmt 1 view .LVU118
+ 466 0030 0748     		ldr	r0, .L31+12
+ 467 0032 FFF7FEFF 		bl	printf
+ 468              	.LVL22:
+ 113:Core/Src/fm_rtc.c ****         }
+ 469              		.loc 1 113 13 view .LVU119
+ 470 0036 E379     		ldrb	r3, [r4, #7]	@ zero_extendqisi2
+ 471 0038 227A     		ldrb	r2, [r4, #8]	@ zero_extendqisi2
+ 472 003a 617A     		ldrb	r1, [r4, #9]	@ zero_extendqisi2
+ 473 003c 0548     		ldr	r0, .L31+16
+ 474 003e FFF7FEFF 		bl	printf
+ 475              	.LVL23:
+ 476 0042 E2E7     		b	.L28
+ 477              	.L32:
+ 478              		.align	2
+ 479              	.L31:
+ 480 0044 00000000 		.word	FM_V0x_RTC_States
+ 481 0048 00000000 		.word	pTime
+ 482 004c 00000000 		.word	hrtc
+ 483 0050 00000000 		.word	.LC5
+ 484 0054 2C000000 		.word	.LC6
+ 485              		.cfi_endproc
+ 486              	.LFE71:
+ 488              		.section	.rodata.FM_V0x_RTC_Get_Date.str1.4,"aMS",%progbits,1
+ 489              		.align	2
+ 490              	.LC7:
+ 491 0000 44617465 		.ascii	"Date is: %d %d %d\015\012\000"
+ 491      2069733A 
+ 491      20256420 
+ 491      25642025 
+ 491      640D0A00 
+ 492              		.section	.text.FM_V0x_RTC_Get_Date,"ax",%progbits
+ 493              		.align	1
+ 494              		.global	FM_V0x_RTC_Get_Date
+ 495              		.syntax unified
+ 496              		.thumb
+ 497              		.thumb_func
+ 499              	FM_V0x_RTC_Get_Date:
+ 500              	.LVL24:
+ 501              	.LFB72:
+ 120:Core/Src/fm_rtc.c **** 
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 14
+
+
+ 121:Core/Src/fm_rtc.c **** uint8_t FM_V0x_RTC_Get_Date (FM_V0x_Parameters_RTC_t  *RTC_GetDate  ){
+ 502              		.loc 1 121 70 view -0
+ 503              		.cfi_startproc
+ 504              		@ args = 0, pretend = 0, frame = 0
+ 505              		@ frame_needed = 0, uses_anonymous_args = 0
+ 506              		.loc 1 121 70 is_stmt 0 view .LVU121
+ 507 0000 38B5     		push	{r3, r4, r5, lr}
+ 508              	.LCFI10:
+ 509              		.cfi_def_cfa_offset 16
+ 510              		.cfi_offset 3, -16
+ 511              		.cfi_offset 4, -12
+ 512              		.cfi_offset 5, -8
+ 513              		.cfi_offset 14, -4
+ 514 0002 0446     		mov	r4, r0
+ 122:Core/Src/fm_rtc.c ****         if( FM_V0x_RTC_States == FM_V0x_RTC_STATE_FLAG_IS_4 ){
+ 515              		.loc 1 122 9 is_stmt 1 view .LVU122
+ 516              		.loc 1 122 31 is_stmt 0 view .LVU123
+ 517 0004 0F4B     		ldr	r3, .L37
+ 518 0006 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 519              		.loc 1 122 11 view .LVU124
+ 520 0008 042B     		cmp	r3, #4
+ 521 000a 01D0     		beq	.L36
+ 522              	.LVL25:
+ 523              	.L34:
+ 123:Core/Src/fm_rtc.c **** 
+ 124:Core/Src/fm_rtc.c ****             HAL_RTC_GetDate(&hrtc, &DateToUpdate, RTC_FORMAT_BIN );
+ 125:Core/Src/fm_rtc.c ****             RTC_GetDate->FM_V0x_Get_TimeDate.Get_Day    = DateToUpdate.Date;
+ 126:Core/Src/fm_rtc.c ****             RTC_GetDate->FM_V0x_Get_TimeDate.Get_Mon    = DateToUpdate.Month;
+ 127:Core/Src/fm_rtc.c ****             RTC_GetDate->FM_V0x_Get_TimeDate.Get_Year   = DateToUpdate.Year;
+ 128:Core/Src/fm_rtc.c ****             FM_V0x_RTC_States  = FM_V0x_RTC_STATE_FLAG_IS_3;
+ 129:Core/Src/fm_rtc.c ****             printf("\r\nRTC STATE: RTC gets time. Mode is: %d. ",FM_V0x_RTC_States );
+ 130:Core/Src/fm_rtc.c ****             printf("Date is: %d %d %d\r\n",    RTC_GetDate->FM_V0x_Get_TimeDate.Get_Day  ,  RTC_Get
+ 131:Core/Src/fm_rtc.c ****            // FM_V0x_RTC_WakeUp(FM_V0x_Get_RTC);  
+ 132:Core/Src/fm_rtc.c ****         }    
+ 133:Core/Src/fm_rtc.c ****         if ((   RTC_GetDate->FM_V0x_Get_TimeDate.Get_Day     >= FM_V0x_CHECK_TIME_IS_24HOUR )   && 
+ 524              		.loc 1 133 9 is_stmt 1 view .LVU125
+ 134:Core/Src/fm_rtc.c ****                 printf( "-->BUG: Hour in RTC isn't set!\r\n" );
+ 135:Core/Src/fm_rtc.c ****                 return false;
+ 136:Core/Src/fm_rtc.c ****             } else {
+ 137:Core/Src/fm_rtc.c ****                 return   RTC_GetDate->FM_V0x_Get_TimeDate.Get_Day  ;
+ 525              		.loc 1 137 17 view .LVU126
+ 138:Core/Src/fm_rtc.c ****         }
+ 139:Core/Src/fm_rtc.c **** 
+ 140:Core/Src/fm_rtc.c **** }
+ 526              		.loc 1 140 1 is_stmt 0 view .LVU127
+ 527 000c A07A     		ldrb	r0, [r4, #10]	@ zero_extendqisi2
+ 528 000e 38BD     		pop	{r3, r4, r5, pc}
+ 529              	.LVL26:
+ 530              	.L36:
+ 124:Core/Src/fm_rtc.c ****             RTC_GetDate->FM_V0x_Get_TimeDate.Get_Day    = DateToUpdate.Date;
+ 531              		.loc 1 124 13 is_stmt 1 view .LVU128
+ 532 0010 0D4D     		ldr	r5, .L37+4
+ 533 0012 0022     		movs	r2, #0
+ 534 0014 2946     		mov	r1, r5
+ 535 0016 0D48     		ldr	r0, .L37+8
+ 536              	.LVL27:
+ 124:Core/Src/fm_rtc.c ****             RTC_GetDate->FM_V0x_Get_TimeDate.Get_Day    = DateToUpdate.Date;
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 15
+
+
+ 537              		.loc 1 124 13 is_stmt 0 view .LVU129
+ 538 0018 FFF7FEFF 		bl	HAL_RTC_GetDate
+ 539              	.LVL28:
+ 125:Core/Src/fm_rtc.c ****             RTC_GetDate->FM_V0x_Get_TimeDate.Get_Mon    = DateToUpdate.Month;
+ 540              		.loc 1 125 13 is_stmt 1 view .LVU130
+ 125:Core/Src/fm_rtc.c ****             RTC_GetDate->FM_V0x_Get_TimeDate.Get_Mon    = DateToUpdate.Month;
+ 541              		.loc 1 125 71 is_stmt 0 view .LVU131
+ 542 001c AB78     		ldrb	r3, [r5, #2]	@ zero_extendqisi2
+ 125:Core/Src/fm_rtc.c ****             RTC_GetDate->FM_V0x_Get_TimeDate.Get_Mon    = DateToUpdate.Month;
+ 543              		.loc 1 125 57 view .LVU132
+ 544 001e A372     		strb	r3, [r4, #10]
+ 126:Core/Src/fm_rtc.c ****             RTC_GetDate->FM_V0x_Get_TimeDate.Get_Year   = DateToUpdate.Year;
+ 545              		.loc 1 126 13 is_stmt 1 view .LVU133
+ 126:Core/Src/fm_rtc.c ****             RTC_GetDate->FM_V0x_Get_TimeDate.Get_Year   = DateToUpdate.Year;
+ 546              		.loc 1 126 71 is_stmt 0 view .LVU134
+ 547 0020 6B78     		ldrb	r3, [r5, #1]	@ zero_extendqisi2
+ 126:Core/Src/fm_rtc.c ****             RTC_GetDate->FM_V0x_Get_TimeDate.Get_Year   = DateToUpdate.Year;
+ 548              		.loc 1 126 57 view .LVU135
+ 549 0022 2373     		strb	r3, [r4, #12]
+ 127:Core/Src/fm_rtc.c ****             FM_V0x_RTC_States  = FM_V0x_RTC_STATE_FLAG_IS_3;
+ 550              		.loc 1 127 13 is_stmt 1 view .LVU136
+ 127:Core/Src/fm_rtc.c ****             FM_V0x_RTC_States  = FM_V0x_RTC_STATE_FLAG_IS_3;
+ 551              		.loc 1 127 71 is_stmt 0 view .LVU137
+ 552 0024 EB78     		ldrb	r3, [r5, #3]	@ zero_extendqisi2
+ 127:Core/Src/fm_rtc.c ****             FM_V0x_RTC_States  = FM_V0x_RTC_STATE_FLAG_IS_3;
+ 553              		.loc 1 127 57 view .LVU138
+ 554 0026 6373     		strb	r3, [r4, #13]
+ 128:Core/Src/fm_rtc.c ****             printf("\r\nRTC STATE: RTC gets time. Mode is: %d. ",FM_V0x_RTC_States );
+ 555              		.loc 1 128 13 is_stmt 1 view .LVU139
+ 128:Core/Src/fm_rtc.c ****             printf("\r\nRTC STATE: RTC gets time. Mode is: %d. ",FM_V0x_RTC_States );
+ 556              		.loc 1 128 32 is_stmt 0 view .LVU140
+ 557 0028 0321     		movs	r1, #3
+ 558 002a 064B     		ldr	r3, .L37
+ 559 002c 1970     		strb	r1, [r3]
+ 129:Core/Src/fm_rtc.c ****             printf("Date is: %d %d %d\r\n",    RTC_GetDate->FM_V0x_Get_TimeDate.Get_Day  ,  RTC_Get
+ 560              		.loc 1 129 13 is_stmt 1 view .LVU141
+ 561 002e 0848     		ldr	r0, .L37+12
+ 562 0030 FFF7FEFF 		bl	printf
+ 563              	.LVL29:
+ 130:Core/Src/fm_rtc.c ****            // FM_V0x_RTC_WakeUp(FM_V0x_Get_RTC);  
+ 564              		.loc 1 130 13 view .LVU142
+ 565 0034 637B     		ldrb	r3, [r4, #13]	@ zero_extendqisi2
+ 566 0036 227B     		ldrb	r2, [r4, #12]	@ zero_extendqisi2
+ 567 0038 A17A     		ldrb	r1, [r4, #10]	@ zero_extendqisi2
+ 568 003a 0648     		ldr	r0, .L37+16
+ 569 003c FFF7FEFF 		bl	printf
+ 570              	.LVL30:
+ 571 0040 E4E7     		b	.L34
+ 572              	.L38:
+ 573 0042 00BF     		.align	2
+ 574              	.L37:
+ 575 0044 00000000 		.word	FM_V0x_RTC_States
+ 576 0048 00000000 		.word	DateToUpdate
+ 577 004c 00000000 		.word	hrtc
+ 578 0050 00000000 		.word	.LC5
+ 579 0054 00000000 		.word	.LC7
+ 580              		.cfi_endproc
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 16
+
+
+ 581              	.LFE72:
+ 583              		.section	.rodata.FM_V0x_RTC_WakeUp.str1.4,"aMS",%progbits,1
+ 584              		.align	2
+ 585              	.LC8:
+ 586 0000 52544320 		.ascii	"RTC STATE: RTC gets time. Mode is: %d\015\012\000"
+ 586      53544154 
+ 586      453A2052 
+ 586      54432067 
+ 586      65747320 
+ 587              		.section	.text.FM_V0x_RTC_WakeUp,"ax",%progbits
+ 588              		.align	1
+ 589              		.global	FM_V0x_RTC_WakeUp
+ 590              		.syntax unified
+ 591              		.thumb
+ 592              		.thumb_func
+ 594              	FM_V0x_RTC_WakeUp:
+ 595              	.LFB73:
+ 141:Core/Src/fm_rtc.c **** 
+ 142:Core/Src/fm_rtc.c **** uint8_t FM_V0x_RTC_WakeUp   ( FM_V0x_Parameters_RTC_t RTC_WakeUp){
+ 596              		.loc 1 142 66 view -0
+ 597              		.cfi_startproc
+ 598              		@ args = 0, pretend = 0, frame = 16
+ 599              		@ frame_needed = 0, uses_anonymous_args = 0
+ 600 0000 70B5     		push	{r4, r5, r6, lr}
+ 601              	.LCFI11:
+ 602              		.cfi_def_cfa_offset 16
+ 603              		.cfi_offset 4, -16
+ 604              		.cfi_offset 5, -12
+ 605              		.cfi_offset 6, -8
+ 606              		.cfi_offset 14, -4
+ 607 0002 84B0     		sub	sp, sp, #16
+ 608              	.LCFI12:
+ 609              		.cfi_def_cfa_offset 32
+ 610 0004 04AC     		add	r4, sp, #16
+ 611 0006 04E90F00 		stmdb	r4, {r0, r1, r2, r3}
+ 143:Core/Src/fm_rtc.c ****          FM_V0x_RTC_WakeUp_States_t RTC_WakeUp_States = FM_V0x_FLAG_IS_0_DEF;
+ 612              		.loc 1 143 10 view .LVU144
+ 613              	.LVL31:
+ 144:Core/Src/fm_rtc.c ****          if( FM_V0x_RTC_States == FM_V0x_RTC_STATE_FLAG_IS_5 ){
+ 614              		.loc 1 144 10 view .LVU145
+ 615              		.loc 1 144 32 is_stmt 0 view .LVU146
+ 616 000a 484B     		ldr	r3, .L53
+ 617 000c 1E78     		ldrb	r6, [r3]	@ zero_extendqisi2
+ 618              		.loc 1 144 12 view .LVU147
+ 619 000e 052E     		cmp	r6, #5
+ 620 0010 7FD1     		bne	.L47
+ 145:Core/Src/fm_rtc.c **** 
+ 146:Core/Src/fm_rtc.c ****             if((RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Hour > FM_V0x_SET_23_HOUR_DEF           )||\
+ 621              		.loc 1 146 13 is_stmt 1 view .LVU148
+ 622              		.loc 1 146 47 is_stmt 0 view .LVU149
+ 623 0012 9DF80940 		ldrb	r4, [sp, #9]	@ zero_extendqisi2
+ 624              		.loc 1 146 15 view .LVU150
+ 625 0016 002C     		cmp	r4, #0
+ 626 0018 40F08580 		bne	.L48
+ 147:Core/Src/fm_rtc.c ****             ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Hour > FM_V0x_SET_0_HOUR_DEF           )){
+ 148:Core/Src/fm_rtc.c ****                     return false;
+ 149:Core/Src/fm_rtc.c ****             }
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 17
+
+
+ 150:Core/Src/fm_rtc.c ****             
+ 151:Core/Src/fm_rtc.c ****             if (( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Hour > FM_V0x_SET_18_HOUR_DEF         )||\
+ 627              		.loc 1 151 13 is_stmt 1 view .LVU151
+ 628              		.loc 1 151 93 is_stmt 0 view .LVU152
+ 629 001c A31F     		subs	r3, r4, #6
+ 630 001e DBB2     		uxtb	r3, r3
+ 631              		.loc 1 151 16 view .LVU153
+ 632 0020 0C2B     		cmp	r3, #12
+ 633 0022 2BD9     		bls	.L42
+ 152:Core/Src/fm_rtc.c ****                 ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Hour < FM_V0x_SET_6_HOUR_DEF          )){
+ 153:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_LED_STATUS_Pin, GPIO_PIN_SET          );      
+ 634              		.loc 1 153 25 is_stmt 1 view .LVU154
+ 635 0024 424D     		ldr	r5, .L53+4
+ 636 0026 0122     		movs	r2, #1
+ 637 0028 4FF48071 		mov	r1, #256
+ 638 002c 2846     		mov	r0, r5
+ 639 002e FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 640              	.LVL32:
+ 154:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_PUMP_DRV_Pin, GPIO_PIN_SET            );
+ 641              		.loc 1 154 25 view .LVU155
+ 642 0032 0122     		movs	r2, #1
+ 643 0034 1146     		mov	r1, r2
+ 644 0036 2846     		mov	r0, r5
+ 645 0038 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 646              	.LVL33:
+ 155:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_LIGHT_DRV_Pin, GPIO_PIN_RESET         );
+ 647              		.loc 1 155 25 view .LVU156
+ 648 003c 0022     		movs	r2, #0
+ 649 003e 1021     		movs	r1, #16
+ 650 0040 2846     		mov	r0, r5
+ 651 0042 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 652              	.LVL34:
+ 156:Core/Src/fm_rtc.c ****                         RTC_WakeUp_States = FM_V0x_FLAG_IS_0_DEF;
+ 653              		.loc 1 156 25 view .LVU157
+ 654              		.loc 1 156 43 is_stmt 0 view .LVU158
+ 655 0046 2546     		mov	r5, r4
+ 656              	.LVL35:
+ 657              	.L43:
+ 157:Core/Src/fm_rtc.c ****             }
+ 158:Core/Src/fm_rtc.c **** 
+ 159:Core/Src/fm_rtc.c ****         else if ((( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Hour < FM_V0x_SET_18_HOUR_DEF    ))||\
+ 160:Core/Src/fm_rtc.c ****                     (( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Hour > FM_V0x_SET_6_HOUR_DEF     ))){
+ 161:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_LED_STATUS_Pin,    GPIO_PIN_RESET     );      
+ 162:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_PUMP_DRV_Pin,      GPIO_PIN_SET       );
+ 163:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_LIGHT_DRV_Pin,     GPIO_PIN_SET       );
+ 164:Core/Src/fm_rtc.c ****                         RTC_WakeUp_States = FM_V0x_FLAG_IS_1_DEF;
+ 165:Core/Src/fm_rtc.c ****             }
+ 166:Core/Src/fm_rtc.c ****         
+ 167:Core/Src/fm_rtc.c ****             if ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Hour == FM_V0x_SET_6_HOUR_DEF          ){
+ 658              		.loc 1 167 13 is_stmt 1 view .LVU159
+ 659              		.loc 1 167 16 is_stmt 0 view .LVU160
+ 660 0048 062C     		cmp	r4, #6
+ 661 004a 2AD0     		beq	.L50
+ 662              	.LVL36:
+ 663              	.L44:
+ 168:Core/Src/fm_rtc.c ****                 if (( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Min == FM_V0x_SET_0_MIN_DEF     )&&\
+ 169:Core/Src/fm_rtc.c ****                     ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Second >= FM_V0x_SET_SECOND_DEF )){
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 18
+
+
+ 170:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_LED_STATUS_Pin,   GPIO_PIN_SET        );
+ 171:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_LIGHT_DRV_Pin,    GPIO_PIN_SET        );
+ 172:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_PUMP_DRV_Pin,     GPIO_PIN_RESET      );
+ 173:Core/Src/fm_rtc.c ****                         RTC_WakeUp_States = FM_V0x_FLAG_IS_2_DEF;
+ 174:Core/Src/fm_rtc.c ****                 }
+ 175:Core/Src/fm_rtc.c ****                 else if ((( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Min >= FM_V0x_SET_2_MIN_DEF      )&&
+ 176:Core/Src/fm_rtc.c ****                             ( RTC_WakeUp.Set_Min <= FM_V0x_SET_59_MIN_DEF                         )
+ 177:Core/Src/fm_rtc.c ****                             ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Second >= FM_V0x_SET_SECOND_DEF  )
+ 178:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_LED_STATUS_Pin,   GPIO_PIN_RESET             )
+ 179:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_PUMP_DRV_Pin,     GPIO_PIN_SET               )
+ 180:Core/Src/fm_rtc.c ****                         RTC_WakeUp_States = FM_V0x_FLAG_IS_3_DEF;
+ 181:Core/Src/fm_rtc.c ****                 }
+ 182:Core/Src/fm_rtc.c ****             }
+ 183:Core/Src/fm_rtc.c **** 
+ 184:Core/Src/fm_rtc.c ****             if( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Hour == FM_V0x_SET_16_HOUR_DEF                 )
+ 664              		.loc 1 184 13 is_stmt 1 view .LVU161
+ 665              		.loc 1 184 15 is_stmt 0 view .LVU162
+ 666 004c 102C     		cmp	r4, #16
+ 667 004e 61D1     		bne	.L40
+ 185:Core/Src/fm_rtc.c ****                 if (( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Min == FM_V0x_SET_0_MIN_DEF               
+ 668              		.loc 1 185 17 is_stmt 1 view .LVU163
+ 669              		.loc 1 185 53 is_stmt 0 view .LVU164
+ 670 0050 9DF80830 		ldrb	r3, [sp, #8]	@ zero_extendqisi2
+ 671              		.loc 1 185 20 view .LVU165
+ 672 0054 002B     		cmp	r3, #0
+ 673 0056 4ED0     		beq	.L51
+ 186:Core/Src/fm_rtc.c ****                     ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Second >= FM_V0x_SET_SECOND_DEF        )){
+ 187:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_LED_STATUS_Pin, GPIO_PIN_SET                 )
+ 188:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_PUMP_DRV_Pin,    GPIO_PIN_RESET              )
+ 189:Core/Src/fm_rtc.c ****                         RTC_WakeUp_States = FM_V0x_FLAG_IS_4_DEF;
+ 190:Core/Src/fm_rtc.c ****                 }
+ 191:Core/Src/fm_rtc.c ****                 else if ((( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Min >= FM_V0x_SET_2_MIN_DEF      )&&
+ 674              		.loc 1 191 22 is_stmt 1 view .LVU166
+ 675              		.loc 1 191 98 is_stmt 0 view .LVU167
+ 676 0058 023B     		subs	r3, r3, #2
+ 677 005a DBB2     		uxtb	r3, r3
+ 678              		.loc 1 191 25 view .LVU168
+ 679 005c 392B     		cmp	r3, #57
+ 680 005e 59D8     		bhi	.L40
+ 192:Core/Src/fm_rtc.c ****                             ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Min <= FM_V0x_SET_59_MIN_DEF     )
+ 193:Core/Src/fm_rtc.c ****                             ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Second >= FM_V0x_SET_SECOND_DEF  )
+ 194:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_LED_STATUS_Pin,   GPIO_PIN_RESET             )
+ 681              		.loc 1 194 25 is_stmt 1 view .LVU169
+ 682 0060 334C     		ldr	r4, .L53+4
+ 683 0062 0022     		movs	r2, #0
+ 684 0064 4FF48071 		mov	r1, #256
+ 685 0068 2046     		mov	r0, r4
+ 686 006a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 687              	.LVL37:
+ 195:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_PUMP_DRV_Pin,   GPIO_PIN_SET                 )
+ 688              		.loc 1 195 25 view .LVU170
+ 689 006e 0122     		movs	r2, #1
+ 690 0070 1146     		mov	r1, r2
+ 691 0072 2046     		mov	r0, r4
+ 692 0074 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 693              	.LVL38:
+ 196:Core/Src/fm_rtc.c ****                         RTC_WakeUp_States = FM_V0x_FLAG_IS_5_DEF;
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 19
+
+
+ 694              		.loc 1 196 25 view .LVU171
+ 695              		.loc 1 196 43 is_stmt 0 view .LVU172
+ 696 0078 3546     		mov	r5, r6
+ 697 007a 4BE0     		b	.L40
+ 698              	.LVL39:
+ 699              	.L42:
+ 159:Core/Src/fm_rtc.c ****                     (( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Hour > FM_V0x_SET_6_HOUR_DEF     ))){
+ 700              		.loc 1 159 14 is_stmt 1 view .LVU173
+ 161:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_PUMP_DRV_Pin,      GPIO_PIN_SET       );
+ 701              		.loc 1 161 25 view .LVU174
+ 702 007c 2C4D     		ldr	r5, .L53+4
+ 703 007e 0022     		movs	r2, #0
+ 704 0080 4FF48071 		mov	r1, #256
+ 705 0084 2846     		mov	r0, r5
+ 706 0086 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 707              	.LVL40:
+ 162:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_LIGHT_DRV_Pin,     GPIO_PIN_SET       );
+ 708              		.loc 1 162 25 view .LVU175
+ 709 008a 0122     		movs	r2, #1
+ 710 008c 1146     		mov	r1, r2
+ 711 008e 2846     		mov	r0, r5
+ 712 0090 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 713              	.LVL41:
+ 163:Core/Src/fm_rtc.c ****                         RTC_WakeUp_States = FM_V0x_FLAG_IS_1_DEF;
+ 714              		.loc 1 163 25 view .LVU176
+ 715 0094 0122     		movs	r2, #1
+ 716 0096 1021     		movs	r1, #16
+ 717 0098 2846     		mov	r0, r5
+ 718 009a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 719              	.LVL42:
+ 164:Core/Src/fm_rtc.c ****             }
+ 720              		.loc 1 164 25 view .LVU177
+ 164:Core/Src/fm_rtc.c ****             }
+ 721              		.loc 1 164 43 is_stmt 0 view .LVU178
+ 722 009e 0125     		movs	r5, #1
+ 723 00a0 D2E7     		b	.L43
+ 724              	.LVL43:
+ 725              	.L50:
+ 168:Core/Src/fm_rtc.c ****                     ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Second >= FM_V0x_SET_SECOND_DEF )){
+ 726              		.loc 1 168 17 is_stmt 1 view .LVU179
+ 168:Core/Src/fm_rtc.c ****                     ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Second >= FM_V0x_SET_SECOND_DEF )){
+ 727              		.loc 1 168 53 is_stmt 0 view .LVU180
+ 728 00a2 9DF80830 		ldrb	r3, [sp, #8]	@ zero_extendqisi2
+ 168:Core/Src/fm_rtc.c ****                     ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Second >= FM_V0x_SET_SECOND_DEF )){
+ 729              		.loc 1 168 20 view .LVU181
+ 730 00a6 9BB1     		cbz	r3, .L52
+ 175:Core/Src/fm_rtc.c ****                             ( RTC_WakeUp.Set_Min <= FM_V0x_SET_59_MIN_DEF                         )
+ 731              		.loc 1 175 22 is_stmt 1 view .LVU182
+ 175:Core/Src/fm_rtc.c ****                             ( RTC_WakeUp.Set_Min <= FM_V0x_SET_59_MIN_DEF                         )
+ 732              		.loc 1 175 25 is_stmt 0 view .LVU183
+ 733 00a8 012B     		cmp	r3, #1
+ 734 00aa CFD9     		bls	.L44
+ 176:Core/Src/fm_rtc.c ****                             ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Second >= FM_V0x_SET_SECOND_DEF  )
+ 735              		.loc 1 176 41 view .LVU184
+ 736 00ac 9DF80130 		ldrb	r3, [sp, #1]	@ zero_extendqisi2
+ 176:Core/Src/fm_rtc.c ****                             ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Second >= FM_V0x_SET_SECOND_DEF  )
+ 737              		.loc 1 176 101 view .LVU185
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 20
+
+
+ 738 00b0 3B2B     		cmp	r3, #59
+ 739 00b2 CBD8     		bhi	.L44
+ 178:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_PUMP_DRV_Pin,     GPIO_PIN_SET               )
+ 740              		.loc 1 178 25 is_stmt 1 view .LVU186
+ 741 00b4 1E4D     		ldr	r5, .L53+4
+ 742              	.LVL44:
+ 178:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_PUMP_DRV_Pin,     GPIO_PIN_SET               )
+ 743              		.loc 1 178 25 is_stmt 0 view .LVU187
+ 744 00b6 0022     		movs	r2, #0
+ 745 00b8 4FF48071 		mov	r1, #256
+ 746 00bc 2846     		mov	r0, r5
+ 747 00be FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 748              	.LVL45:
+ 179:Core/Src/fm_rtc.c ****                         RTC_WakeUp_States = FM_V0x_FLAG_IS_3_DEF;
+ 749              		.loc 1 179 25 is_stmt 1 view .LVU188
+ 750 00c2 0122     		movs	r2, #1
+ 751 00c4 1146     		mov	r1, r2
+ 752 00c6 2846     		mov	r0, r5
+ 753 00c8 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 754              	.LVL46:
+ 180:Core/Src/fm_rtc.c ****                 }
+ 755              		.loc 1 180 25 view .LVU189
+ 180:Core/Src/fm_rtc.c ****                 }
+ 756              		.loc 1 180 43 is_stmt 0 view .LVU190
+ 757 00cc 0325     		movs	r5, #3
+ 758 00ce BDE7     		b	.L44
+ 759              	.LVL47:
+ 760              	.L52:
+ 170:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_LIGHT_DRV_Pin,    GPIO_PIN_SET        );
+ 761              		.loc 1 170 25 is_stmt 1 view .LVU191
+ 762 00d0 174D     		ldr	r5, .L53+4
+ 763              	.LVL48:
+ 170:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_LIGHT_DRV_Pin,    GPIO_PIN_SET        );
+ 764              		.loc 1 170 25 is_stmt 0 view .LVU192
+ 765 00d2 0122     		movs	r2, #1
+ 766 00d4 4FF48071 		mov	r1, #256
+ 767 00d8 2846     		mov	r0, r5
+ 768 00da FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 769              	.LVL49:
+ 171:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_PUMP_DRV_Pin,     GPIO_PIN_RESET      );
+ 770              		.loc 1 171 25 is_stmt 1 view .LVU193
+ 771 00de 0122     		movs	r2, #1
+ 772 00e0 1021     		movs	r1, #16
+ 773 00e2 2846     		mov	r0, r5
+ 774 00e4 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 775              	.LVL50:
+ 172:Core/Src/fm_rtc.c ****                         RTC_WakeUp_States = FM_V0x_FLAG_IS_2_DEF;
+ 776              		.loc 1 172 25 view .LVU194
+ 777 00e8 0022     		movs	r2, #0
+ 778 00ea 0121     		movs	r1, #1
+ 779 00ec 2846     		mov	r0, r5
+ 780 00ee FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 781              	.LVL51:
+ 173:Core/Src/fm_rtc.c ****                 }
+ 782              		.loc 1 173 25 view .LVU195
+ 173:Core/Src/fm_rtc.c ****                 }
+ 783              		.loc 1 173 43 is_stmt 0 view .LVU196
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 21
+
+
+ 784 00f2 0225     		movs	r5, #2
+ 785 00f4 AAE7     		b	.L44
+ 786              	.LVL52:
+ 787              	.L51:
+ 187:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_PUMP_DRV_Pin,    GPIO_PIN_RESET              )
+ 788              		.loc 1 187 25 is_stmt 1 view .LVU197
+ 789 00f6 0E4C     		ldr	r4, .L53+4
+ 790 00f8 0122     		movs	r2, #1
+ 791 00fa 4FF48071 		mov	r1, #256
+ 792 00fe 2046     		mov	r0, r4
+ 793 0100 FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 794              	.LVL53:
+ 188:Core/Src/fm_rtc.c ****                         RTC_WakeUp_States = FM_V0x_FLAG_IS_4_DEF;
+ 795              		.loc 1 188 25 view .LVU198
+ 796 0104 0022     		movs	r2, #0
+ 797 0106 0121     		movs	r1, #1
+ 798 0108 2046     		mov	r0, r4
+ 799 010a FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 800              	.LVL54:
+ 189:Core/Src/fm_rtc.c ****                 }
+ 801              		.loc 1 189 25 view .LVU199
+ 189:Core/Src/fm_rtc.c ****                 }
+ 802              		.loc 1 189 43 is_stmt 0 view .LVU200
+ 803 010e 0425     		movs	r5, #4
+ 804 0110 00E0     		b	.L40
+ 805              	.LVL55:
+ 806              	.L47:
+ 143:Core/Src/fm_rtc.c ****          if( FM_V0x_RTC_States == FM_V0x_RTC_STATE_FLAG_IS_5 ){
+ 807              		.loc 1 143 37 view .LVU201
+ 808 0112 0025     		movs	r5, #0
+ 809              	.LVL56:
+ 810              	.L40:
+ 197:Core/Src/fm_rtc.c ****                 }
+ 198:Core/Src/fm_rtc.c ****             }
+ 199:Core/Src/fm_rtc.c ****     }    
+ 200:Core/Src/fm_rtc.c ****         FM_V0x_RTC_States  = FM_V0x_RTC_STATE_FLAG_IS_5;
+ 811              		.loc 1 200 9 is_stmt 1 view .LVU202
+ 812              		.loc 1 200 28 is_stmt 0 view .LVU203
+ 813 0114 0521     		movs	r1, #5
+ 814 0116 054B     		ldr	r3, .L53
+ 815 0118 1970     		strb	r1, [r3]
+ 201:Core/Src/fm_rtc.c ****         printf("RTC STATE: RTC gets time. Mode is: %d\r\n",FM_V0x_RTC_States );
+ 816              		.loc 1 201 9 is_stmt 1 view .LVU204
+ 817 011a 0648     		ldr	r0, .L53+8
+ 818 011c FFF7FEFF 		bl	printf
+ 819              	.LVL57:
+ 202:Core/Src/fm_rtc.c ****         return  RTC_WakeUp_States;
+ 820              		.loc 1 202 9 view .LVU205
+ 821              	.L41:
+ 203:Core/Src/fm_rtc.c **** }...
+ 822              		.loc 1 203 1 is_stmt 0 view .LVU206
+ 823 0120 2846     		mov	r0, r5
+ 824 0122 04B0     		add	sp, sp, #16
+ 825              	.LCFI13:
+ 826              		.cfi_remember_state
+ 827              		.cfi_def_cfa_offset 16
+ 828              		@ sp needed
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 22
+
+
+ 829 0124 70BD     		pop	{r4, r5, r6, pc}
+ 830              	.LVL58:
+ 831              	.L48:
+ 832              	.LCFI14:
+ 833              		.cfi_restore_state
+ 148:Core/Src/fm_rtc.c ****                     return false;
+ 834              		.loc 1 148 28 view .LVU207
+ 835 0126 0025     		movs	r5, #0
+ 836 0128 FAE7     		b	.L41
+ 837              	.L54:
+ 838 012a 00BF     		.align	2
+ 839              	.L53:
+ 840 012c 00000000 		.word	FM_V0x_RTC_States
+ 841 0130 00080140 		.word	1073809408
+ 842 0134 00000000 		.word	.LC8
+ 843              		.cfi_endproc
+ 844              	.LFE73:
+ 846              		.global	DateToUpdate
+ 847              		.section	.bss.DateToUpdate,"aw",%nobits
+ 848              		.align	2
+ 851              	DateToUpdate:
+ 852 0000 00000000 		.space	4
+ 853              		.global	sTime
+ 854              		.section	.bss.sTime,"aw",%nobits
+ 855              		.align	2
+ 858              	sTime:
+ 859 0000 000000   		.space	3
+ 860              		.global	hrtc
+ 861              		.section	.bss.hrtc,"aw",%nobits
+ 862              		.align	2
+ 865              	hrtc:
+ 866 0000 00000000 		.space	20
+ 866      00000000 
+ 866      00000000 
+ 866      00000000 
+ 866      00000000 
+ 867              		.global	pTime
+ 868              		.section	.bss.pTime,"aw",%nobits
+ 869              		.align	2
+ 872              	pTime:
+ 873 0000 000000   		.space	3
+ 874              		.global	FM_V0x_RTC_States
+ 875              		.section	.bss.FM_V0x_RTC_States,"aw",%nobits
+ 878              	FM_V0x_RTC_States:
+ 879 0000 00       		.space	1
+ 880              		.global	FM_V0x_Alarm_RTC
+ 881              		.section	.bss.FM_V0x_Alarm_RTC,"aw",%nobits
+ 882              		.align	2
+ 885              	FM_V0x_Alarm_RTC:
+ 886 0000 000000   		.space	3
+ 887              		.global	FM_V0x_Get_RTC
+ 888              		.section	.bss.FM_V0x_Get_RTC,"aw",%nobits
+ 889              		.align	2
+ 892              	FM_V0x_Get_RTC:
+ 893 0000 00000000 		.space	14
+ 893      00000000 
+ 893      00000000 
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 23
+
+
+ 893      0000
+ 894              		.global	FM_V0x_RTC_Pars
+ 895              		.section	.bss.FM_V0x_RTC_Pars,"aw",%nobits
+ 896              		.align	2
+ 899              	FM_V0x_RTC_Pars:
+ 900 0000 00000000 		.space	14
+ 900      00000000 
+ 900      00000000 
+ 900      0000
+ 901              		.text
+ 902              	.Letext0:
+ 903              		.file 2 "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.2 Rel1/arm-none-eabi/include/ma
+ 904              		.file 3 "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.2 Rel1/arm-none-eabi/include/sy
+ 905              		.file 4 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 906              		.file 5 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 907              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h"
+ 908              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc.h"
+ 909              		.file 8 "Core/Inc/fm_rtc.h"
+ 910              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h"
+ 911              		.file 10 "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.2 Rel1/arm-none-eabi/include/s
+ 912              		.file 11 "<built-in>"
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 24
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 fm_rtc.c
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:19     .rodata.FM_V0x_RTC_Set_Time.str1.4:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:24     .text.FM_V0x_RTC_Set_Time:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:30     .text.FM_V0x_RTC_Set_Time:00000000 FM_V0x_RTC_Set_Time
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:155    .text.FM_V0x_RTC_Set_Time:0000008c $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:878    .bss.FM_V0x_RTC_States:00000000 FM_V0x_RTC_States
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:865    .bss.hrtc:00000000 hrtc
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:858    .bss.sTime:00000000 sTime
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:164    .rodata.FM_V0x_RTC_Set_Date.str1.4:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:169    .text.FM_V0x_RTC_Set_Date:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:175    .text.FM_V0x_RTC_Set_Date:00000000 FM_V0x_RTC_Set_Date
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:281    .text.FM_V0x_RTC_Set_Date:00000070 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:851    .bss.DateToUpdate:00000000 DateToUpdate
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:290    .rodata.FM_V0x_Rtc_Init.str1.4:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:301    .text.FM_V0x_Rtc_Init:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:307    .text.FM_V0x_Rtc_Init:00000000 FM_V0x_Rtc_Init
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:380    .text.FM_V0x_Rtc_Init:0000004c $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:899    .bss.FM_V0x_RTC_Pars:00000000 FM_V0x_RTC_Pars
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:389    .rodata.FM_V0x_RTC_Get_Time.str1.4:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:396    .text.FM_V0x_RTC_Get_Time:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:402    .text.FM_V0x_RTC_Get_Time:00000000 FM_V0x_RTC_Get_Time
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:480    .text.FM_V0x_RTC_Get_Time:00000044 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:872    .bss.pTime:00000000 pTime
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:489    .rodata.FM_V0x_RTC_Get_Date.str1.4:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:493    .text.FM_V0x_RTC_Get_Date:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:499    .text.FM_V0x_RTC_Get_Date:00000000 FM_V0x_RTC_Get_Date
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:575    .text.FM_V0x_RTC_Get_Date:00000044 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:584    .rodata.FM_V0x_RTC_WakeUp.str1.4:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:588    .text.FM_V0x_RTC_WakeUp:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:594    .text.FM_V0x_RTC_WakeUp:00000000 FM_V0x_RTC_WakeUp
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:840    .text.FM_V0x_RTC_WakeUp:0000012c $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:848    .bss.DateToUpdate:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:855    .bss.sTime:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:862    .bss.hrtc:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:869    .bss.pTime:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:879    .bss.FM_V0x_RTC_States:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:885    .bss.FM_V0x_Alarm_RTC:00000000 FM_V0x_Alarm_RTC
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:882    .bss.FM_V0x_Alarm_RTC:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:892    .bss.FM_V0x_Get_RTC:00000000 FM_V0x_Get_RTC
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:889    .bss.FM_V0x_Get_RTC:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:896    .bss.FM_V0x_RTC_Pars:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_RTC_Init
+HAL_RTCEx_BKUPRead
+printf
+Error_Handler
+HAL_RTC_SetTime
+HAL_RTCEx_BKUPWrite
+HAL_RTC_SetDate
+puts
+HAL_RTC_GetTime
+HAL_RTC_GetDate
+HAL_GPIO_WritePin

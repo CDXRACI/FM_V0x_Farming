@@ -1,4 +1,4 @@
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 1
 
 
    1              		.cpu cortex-m3
@@ -58,7 +58,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
   21:Core/Src/fm_rtc.c ****     
   22:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Hour   = 0X05;
   23:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Min    = 0x59;
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 2
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 2
 
 
   24:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Second =    0;
@@ -118,7 +118,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
   57:Core/Src/fm_rtc.c ****          HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x32F2 );}
   58:Core/Src/fm_rtc.c ****             FM_V0x_RTC_States  = FM_V0x_RTC_STATE_FLAG_IS_2;
   59:Core/Src/fm_rtc.c ****             printf("\r\nRTC STATE: RTC was set time. Mode is: %d\r\n", FM_V0x_RTC_States);
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 3
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 3
 
 
   60:Core/Src/fm_rtc.c ****         }
@@ -178,7 +178,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
   88              		.loc 1 49 9 is_stmt 1 view .LVU17
   49:Core/Src/fm_rtc.c ****             sTime.Hours   =  RTC_SetTime.Set_Hour;
   89              		.loc 1 49 13 is_stmt 0 view .LVU18
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 4
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 4
 
 
   90 0036 0121     		movs	r1, #1
@@ -238,7 +238,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  130 006c 8B70     		strb	r3, [r1, #2]
   54:Core/Src/fm_rtc.c ****                 Error_Handler( );}
  131              		.loc 1 54 13 is_stmt 1 view .LVU33
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 5
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 5
 
 
   54:Core/Src/fm_rtc.c ****                 Error_Handler( );}
@@ -298,7 +298,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  178              		.cfi_startproc
  179              		@ args = 0, pretend = 0, frame = 16
  180              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 6
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 6
 
 
  181 0000 00B5     		push	{lr}
@@ -358,7 +358,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  205              		.cfi_remember_state
  206              		.cfi_def_cfa_offset 4
  207              		@ sp needed
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 7
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 7
 
 
  208 001a 5DF804FB 		ldr	pc, [sp], #4
@@ -418,7 +418,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
   86:Core/Src/fm_rtc.c **** 
  245              		.loc 1 86 47 is_stmt 0 view .LVU62
  246 0044 9DF80630 		ldrb	r3, [sp, #6]	@ zero_extendqisi2
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 8
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 8
 
 
   86:Core/Src/fm_rtc.c **** 
@@ -478,7 +478,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  292      22464D5F 
  292      5254435F 
  292      56307820 
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 9
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 9
 
 
  292      69732049 
@@ -538,7 +538,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  333              		.loc 1 22 9 view .LVU77
   22:Core/Src/fm_rtc.c ****         FM_V0x_RTC_Pars.Set_Min    = 0x59;
  334              		.loc 1 22 36 is_stmt 0 view .LVU78
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 10
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 10
 
 
  335 0014 104C     		ldr	r4, .L25+12
@@ -598,7 +598,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  373              		.loc 1 33 9 view .LVU94
   34:Core/Src/fm_rtc.c **** 
  374              		.loc 1 34 1 is_stmt 0 view .LVU95
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 11
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 11
 
 
  375 0046 2878     		ldrb	r0, [r5]	@ zero_extendqisi2
@@ -658,7 +658,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  418              		.loc 1 104 31 is_stmt 0 view .LVU99
  419 0002 104B     		ldr	r3, .L31
  420 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 12
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 12
 
 
  421              		.loc 1 104 11 view .LVU100
@@ -718,7 +718,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  108:Core/Src/fm_rtc.c ****             RTC_GetTime->FM_V0x_Get_TimeDate.Get_Second = pTime.Seconds;
  453              		.loc 1 108 57 view .LVU112
  454 0024 2372     		strb	r3, [r4, #8]
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 13
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 13
 
 
  109:Core/Src/fm_rtc.c ****            // FM_V0x_RTC_WakeUp(FM_V0x_Get_RTC); 
@@ -778,7 +778,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  500              	.LVL24:
  501              	.LFB72:
  120:Core/Src/fm_rtc.c **** 
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 14
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 14
 
 
  121:Core/Src/fm_rtc.c **** uint8_t FM_V0x_RTC_Get_Date (FM_V0x_Parameters_RTC_t  *RTC_GetDate  ){
@@ -838,7 +838,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  535 0016 0D48     		ldr	r0, .L37+8
  536              	.LVL27:
  124:Core/Src/fm_rtc.c ****             RTC_GetDate->FM_V0x_Get_TimeDate.Get_Day    = DateToUpdate.Date;
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 15
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 15
 
 
  537              		.loc 1 124 13 is_stmt 0 view .LVU129
@@ -898,7 +898,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  578 0050 00000000 		.word	.LC5
  579 0054 00000000 		.word	.LC7
  580              		.cfi_endproc
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 16
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 16
 
 
  581              	.LFE72:
@@ -958,7 +958,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  147:Core/Src/fm_rtc.c ****             ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Hour > FM_V0x_SET_0_HOUR_DEF           )){
  148:Core/Src/fm_rtc.c ****                     return false;
  149:Core/Src/fm_rtc.c ****             }
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 17
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 17
 
 
  150:Core/Src/fm_rtc.c ****             
@@ -1018,7 +1018,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  663              	.L44:
  168:Core/Src/fm_rtc.c ****                 if (( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Min == FM_V0x_SET_0_MIN_DEF     )&&\
  169:Core/Src/fm_rtc.c ****                     ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Second >= FM_V0x_SET_SECOND_DEF )){
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 18
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 18
 
 
  170:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_LED_STATUS_Pin,   GPIO_PIN_SET        );
@@ -1040,21 +1040,21 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  665              		.loc 1 184 15 is_stmt 0 view .LVU162
  666 004c 102C     		cmp	r4, #16
  667 004e 61D1     		bne	.L40
- 185:Core/Src/fm_rtc.c ****                 if (( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Min == FM_V0x_SET_0_MIN_DEF               
+ 185:Core/Src/fm_rtc.c ****                 if (( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Min == FM_V0x_SET_0_MIN_DEF              )
  668              		.loc 1 185 17 is_stmt 1 view .LVU163
  669              		.loc 1 185 53 is_stmt 0 view .LVU164
  670 0050 9DF80830 		ldrb	r3, [sp, #8]	@ zero_extendqisi2
  671              		.loc 1 185 20 view .LVU165
  672 0054 002B     		cmp	r3, #0
  673 0056 4ED0     		beq	.L51
- 186:Core/Src/fm_rtc.c ****                     ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Second >= FM_V0x_SET_SECOND_DEF        )){
+ 186:Core/Src/fm_rtc.c ****                     ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Second >= FM_V0x_SET_SECOND_DEF          )
  187:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_LED_STATUS_Pin, GPIO_PIN_SET                 )
  188:Core/Src/fm_rtc.c ****                         HAL_GPIO_WritePin( GPIOA, FM_PUMP_DRV_Pin,    GPIO_PIN_RESET              )
  189:Core/Src/fm_rtc.c ****                         RTC_WakeUp_States = FM_V0x_FLAG_IS_4_DEF;
  190:Core/Src/fm_rtc.c ****                 }
- 191:Core/Src/fm_rtc.c ****                 else if ((( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Min >= FM_V0x_SET_2_MIN_DEF      )&&
+ 191:Core/Src/fm_rtc.c ****                 else if ((( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Min >= FM_V0x_SET_2_MIN_DEF        )
  674              		.loc 1 191 22 is_stmt 1 view .LVU166
- 675              		.loc 1 191 98 is_stmt 0 view .LVU167
+ 675              		.loc 1 191 100 is_stmt 0 view .LVU167
  676 0058 023B     		subs	r3, r3, #2
  677 005a DBB2     		uxtb	r3, r3
  678              		.loc 1 191 25 view .LVU168
@@ -1078,7 +1078,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  692 0074 FFF7FEFF 		bl	HAL_GPIO_WritePin
  693              	.LVL38:
  196:Core/Src/fm_rtc.c ****                         RTC_WakeUp_States = FM_V0x_FLAG_IS_5_DEF;
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 19
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 19
 
 
  694              		.loc 1 196 25 view .LVU171
@@ -1138,7 +1138,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  736 00ac 9DF80130 		ldrb	r3, [sp, #1]	@ zero_extendqisi2
  176:Core/Src/fm_rtc.c ****                             ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Second >= FM_V0x_SET_SECOND_DEF  )
  737              		.loc 1 176 101 view .LVU185
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 20
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 20
 
 
  738 00b0 3B2B     		cmp	r3, #59
@@ -1198,7 +1198,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  782              		.loc 1 173 25 view .LVU195
  173:Core/Src/fm_rtc.c ****                 }
  783              		.loc 1 173 43 is_stmt 0 view .LVU196
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 21
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 21
 
 
  784 00f2 0225     		movs	r5, #2
@@ -1258,7 +1258,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  826              		.cfi_remember_state
  827              		.cfi_def_cfa_offset 16
  828              		@ sp needed
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 22
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 22
 
 
  829 0124 70BD     		pop	{r4, r5, r6, pc}
@@ -1318,7 +1318,7 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  893 0000 00000000 		.space	14
  893      00000000 
  893      00000000 
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 23
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 23
 
 
  893      0000
@@ -1342,51 +1342,51 @@ ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 1
  910              		.file 9 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h"
  911              		.file 10 "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.2 Rel1/arm-none-eabi/include/s
  912              		.file 11 "<built-in>"
-ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s 			page 24
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s 			page 24
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 fm_rtc.c
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:19     .rodata.FM_V0x_RTC_Set_Time.str1.4:00000000 $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:24     .text.FM_V0x_RTC_Set_Time:00000000 $t
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:30     .text.FM_V0x_RTC_Set_Time:00000000 FM_V0x_RTC_Set_Time
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:155    .text.FM_V0x_RTC_Set_Time:0000008c $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:878    .bss.FM_V0x_RTC_States:00000000 FM_V0x_RTC_States
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:865    .bss.hrtc:00000000 hrtc
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:858    .bss.sTime:00000000 sTime
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:164    .rodata.FM_V0x_RTC_Set_Date.str1.4:00000000 $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:169    .text.FM_V0x_RTC_Set_Date:00000000 $t
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:175    .text.FM_V0x_RTC_Set_Date:00000000 FM_V0x_RTC_Set_Date
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:281    .text.FM_V0x_RTC_Set_Date:00000070 $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:851    .bss.DateToUpdate:00000000 DateToUpdate
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:290    .rodata.FM_V0x_Rtc_Init.str1.4:00000000 $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:301    .text.FM_V0x_Rtc_Init:00000000 $t
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:307    .text.FM_V0x_Rtc_Init:00000000 FM_V0x_Rtc_Init
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:380    .text.FM_V0x_Rtc_Init:0000004c $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:899    .bss.FM_V0x_RTC_Pars:00000000 FM_V0x_RTC_Pars
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:389    .rodata.FM_V0x_RTC_Get_Time.str1.4:00000000 $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:396    .text.FM_V0x_RTC_Get_Time:00000000 $t
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:402    .text.FM_V0x_RTC_Get_Time:00000000 FM_V0x_RTC_Get_Time
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:480    .text.FM_V0x_RTC_Get_Time:00000044 $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:872    .bss.pTime:00000000 pTime
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:489    .rodata.FM_V0x_RTC_Get_Date.str1.4:00000000 $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:493    .text.FM_V0x_RTC_Get_Date:00000000 $t
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:499    .text.FM_V0x_RTC_Get_Date:00000000 FM_V0x_RTC_Get_Date
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:575    .text.FM_V0x_RTC_Get_Date:00000044 $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:584    .rodata.FM_V0x_RTC_WakeUp.str1.4:00000000 $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:588    .text.FM_V0x_RTC_WakeUp:00000000 $t
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:594    .text.FM_V0x_RTC_WakeUp:00000000 FM_V0x_RTC_WakeUp
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:840    .text.FM_V0x_RTC_WakeUp:0000012c $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:848    .bss.DateToUpdate:00000000 $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:855    .bss.sTime:00000000 $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:862    .bss.hrtc:00000000 $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:869    .bss.pTime:00000000 $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:879    .bss.FM_V0x_RTC_States:00000000 $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:885    .bss.FM_V0x_Alarm_RTC:00000000 FM_V0x_Alarm_RTC
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:882    .bss.FM_V0x_Alarm_RTC:00000000 $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:892    .bss.FM_V0x_Get_RTC:00000000 FM_V0x_Get_RTC
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:889    .bss.FM_V0x_Get_RTC:00000000 $d
-C:\Users\CDP~1.DAR\AppData\Local\Temp\ccilOHam.s:896    .bss.FM_V0x_RTC_Pars:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:19     .rodata.FM_V0x_RTC_Set_Time.str1.4:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:24     .text.FM_V0x_RTC_Set_Time:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:30     .text.FM_V0x_RTC_Set_Time:00000000 FM_V0x_RTC_Set_Time
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:155    .text.FM_V0x_RTC_Set_Time:0000008c $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:878    .bss.FM_V0x_RTC_States:00000000 FM_V0x_RTC_States
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:865    .bss.hrtc:00000000 hrtc
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:858    .bss.sTime:00000000 sTime
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:164    .rodata.FM_V0x_RTC_Set_Date.str1.4:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:169    .text.FM_V0x_RTC_Set_Date:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:175    .text.FM_V0x_RTC_Set_Date:00000000 FM_V0x_RTC_Set_Date
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:281    .text.FM_V0x_RTC_Set_Date:00000070 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:851    .bss.DateToUpdate:00000000 DateToUpdate
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:290    .rodata.FM_V0x_Rtc_Init.str1.4:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:301    .text.FM_V0x_Rtc_Init:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:307    .text.FM_V0x_Rtc_Init:00000000 FM_V0x_Rtc_Init
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:380    .text.FM_V0x_Rtc_Init:0000004c $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:899    .bss.FM_V0x_RTC_Pars:00000000 FM_V0x_RTC_Pars
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:389    .rodata.FM_V0x_RTC_Get_Time.str1.4:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:396    .text.FM_V0x_RTC_Get_Time:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:402    .text.FM_V0x_RTC_Get_Time:00000000 FM_V0x_RTC_Get_Time
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:480    .text.FM_V0x_RTC_Get_Time:00000044 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:872    .bss.pTime:00000000 pTime
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:489    .rodata.FM_V0x_RTC_Get_Date.str1.4:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:493    .text.FM_V0x_RTC_Get_Date:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:499    .text.FM_V0x_RTC_Get_Date:00000000 FM_V0x_RTC_Get_Date
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:575    .text.FM_V0x_RTC_Get_Date:00000044 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:584    .rodata.FM_V0x_RTC_WakeUp.str1.4:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:588    .text.FM_V0x_RTC_WakeUp:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:594    .text.FM_V0x_RTC_WakeUp:00000000 FM_V0x_RTC_WakeUp
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:840    .text.FM_V0x_RTC_WakeUp:0000012c $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:848    .bss.DateToUpdate:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:855    .bss.sTime:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:862    .bss.hrtc:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:869    .bss.pTime:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:879    .bss.FM_V0x_RTC_States:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:885    .bss.FM_V0x_Alarm_RTC:00000000 FM_V0x_Alarm_RTC
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:882    .bss.FM_V0x_Alarm_RTC:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:892    .bss.FM_V0x_Get_RTC:00000000 FM_V0x_Get_RTC
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:889    .bss.FM_V0x_Get_RTC:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\ccJ4Lonc.s:896    .bss.FM_V0x_RTC_Pars:00000000 $d
 
 UNDEFINED SYMBOLS
 HAL_RTC_Init

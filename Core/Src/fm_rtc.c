@@ -182,13 +182,13 @@ uint8_t FM_V0x_RTC_WakeUp   ( FM_V0x_Parameters_RTC_t RTC_WakeUp){
             }
 
             if( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Hour == FM_V0x_SET_16_HOUR_DEF                 ){
-                if (( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Min == FM_V0x_SET_0_MIN_DEF              )&&\
-                    ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Second >= FM_V0x_SET_SECOND_DEF          )){
+                if (( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Min == FM_V0x_SET_0_MIN_DEF                               )&&\
+                    ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Second >= FM_V0x_SET_SECOND_DEF        )){
                         HAL_GPIO_WritePin( GPIOA, FM_LED_STATUS_Pin, GPIO_PIN_SET                 );
                         HAL_GPIO_WritePin( GPIOA, FM_PUMP_DRV_Pin,    GPIO_PIN_RESET              );
                         RTC_WakeUp_States = FM_V0x_FLAG_IS_4_DEF;
                 }
-                else if ((( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Min >= FM_V0x_SET_2_MIN_DEF        )&&\
+                else if ((( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Min >= FM_V0x_SET_2_MIN_DEF      )&&\
                             ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Min <= FM_V0x_SET_59_MIN_DEF     ))&&\
                             ( RTC_WakeUp.FM_V0x_Get_TimeDate.Get_Second >= FM_V0x_SET_SECOND_DEF  )){
                         HAL_GPIO_WritePin( GPIOA, FM_LED_STATUS_Pin,   GPIO_PIN_RESET             );

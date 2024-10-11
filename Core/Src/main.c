@@ -2,47 +2,71 @@
 #include <stdio.h>
 #include "fm_init_project.h"
 #include "fm_rtc.h"
+#include "fm_sht30_sensor.h"
 
 
-
+I2C_HandleTypeDef hi2c2;
 UART_HandleTypeDef huart2;
-
-RTC_AlarmTypeDef sAlarm = {0};
-
-extern FM_V0x_Parameters_RTC_t              FM_V0x_RTC_Pars ;
-extern FM_V0x_Parameters_RTC_t              FM_V0x_Get_RTC ;
-
+extern FM_V0x_Parameters_RTC_t              FM_V0x_Get_RTC   ;
 
 int _write(int file, char *ptr, int len)
 {
     HAL_UART_Transmit(&huart2, (uint8_t*)ptr, len, HAL_MAX_DELAY);
     return len;
 }
+
+
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART2_UART_Init(void);
-static void MX_RTC_Init(void);
-void Clear_Backup_Registers(void);
+static void MX_I2C2_Init(void);
+
 
 int main(void)
 {
+
   HAL_Init();
   SystemClock_Config();
   MX_GPIO_Init();
   MX_USART2_UART_Init();
-  MX_RTC_Init();
- // set_alarm(14,0,0);
- 
-fm_fc_init();
-FM_V0x_Rtc_Init();
+  MX_I2C2_Init();
+
+  sht3x_handle_t handle = {
+        .i2c_handle = &hi2c2,
+        .device_address = SHT3X_I2C_DEVICE_ADDRESS_ADDR_PIN_LOW
+    };
+  if( FM_V0x_Rtc_Init( ) == false ){
+        printf("RTC_BUG: Something is wrong in RTC function\r\n");
+        return false;
+    }
+
+  if (!FM_V0x_SHT30_Sensor_Init(&handle)) {
+      printf("SHT3x access failed.\n\r");
+  }
+
+  float temperature, humidity;
+  FM_V0x_SHT30_Read_Temp_Humid(&handle, &temperature, &humidity);
+  printf("Initial temperature: %.2fC, humidity: %.2f%%RH\n\r", temperature, humidity);
+
+// Enable heater for two seconds.
+  FM_V0x_SHT30_Set_Header_Enable(&handle, true);
+  HAL_Delay(2000);
+  FM_V0x_SHT30_Set_Header_Enable(&handle, false);
   while (1)
   {
-      FM_V0x_RTC_Get_Time(&FM_V0x_Get_RTC );
-      FM_V0x_RTC_Get_Date(&FM_V0x_Get_RTC );
-      HAL_Delay(1000);
+    /* USER CODE END WHILE */
+  FM_V0x_SHT30_Read_Temp_Humid(&handle, &temperature, &humidity);
+  printf("After heating temperature: %.2fC, humidity: %.2f%%RH\n\r", temperature, humidity);
+  FM_V0x_RTC_Get_Time(&FM_V0x_Get_RTC );
+  FM_V0x_RTC_Get_Date(&FM_V0x_Get_RTC );
+  HAL_Delay(1000);
+
+    /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
 }
+
+
 
 /**
   * @brief System Clock Configuration
@@ -92,20 +116,39 @@ void SystemClock_Config(void)
 }
 
 /**
-  * @brief RTC Initialization Function
+  * @brief I2C2 Initialization Function
   * @param None
   * @retval None
   */
-static void MX_RTC_Init(void)
+static void MX_I2C2_Init(void)
 {
+
+  /* USER CODE BEGIN I2C2_Init 0 */
+
+  /* USER CODE END I2C2_Init 0 */
+
+  /* USER CODE BEGIN I2C2_Init 1 */
+
+  /* USER CODE END I2C2_Init 1 */
+  hi2c2.Instance = I2C2;
+  hi2c2.Init.ClockSpeed = 100000;
+  hi2c2.Init.DutyCycle = I2C_DUTYCYCLE_2;
+  hi2c2.Init.OwnAddress1 = 0;
+  hi2c2.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  hi2c2.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  hi2c2.Init.OwnAddress2 = 0;
+  hi2c2.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  hi2c2.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&hi2c2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN I2C2_Init 2 */
+
+  /* USER CODE END I2C2_Init 2 */
 
 }
 
-/**
-  * @brief USART2 Initialization Function
-  * @param None
-  * @retval None
-  */
 static void MX_USART2_UART_Init(void)
 {
 
@@ -146,9 +189,10 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOC_CLK_ENABLE();
   __HAL_RCC_GPIOD_CLK_ENABLE();
   __HAL_RCC_GPIOA_CLK_ENABLE();
+  __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  // HAL_GPIO_WritePin(GPIOA, FM_PUMP_DRV_Pin|FM_STR_DRV_Pin|FM_LIGHT_DRV_Pin|FM_LED_STATUS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, FM_PUMP_DRV_Pin|FM_STR_DRV_Pin|FM_LIGHT_DRV_Pin|FM_LED_STATUS_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : FM_PUMP_DRV_Pin FM_STR_DRV_Pin FM_LIGHT_DRV_Pin FM_LED_STATUS_Pin */
   GPIO_InitStruct.Pin = FM_PUMP_DRV_Pin|FM_STR_DRV_Pin|FM_LIGHT_DRV_Pin|FM_LED_STATUS_Pin;

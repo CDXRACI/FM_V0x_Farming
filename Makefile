@@ -40,6 +40,7 @@ Core/Src/main.c \
 Core/Src/fm_init_project.c \
 Core/Src/fm_ring_buffer.c \
 Core/Src/fm_rtc.c \
+Core/Src/fm_sht30.c \
 Core/Src/stm32f1xx_it.c \
 Core/Src/stm32f1xx_hal_msp.c \
 Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.c \

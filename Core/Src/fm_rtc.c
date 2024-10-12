@@ -19,11 +19,11 @@ uint8_t FM_V0x_Rtc_Init( void ){
         printf("--> \"FM_RTC_V0x is Initializing... \" \r\n");
         printf("--> Time and Data were initialized is: 7h-21min-00s \r\n");
     
-        FM_V0x_RTC_Pars.Set_Hour   = 0X05;
-        FM_V0x_RTC_Pars.Set_Min    = 0x59;
+        FM_V0x_RTC_Pars.Set_Hour   = 0X10;
+        FM_V0x_RTC_Pars.Set_Min    = 0x57;
         FM_V0x_RTC_Pars.Set_Second =    0;
         FM_V0x_RTC_Pars.Set_Day    = 0x12;
-        FM_V0x_RTC_Pars.Set_Mon    = 0x09;
+        FM_V0x_RTC_Pars.Set_Mon    = 0x10;
         FM_V0x_RTC_Pars.Set_Year   = 0x24;
     
         FM_V0x_RTC_States = FM_V0x_RTC_STATE_FLAG_IS_ON;
@@ -46,7 +46,7 @@ uint8_t FM_V0x_RTC_Set_Time (FM_V0x_Parameters_RTC_t  RTC_SetTime ){
             hrtc.Init.OutPut = RTC_OUTPUTSOURCE_ALARM;
             if (HAL_RTC_Init( &hrtc ) != HAL_OK ){
                 Error_Handler( ); }
-        if( HAL_RTCEx_BKUPRead( &hrtc, RTC_BKP_DR1 ) != 0x32F2 ){
+         if( HAL_RTCEx_BKUPRead( &hrtc, RTC_BKP_DR1 ) != 0x32F2 ){
             sTime.Hours   =  RTC_SetTime.Set_Hour;
             sTime.Minutes =  RTC_SetTime.Set_Min;
             sTime.Seconds =  RTC_SetTime.Set_Second; 
@@ -54,7 +54,7 @@ uint8_t FM_V0x_RTC_Set_Time (FM_V0x_Parameters_RTC_t  RTC_SetTime ){
             if (HAL_RTC_SetTime( &hrtc, &sTime, RTC_FORMAT_BCD ) != HAL_OK ){
                 Error_Handler( );}
       
-         HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x32F2 );}
+          HAL_RTCEx_BKUPWrite(&hrtc, RTC_BKP_DR1, 0x32F2 );}
             FM_V0x_RTC_States  = FM_V0x_RTC_STATE_FLAG_IS_2;
             printf("\r\nRTC STATE: RTC was set time. Mode is: %d\r\n", FM_V0x_RTC_States);
         }
@@ -109,7 +109,8 @@ uint8_t FM_V0x_RTC_Get_Time ( FM_V0x_Parameters_RTC_t  *RTC_GetTime ){
             RTC_GetTime->FM_V0x_Get_TimeDate.Get_Second = pTime.Seconds;
            // FM_V0x_RTC_WakeUp(FM_V0x_Get_RTC); 
             FM_V0x_RTC_States  = FM_V0x_RTC_STATE_FLAG_IS_4;
-            printf("\r\nRTC STATE: RTC gets time. Mode is: %d. ",FM_V0x_RTC_States );
+            printf("RTC_LOG: ==================***RTC***=====================\r\n");
+            printf("RTC STATE: RTC gets time. Mode is: %d. ",FM_V0x_RTC_States );
             printf("Time is: %d %d %d\r\n",    RTC_GetTime->FM_V0x_Get_TimeDate.Get_Hour  ,  RTC_GetTime->FM_V0x_Get_TimeDate.Get_Min  ,  RTC_GetTime->FM_V0x_Get_TimeDate.Get_Second );
         }
         if ((   RTC_GetTime->FM_V0x_Get_TimeDate.Get_Hour     >= FM_V0x_CHECK_TIME_IS_24HOUR )   && (      RTC_GetTime->FM_V0x_Get_TimeDate.Get_Hour     < FM_V0x_CHECK_TIME_IS_0HOUR )) {
@@ -126,8 +127,9 @@ uint8_t FM_V0x_RTC_Get_Date (FM_V0x_Parameters_RTC_t  *RTC_GetDate  ){
             RTC_GetDate->FM_V0x_Get_TimeDate.Get_Mon    = DateToUpdate.Month;
             RTC_GetDate->FM_V0x_Get_TimeDate.Get_Year   = DateToUpdate.Year;
             FM_V0x_RTC_States  = FM_V0x_RTC_STATE_FLAG_IS_3;
-            printf("\r\nRTC STATE: RTC gets time. Mode is: %d. ",FM_V0x_RTC_States );
+            printf("RTC STATE: RTC gets time. Mode is: %d. ",FM_V0x_RTC_States );
             printf("Date is: %d %d %d\r\n",    RTC_GetDate->FM_V0x_Get_TimeDate.Get_Day  ,  RTC_GetDate->FM_V0x_Get_TimeDate.Get_Mon  ,  RTC_GetDate->FM_V0x_Get_TimeDate.Get_Year );
+            printf("RTC_LOG: ==================***RTC***=====================\r\n");
            // FM_V0x_RTC_WakeUp(FM_V0x_Get_RTC);  
         }    
         if ((   RTC_GetDate->FM_V0x_Get_TimeDate.Get_Day     >= FM_V0x_CHECK_TIME_IS_24HOUR )   && (      RTC_GetDate->FM_V0x_Get_TimeDate.Get_Day     < FM_V0x_CHECK_TIME_IS_0HOUR )) {

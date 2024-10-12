@@ -3,23 +3,31 @@
 #include "fm_init_project.h"
 #include "fm_rtc.h"
 #include "fm_sht30_sensor.h"
+#include "fm_multiADC.h"
+
+
 
 
 I2C_HandleTypeDef hi2c2;
 UART_HandleTypeDef huart2;
-extern FM_V0x_Parameters_RTC_t              FM_V0x_Get_RTC   ;
+extern FM_V0x_Parameters_RTC_t                  FM_V0x_Get_RTC   ;
+extern FM_V0x_MultADC_Buffer_t                 *FM_V0x_MultiADC_Buffer;
+
+uint32_t adcValue = 0;
+
+void SystemClock_Config(void);
+static void MX_GPIO_Init(void);
+static void MX_USART2_UART_Init(void);
+static void MX_I2C2_Init(void);
+static void MX_ADC1_Init(void);
+
+int _write(int file, char *ptr, int len);
 
 int _write(int file, char *ptr, int len)
 {
     HAL_UART_Transmit(&huart2, (uint8_t*)ptr, len, HAL_MAX_DELAY);
     return len;
 }
-
-
-void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
-static void MX_USART2_UART_Init(void);
-static void MX_I2C2_Init(void);
 
 
 int main(void)
@@ -30,7 +38,8 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   MX_I2C2_Init();
-
+  MX_ADC1_Init();
+//  FM_V0x_MultiADC_Init();
   sht3x_handle_t handle = {
         .i2c_handle = &hi2c2,
         .device_address = SHT3X_I2C_DEVICE_ADDRESS_ADDR_PIN_LOW
@@ -43,30 +52,26 @@ int main(void)
   if (!FM_V0x_SHT30_Sensor_Init(&handle)) {
       printf("SHT3x access failed.\n\r");
   }
-
-  float temperature, humidity;
+  
+    float temperature, humidity;
   FM_V0x_SHT30_Read_Temp_Humid(&handle, &temperature, &humidity);
-  printf("Initial temperature: %.2fC, humidity: %.2f%%RH\n\r", temperature, humidity);
-
-// Enable heater for two seconds.
+  
   FM_V0x_SHT30_Set_Header_Enable(&handle, true);
   HAL_Delay(2000);
   FM_V0x_SHT30_Set_Header_Enable(&handle, false);
   while (1)
   {
-    /* USER CODE END WHILE */
   FM_V0x_SHT30_Read_Temp_Humid(&handle, &temperature, &humidity);
-  printf("After heating temperature: %.2fC, humidity: %.2f%%RH\n\r", temperature, humidity);
+  printf("LOG_ADC: SHT30x %.2fC, humidity: %.2f%%RH\n\r", temperature, humidity);
   FM_V0x_RTC_Get_Time(&FM_V0x_Get_RTC );
   FM_V0x_RTC_Get_Date(&FM_V0x_Get_RTC );
-  HAL_Delay(1000);
 
-    /* USER CODE BEGIN 3 */
+
+   FM_V0x_MultiADC_Init ( );
+  HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
-
-
 
 /**
   * @brief System Clock Configuration
@@ -99,7 +104,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV2;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
@@ -107,12 +112,25 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC;
+  PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_RTC|RCC_PERIPHCLK_ADC;
   PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
+  PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV4;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
   }
+}
+
+/**
+  * @brief ADC1 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_ADC1_Init(void)
+{
+
+
+
 }
 
 /**
@@ -149,6 +167,18 @@ static void MX_I2C2_Init(void)
 
 }
 
+/**
+  * @brief RTC Initialization Function
+  * @param None
+  * @retval None
+  */
+
+
+/**
+  * @brief USART2 Initialization Function
+  * @param None
+  * @retval None
+  */
 static void MX_USART2_UART_Init(void)
 {
 
@@ -192,10 +222,13 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, FM_PUMP_DRV_Pin|FM_STR_DRV_Pin|FM_LIGHT_DRV_Pin|FM_LED_STATUS_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, FM_PUMP_DRV_Pin|FM_STR_DRV_Pin|FM_LIGHT_DRV_Pin|GPIO_PIN_5
+                          |FM_LED_STATUS_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : FM_PUMP_DRV_Pin FM_STR_DRV_Pin FM_LIGHT_DRV_Pin FM_LED_STATUS_Pin */
-  GPIO_InitStruct.Pin = FM_PUMP_DRV_Pin|FM_STR_DRV_Pin|FM_LIGHT_DRV_Pin|FM_LED_STATUS_Pin;
+  /*Configure GPIO pins : FM_PUMP_DRV_Pin FM_STR_DRV_Pin FM_LIGHT_DRV_Pin PA5
+                           FM_LED_STATUS_Pin */
+  GPIO_InitStruct.Pin = FM_PUMP_DRV_Pin|FM_STR_DRV_Pin|FM_LIGHT_DRV_Pin|GPIO_PIN_5
+                          |FM_LED_STATUS_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -216,6 +249,7 @@ void Error_Handler(void)
 {
   /* USER CODE BEGIN Error_Handler_Debug */
   /* USER CODE END Error_Handler_Debug */
+  printf("bi ngu\r\n");
 }
 
 #ifdef  USE_FULL_ASSERT

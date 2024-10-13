@@ -2,7 +2,12 @@
     "files.associations": {
         "fm_init_project.h": "c",
         "fm_rtc.h": "c",
-        "stm32f1xx_hal_rtc.h": "c"
+        "stm32f1xx_hal_rtc.h": "c",
+        "main.h": "c",
+        "stdio.h": "c",
+        "type_traits": "c",
+        "fm_multiadc.h": "c",
+        "stm32f1xx_hal.h": "c"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }

@@ -57,7 +57,7 @@ bool FM_V0x_SHT30_Sensor_Init(sht3x_handle_t *handle)
 }
 
 bool FM_V0x_SHT30_Read_Temp_Humid(sht3x_handle_t *handle, float *temp, float *humid){
-	FM_V0x_SHT30_Send_Command(handle, SHT3X_COMMAND_MEASURE_HIGHREP_STRETCH);
+	 FM_V0x_SHT30_Send_Command(handle, SHT3X_COMMAND_MEASURE_HIGHREP_STRETCH);
 
 	HAL_Delay(1);
 
@@ -89,3 +89,4 @@ bool FM_V0x_SHT30_Set_Header_Enable(sht3x_handle_t *handle, bool enable)
 		return FM_V0x_SHT30_Send_Command(handle, SHT3X_COMMAND_HEATER_DISABLE);
 	}
 }
+

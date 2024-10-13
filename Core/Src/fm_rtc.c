@@ -41,7 +41,7 @@ uint8_t FM_V0x_RTC_Set_Time (FM_V0x_Parameters_RTC_t  RTC_SetTime ){
                 printf("-->BUG: Hour in RTC's Setting is not seted \r\n");
                 return false;
             }
-        //    if( HAL_RTCEx_BKUPRead( &hrtc, RTC_BKP_DR1 ) != 0x32F2 ){
+        // if( HAL_RTCEx_BKUPRead( &hrtc, RTC_BKP_DR1 ) != 0x32F2 ){
             hrtc.Init.AsynchPrediv = RTC_AUTO_1_SECOND;
             hrtc.Init.OutPut = RTC_OUTPUTSOURCE_ALARM;
             if (HAL_RTC_Init( &hrtc ) != HAL_OK ){

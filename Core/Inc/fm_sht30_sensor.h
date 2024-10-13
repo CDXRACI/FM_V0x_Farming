@@ -54,9 +54,9 @@ typedef enum
 bool            FM_V0x_SHT30_Sensor_Init(sht3x_handle_t *handle);
 bool            FM_V0x_SHT30_Read_Temp_Humid(sht3x_handle_t *handle, float *temp, float *humid);
 bool            FM_V0x_SHT30_Set_Header_Enable(sht3x_handle_t *handle, bool enable);
-static uint8_t  FM_V0x_SHT30_Calc_CRC(const uint8_t *data, size_t length);
-static bool     FM_V0x_SHT30_Send_Command(sht3x_handle_t *handle, sht3x_command_t command);
-static uint16_t FM_V0x_Conv_U8_2U16(uint8_t msb, uint8_t lsb);
+// static uint8_t  FM_V0x_SHT30_Calc_CRC(const uint8_t *data, size_t length);
+// static bool     FM_V0x_SHT30_Send_Command(sht3x_handle_t *handle, sht3x_command_t command);
+// static uint16_t FM_V0x_Conv_U8_2U16(uint8_t msb, uint8_t lsb);
 
 
 #ifdef      __cplusplus

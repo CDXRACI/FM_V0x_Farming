@@ -11,9 +11,7 @@
 I2C_HandleTypeDef hi2c2;
 UART_HandleTypeDef huart2;
 extern FM_V0x_Parameters_RTC_t                  FM_V0x_Get_RTC   ;
-extern FM_V0x_MultADC_Buffer_t                 *FM_V0x_MultiADC_Buffer;
 
-uint32_t adcValue = 0;
 
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
@@ -21,13 +19,8 @@ static void MX_USART2_UART_Init(void);
 static void MX_I2C2_Init(void);
 static void MX_ADC1_Init(void);
 
-int _write(int file, char *ptr, int len);
 
-int _write(int file, char *ptr, int len)
-{
-    HAL_UART_Transmit(&huart2, (uint8_t*)ptr, len, HAL_MAX_DELAY);
-    return len;
-}
+
 
 
 int main(void)
@@ -65,9 +58,7 @@ int main(void)
   printf("LOG_ADC: SHT30x %.2fC, humidity: %.2f%%RH\n\r", temperature, humidity);
   FM_V0x_RTC_Get_Time(&FM_V0x_Get_RTC );
   FM_V0x_RTC_Get_Date(&FM_V0x_Get_RTC );
-
-
-   FM_V0x_MultiADC_Init ( );
+  FM_V0x_MultiADC_Init ( );
   HAL_Delay(1000);
   }
   /* USER CODE END 3 */

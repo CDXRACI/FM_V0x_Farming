@@ -1,0 +1,787 @@
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"sht3x.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.file 1 "Core/Src/sht3x.c"
+  18              		.section	.text.calculate_crc,"ax",%progbits
+  19              		.align	1
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	calculate_crc:
+  25              	.LVL0:
+  26              	.LFB68:
+   1:Core/Src/sht3x.c **** #include "sht3x.h"
+   2:Core/Src/sht3x.c **** 
+   3:Core/Src/sht3x.c **** #include <assert.h>
+   4:Core/Src/sht3x.c **** 
+   5:Core/Src/sht3x.c **** /**
+   6:Core/Src/sht3x.c ****  * Registers addresses.
+   7:Core/Src/sht3x.c ****  */
+   8:Core/Src/sht3x.c **** typedef enum
+   9:Core/Src/sht3x.c **** {
+  10:Core/Src/sht3x.c **** 	SHT3X_COMMAND_MEASURE_HIGHREP_STRETCH = 0x2c06,
+  11:Core/Src/sht3x.c **** 	SHT3X_COMMAND_CLEAR_STATUS = 0x3041,
+  12:Core/Src/sht3x.c **** 	SHT3X_COMMAND_SOFT_RESET = 0x30A2,
+  13:Core/Src/sht3x.c **** 	SHT3X_COMMAND_HEATER_ENABLE = 0x306d,
+  14:Core/Src/sht3x.c **** 	SHT3X_COMMAND_HEATER_DISABLE = 0x3066,
+  15:Core/Src/sht3x.c **** 	SHT3X_COMMAND_READ_STATUS = 0xf32d,
+  16:Core/Src/sht3x.c **** 	SHT3X_COMMAND_FETCH_DATA = 0xe000,
+  17:Core/Src/sht3x.c **** 	SHT3X_COMMAND_MEASURE_HIGHREP_10HZ = 0x2737,
+  18:Core/Src/sht3x.c **** 	SHT3X_COMMAND_MEASURE_LOWREP_10HZ = 0x272a
+  19:Core/Src/sht3x.c **** } sht3x_command_t;
+  20:Core/Src/sht3x.c **** 
+  21:Core/Src/sht3x.c **** static uint8_t calculate_crc(const uint8_t *data, size_t length)
+  22:Core/Src/sht3x.c **** {
+  27              		.loc 1 22 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32              		.loc 1 22 1 is_stmt 0 view .LVU1
+  33 0000 8446     		mov	ip, r0
+  23:Core/Src/sht3x.c **** 	uint8_t crc = 0xff;
+  34              		.loc 1 23 2 is_stmt 1 view .LVU2
+  35              	.LVL1:
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s 			page 2
+
+
+  24:Core/Src/sht3x.c **** 	for (size_t i = 0; i < length; i++) {
+  36              		.loc 1 24 2 view .LVU3
+  37              	.LBB2:
+  38              		.loc 1 24 7 view .LVU4
+  39              		.loc 1 24 14 is_stmt 0 view .LVU5
+  40 0002 0022     		movs	r2, #0
+  41              	.LBE2:
+  23:Core/Src/sht3x.c **** 	uint8_t crc = 0xff;
+  42              		.loc 1 23 10 view .LVU6
+  43 0004 FF20     		movs	r0, #255
+  44              	.LVL2:
+  45              	.LBB5:
+  46              		.loc 1 24 2 view .LVU7
+  47 0006 0DE0     		b	.L2
+  48              	.LVL3:
+  49              	.L4:
+  50              	.LBB3:
+  25:Core/Src/sht3x.c **** 		crc ^= data[i];
+  26:Core/Src/sht3x.c **** 		for (size_t j = 0; j < 8; j++) {
+  27:Core/Src/sht3x.c **** 			if ((crc & 0x80u) != 0) {
+  28:Core/Src/sht3x.c **** 				crc = (uint8_t)((uint8_t)(crc << 1u) ^ 0x31u);
+  29:Core/Src/sht3x.c **** 			} else {
+  30:Core/Src/sht3x.c **** 				crc <<= 1u;
+  51              		.loc 1 30 5 is_stmt 1 view .LVU8
+  52              		.loc 1 30 9 is_stmt 0 view .LVU9
+  53 0008 4000     		lsls	r0, r0, #1
+  54              	.LVL4:
+  55              		.loc 1 30 9 view .LVU10
+  56 000a C0B2     		uxtb	r0, r0
+  57              	.LVL5:
+  58              	.L5:
+  26:Core/Src/sht3x.c **** 			if ((crc & 0x80u) != 0) {
+  59              		.loc 1 26 30 is_stmt 1 discriminator 2 view .LVU11
+  60 000c 0133     		adds	r3, r3, #1
+  61              	.LVL6:
+  62              	.L3:
+  26:Core/Src/sht3x.c **** 			if ((crc & 0x80u) != 0) {
+  63              		.loc 1 26 24 discriminator 1 view .LVU12
+  64 000e 072B     		cmp	r3, #7
+  65 0010 07D8     		bhi	.L8
+  27:Core/Src/sht3x.c **** 				crc = (uint8_t)((uint8_t)(crc << 1u) ^ 0x31u);
+  66              		.loc 1 27 4 view .LVU13
+  27:Core/Src/sht3x.c **** 				crc = (uint8_t)((uint8_t)(crc << 1u) ^ 0x31u);
+  67              		.loc 1 27 7 is_stmt 0 view .LVU14
+  68 0012 10F0800F 		tst	r0, #128
+  69 0016 F7D0     		beq	.L4
+  28:Core/Src/sht3x.c **** 			} else {
+  70              		.loc 1 28 5 is_stmt 1 view .LVU15
+  28:Core/Src/sht3x.c **** 			} else {
+  71              		.loc 1 28 21 is_stmt 0 view .LVU16
+  72 0018 4000     		lsls	r0, r0, #1
+  73              	.LVL7:
+  28:Core/Src/sht3x.c **** 			} else {
+  74              		.loc 1 28 21 view .LVU17
+  75 001a C0B2     		uxtb	r0, r0
+  28:Core/Src/sht3x.c **** 			} else {
+  76              		.loc 1 28 9 view .LVU18
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s 			page 3
+
+
+  77 001c 80F03100 		eor	r0, r0, #49
+  78              	.LVL8:
+  28:Core/Src/sht3x.c **** 			} else {
+  79              		.loc 1 28 9 view .LVU19
+  80 0020 F4E7     		b	.L5
+  81              	.L8:
+  28:Core/Src/sht3x.c **** 			} else {
+  82              		.loc 1 28 9 view .LVU20
+  83              	.LBE3:
+  24:Core/Src/sht3x.c **** 		crc ^= data[i];
+  84              		.loc 1 24 34 is_stmt 1 discriminator 2 view .LVU21
+  85 0022 0132     		adds	r2, r2, #1
+  86              	.LVL9:
+  87              	.L2:
+  24:Core/Src/sht3x.c **** 		crc ^= data[i];
+  88              		.loc 1 24 23 discriminator 1 view .LVU22
+  89 0024 8A42     		cmp	r2, r1
+  90 0026 04D2     		bcs	.L9
+  25:Core/Src/sht3x.c **** 		for (size_t j = 0; j < 8; j++) {
+  91              		.loc 1 25 3 view .LVU23
+  25:Core/Src/sht3x.c **** 		for (size_t j = 0; j < 8; j++) {
+  92              		.loc 1 25 14 is_stmt 0 view .LVU24
+  93 0028 1CF80230 		ldrb	r3, [ip, r2]	@ zero_extendqisi2
+  25:Core/Src/sht3x.c **** 		for (size_t j = 0; j < 8; j++) {
+  94              		.loc 1 25 7 view .LVU25
+  95 002c 5840     		eors	r0, r0, r3
+  96              	.LVL10:
+  26:Core/Src/sht3x.c **** 			if ((crc & 0x80u) != 0) {
+  97              		.loc 1 26 3 is_stmt 1 view .LVU26
+  98              	.LBB4:
+  26:Core/Src/sht3x.c **** 			if ((crc & 0x80u) != 0) {
+  99              		.loc 1 26 8 view .LVU27
+  26:Core/Src/sht3x.c **** 			if ((crc & 0x80u) != 0) {
+ 100              		.loc 1 26 15 is_stmt 0 view .LVU28
+ 101 002e 0023     		movs	r3, #0
+  26:Core/Src/sht3x.c **** 			if ((crc & 0x80u) != 0) {
+ 102              		.loc 1 26 3 view .LVU29
+ 103 0030 EDE7     		b	.L3
+ 104              	.LVL11:
+ 105              	.L9:
+  26:Core/Src/sht3x.c **** 			if ((crc & 0x80u) != 0) {
+ 106              		.loc 1 26 3 view .LVU30
+ 107              	.LBE4:
+ 108              	.LBE5:
+  31:Core/Src/sht3x.c **** 			}
+  32:Core/Src/sht3x.c **** 		}
+  33:Core/Src/sht3x.c **** 	}
+  34:Core/Src/sht3x.c **** 	return crc;
+ 109              		.loc 1 34 2 is_stmt 1 view .LVU31
+  35:Core/Src/sht3x.c **** }
+ 110              		.loc 1 35 1 is_stmt 0 view .LVU32
+ 111 0032 7047     		bx	lr
+ 112              		.cfi_endproc
+ 113              	.LFE68:
+ 115              		.section	.text.uint8_to_uint16,"ax",%progbits
+ 116              		.align	1
+ 117              		.syntax unified
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s 			page 4
+
+
+ 118              		.thumb
+ 119              		.thumb_func
+ 121              	uint8_to_uint16:
+ 122              	.LVL12:
+ 123              	.LFB70:
+  36:Core/Src/sht3x.c **** 
+  37:Core/Src/sht3x.c **** static bool sht3x_send_command(sht3x_handle_t *handle, sht3x_command_t command)
+  38:Core/Src/sht3x.c **** {
+  39:Core/Src/sht3x.c **** 	uint8_t command_buffer[2] = {(command & 0xff00u) >> 8u, command & 0xffu};
+  40:Core/Src/sht3x.c **** 
+  41:Core/Src/sht3x.c **** 	if (HAL_I2C_Master_Transmit(handle->i2c_handle, handle->device_address << 1u, command_buffer, size
+  42:Core/Src/sht3x.c **** 	                            SHT3X_I2C_TIMEOUT) != HAL_OK) {
+  43:Core/Src/sht3x.c **** 		return false;
+  44:Core/Src/sht3x.c **** 	}
+  45:Core/Src/sht3x.c **** 
+  46:Core/Src/sht3x.c **** 	return true;
+  47:Core/Src/sht3x.c **** }
+  48:Core/Src/sht3x.c **** 
+  49:Core/Src/sht3x.c **** static uint16_t uint8_to_uint16(uint8_t msb, uint8_t lsb)
+  50:Core/Src/sht3x.c **** {
+ 124              		.loc 1 50 1 is_stmt 1 view -0
+ 125              		.cfi_startproc
+ 126              		@ args = 0, pretend = 0, frame = 0
+ 127              		@ frame_needed = 0, uses_anonymous_args = 0
+ 128              		@ link register save eliminated.
+  51:Core/Src/sht3x.c **** 	return (uint16_t)((uint16_t)msb << 8u) | lsb;
+ 129              		.loc 1 51 2 view .LVU34
+  52:Core/Src/sht3x.c **** }
+ 130              		.loc 1 52 1 is_stmt 0 view .LVU35
+ 131 0000 41EA0020 		orr	r0, r1, r0, lsl #8
+ 132              	.LVL13:
+ 133              		.loc 1 52 1 view .LVU36
+ 134 0004 7047     		bx	lr
+ 135              		.cfi_endproc
+ 136              	.LFE70:
+ 138              		.section	.text.sht3x_send_command,"ax",%progbits
+ 139              		.align	1
+ 140              		.syntax unified
+ 141              		.thumb
+ 142              		.thumb_func
+ 144              	sht3x_send_command:
+ 145              	.LVL14:
+ 146              	.LFB69:
+  38:Core/Src/sht3x.c **** 	uint8_t command_buffer[2] = {(command & 0xff00u) >> 8u, command & 0xffu};
+ 147              		.loc 1 38 1 is_stmt 1 view -0
+ 148              		.cfi_startproc
+ 149              		@ args = 0, pretend = 0, frame = 8
+ 150              		@ frame_needed = 0, uses_anonymous_args = 0
+  38:Core/Src/sht3x.c **** 	uint8_t command_buffer[2] = {(command & 0xff00u) >> 8u, command & 0xffu};
+ 151              		.loc 1 38 1 is_stmt 0 view .LVU38
+ 152 0000 00B5     		push	{lr}
+ 153              	.LCFI0:
+ 154              		.cfi_def_cfa_offset 4
+ 155              		.cfi_offset 14, -4
+ 156 0002 85B0     		sub	sp, sp, #20
+ 157              	.LCFI1:
+ 158              		.cfi_def_cfa_offset 24
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s 			page 5
+
+
+  39:Core/Src/sht3x.c **** 
+ 159              		.loc 1 39 2 is_stmt 1 view .LVU39
+  39:Core/Src/sht3x.c **** 
+ 160              		.loc 1 39 51 is_stmt 0 view .LVU40
+ 161 0004 0B0A     		lsrs	r3, r1, #8
+  39:Core/Src/sht3x.c **** 
+ 162              		.loc 1 39 10 view .LVU41
+ 163 0006 8DF80C30 		strb	r3, [sp, #12]
+ 164 000a 8DF80D10 		strb	r1, [sp, #13]
+  41:Core/Src/sht3x.c **** 	                            SHT3X_I2C_TIMEOUT) != HAL_OK) {
+ 165              		.loc 1 41 2 is_stmt 1 view .LVU42
+  41:Core/Src/sht3x.c **** 	                            SHT3X_I2C_TIMEOUT) != HAL_OK) {
+ 166              		.loc 1 41 56 is_stmt 0 view .LVU43
+ 167 000e 8188     		ldrh	r1, [r0, #4]
+ 168              	.LVL15:
+  41:Core/Src/sht3x.c **** 	                            SHT3X_I2C_TIMEOUT) != HAL_OK) {
+ 169              		.loc 1 41 6 view .LVU44
+ 170 0010 4900     		lsls	r1, r1, #1
+ 171 0012 89B2     		uxth	r1, r1
+ 172 0014 1E23     		movs	r3, #30
+ 173 0016 0093     		str	r3, [sp]
+ 174 0018 0223     		movs	r3, #2
+ 175 001a 03AA     		add	r2, sp, #12
+ 176 001c 0068     		ldr	r0, [r0]
+ 177              	.LVL16:
+  41:Core/Src/sht3x.c **** 	                            SHT3X_I2C_TIMEOUT) != HAL_OK) {
+ 178              		.loc 1 41 6 view .LVU45
+ 179 001e FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ 180              	.LVL17:
+  41:Core/Src/sht3x.c **** 	                            SHT3X_I2C_TIMEOUT) != HAL_OK) {
+ 181              		.loc 1 41 5 discriminator 1 view .LVU46
+ 182 0022 18B9     		cbnz	r0, .L13
+  46:Core/Src/sht3x.c **** }
+ 183              		.loc 1 46 9 view .LVU47
+ 184 0024 0120     		movs	r0, #1
+ 185              	.L12:
+  47:Core/Src/sht3x.c **** 
+ 186              		.loc 1 47 1 view .LVU48
+ 187 0026 05B0     		add	sp, sp, #20
+ 188              	.LCFI2:
+ 189              		.cfi_remember_state
+ 190              		.cfi_def_cfa_offset 4
+ 191              		@ sp needed
+ 192 0028 5DF804FB 		ldr	pc, [sp], #4
+ 193              	.L13:
+ 194              	.LCFI3:
+ 195              		.cfi_restore_state
+  43:Core/Src/sht3x.c **** 	}
+ 196              		.loc 1 43 10 view .LVU49
+ 197 002c 0020     		movs	r0, #0
+ 198 002e FAE7     		b	.L12
+ 199              		.cfi_endproc
+ 200              	.LFE69:
+ 202              		.section	.rodata.sht3x_init.str1.4,"aMS",%progbits,1
+ 203              		.align	2
+ 204              	.LC0:
+ 205 0000 68616E64 		.ascii	"handle->i2c_handle->Init.NoStretchMode == I2C_NOSTR"
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s 			page 6
+
+
+ 205      6C652D3E 
+ 205      6932635F 
+ 205      68616E64 
+ 205      6C652D3E 
+ 206 0033 45544348 		.ascii	"ETCH_DISABLE\000"
+ 206      5F444953 
+ 206      41424C45 
+ 206      00
+ 207              		.align	2
+ 208              	.LC1:
+ 209 0040 436F7265 		.ascii	"Core/Src/sht3x.c\000"
+ 209      2F537263 
+ 209      2F736874 
+ 209      33782E63 
+ 209      00
+ 210              		.section	.text.sht3x_init,"ax",%progbits
+ 211              		.align	1
+ 212              		.global	sht3x_init
+ 213              		.syntax unified
+ 214              		.thumb
+ 215              		.thumb_func
+ 217              	sht3x_init:
+ 218              	.LVL18:
+ 219              	.LFB71:
+  53:Core/Src/sht3x.c **** 
+  54:Core/Src/sht3x.c **** bool sht3x_init(sht3x_handle_t *handle)
+  55:Core/Src/sht3x.c **** {
+ 220              		.loc 1 55 1 is_stmt 1 view -0
+ 221              		.cfi_startproc
+ 222              		@ args = 0, pretend = 0, frame = 8
+ 223              		@ frame_needed = 0, uses_anonymous_args = 0
+ 224              		.loc 1 55 1 is_stmt 0 view .LVU51
+ 225 0000 00B5     		push	{lr}
+ 226              	.LCFI4:
+ 227              		.cfi_def_cfa_offset 4
+ 228              		.cfi_offset 14, -4
+ 229 0002 87B0     		sub	sp, sp, #28
+ 230              	.LCFI5:
+ 231              		.cfi_def_cfa_offset 32
+ 232 0004 0346     		mov	r3, r0
+  56:Core/Src/sht3x.c **** 	assert(handle->i2c_handle->Init.NoStretchMode == I2C_NOSTRETCH_DISABLE);
+ 233              		.loc 1 56 2 is_stmt 1 view .LVU52
+ 234 0006 0068     		ldr	r0, [r0]
+ 235              	.LVL19:
+ 236              		.loc 1 56 2 is_stmt 0 view .LVU53
+ 237 0008 026A     		ldr	r2, [r0, #32]
+ 238 000a C2B9     		cbnz	r2, .L21
+  57:Core/Src/sht3x.c **** 	// TODO: Assert i2c frequency is not too high
+  58:Core/Src/sht3x.c **** 
+  59:Core/Src/sht3x.c **** 	uint8_t status_reg_and_checksum[3];
+ 239              		.loc 1 59 2 is_stmt 1 view .LVU54
+  60:Core/Src/sht3x.c **** 	if (HAL_I2C_Mem_Read(handle->i2c_handle, handle->device_address << 1u, SHT3X_COMMAND_READ_STATUS, 
+ 240              		.loc 1 60 2 view .LVU55
+ 241              		.loc 1 60 49 is_stmt 0 view .LVU56
+ 242 000c 9988     		ldrh	r1, [r3, #4]
+ 243              		.loc 1 60 6 view .LVU57
+ 244 000e 4900     		lsls	r1, r1, #1
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s 			page 7
+
+
+ 245 0010 89B2     		uxth	r1, r1
+ 246 0012 1E23     		movs	r3, #30
+ 247              	.LVL20:
+ 248              		.loc 1 60 6 view .LVU58
+ 249 0014 0293     		str	r3, [sp, #8]
+ 250 0016 0323     		movs	r3, #3
+ 251 0018 0193     		str	r3, [sp, #4]
+ 252 001a 05AB     		add	r3, sp, #20
+ 253 001c 0093     		str	r3, [sp]
+ 254 001e 0223     		movs	r3, #2
+ 255 0020 4FF22D32 		movw	r2, #62253
+ 256 0024 FFF7FEFF 		bl	HAL_I2C_Mem_Read
+ 257              	.LVL21:
+ 258              		.loc 1 60 5 discriminator 1 view .LVU59
+ 259 0028 78B9     		cbnz	r0, .L18
+  61:Core/Src/sht3x.c **** 					  sizeof(status_reg_and_checksum), SHT3X_I2C_TIMEOUT) != HAL_OK) {
+  62:Core/Src/sht3x.c **** 		return false;
+  63:Core/Src/sht3x.c **** 	}
+  64:Core/Src/sht3x.c **** 
+  65:Core/Src/sht3x.c **** 	uint8_t calculated_crc = calculate_crc(status_reg_and_checksum, 2);
+ 260              		.loc 1 65 2 is_stmt 1 view .LVU60
+ 261              		.loc 1 65 27 is_stmt 0 view .LVU61
+ 262 002a 0221     		movs	r1, #2
+ 263 002c 05A8     		add	r0, sp, #20
+ 264 002e FFF7FEFF 		bl	calculate_crc
+ 265              	.LVL22:
+  66:Core/Src/sht3x.c **** 
+  67:Core/Src/sht3x.c **** 	if (calculated_crc != status_reg_and_checksum[2]) {
+ 266              		.loc 1 67 2 is_stmt 1 view .LVU62
+ 267              		.loc 1 67 47 is_stmt 0 view .LVU63
+ 268 0032 9DF81630 		ldrb	r3, [sp, #22]	@ zero_extendqisi2
+ 269              		.loc 1 67 5 view .LVU64
+ 270 0036 8342     		cmp	r3, r0
+ 271 0038 0BD1     		bne	.L19
+  68:Core/Src/sht3x.c **** 		return false;
+  69:Core/Src/sht3x.c **** 	}
+  70:Core/Src/sht3x.c **** 
+  71:Core/Src/sht3x.c **** 	return true;
+ 272              		.loc 1 71 9 view .LVU65
+ 273 003a 0120     		movs	r0, #1
+ 274              	.LVL23:
+ 275              		.loc 1 71 9 view .LVU66
+ 276 003c 06E0     		b	.L17
+ 277              	.LVL24:
+ 278              	.L21:
+  56:Core/Src/sht3x.c **** 	// TODO: Assert i2c frequency is not too high
+ 279              		.loc 1 56 2 discriminator 1 view .LVU67
+ 280 003e 064B     		ldr	r3, .L22
+ 281              	.LVL25:
+  56:Core/Src/sht3x.c **** 	// TODO: Assert i2c frequency is not too high
+ 282              		.loc 1 56 2 discriminator 1 view .LVU68
+ 283 0040 064A     		ldr	r2, .L22+4
+ 284 0042 3821     		movs	r1, #56
+ 285 0044 0648     		ldr	r0, .L22+8
+ 286 0046 FFF7FEFF 		bl	__assert_func
+ 287              	.LVL26:
+ 288              	.L18:
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s 			page 8
+
+
+  62:Core/Src/sht3x.c **** 	}
+ 289              		.loc 1 62 10 view .LVU69
+ 290 004a 0020     		movs	r0, #0
+ 291              	.L17:
+  72:Core/Src/sht3x.c **** }
+ 292              		.loc 1 72 1 view .LVU70
+ 293 004c 07B0     		add	sp, sp, #28
+ 294              	.LCFI6:
+ 295              		.cfi_remember_state
+ 296              		.cfi_def_cfa_offset 4
+ 297              		@ sp needed
+ 298 004e 5DF804FB 		ldr	pc, [sp], #4
+ 299              	.LVL27:
+ 300              	.L19:
+ 301              	.LCFI7:
+ 302              		.cfi_restore_state
+  68:Core/Src/sht3x.c **** 	}
+ 303              		.loc 1 68 10 view .LVU71
+ 304 0052 0020     		movs	r0, #0
+ 305              	.LVL28:
+  68:Core/Src/sht3x.c **** 	}
+ 306              		.loc 1 68 10 view .LVU72
+ 307 0054 FAE7     		b	.L17
+ 308              	.L23:
+ 309 0056 00BF     		.align	2
+ 310              	.L22:
+ 311 0058 00000000 		.word	.LC0
+ 312 005c 00000000 		.word	__func__.0
+ 313 0060 40000000 		.word	.LC1
+ 314              		.cfi_endproc
+ 315              	.LFE71:
+ 317              		.global	__aeabi_ui2f
+ 318              		.global	__aeabi_fmul
+ 319              		.global	__aeabi_fdiv
+ 320              		.global	__aeabi_fsub
+ 321              		.section	.text.sht3x_read_temperature_and_humidity,"ax",%progbits
+ 322              		.align	1
+ 323              		.global	sht3x_read_temperature_and_humidity
+ 324              		.syntax unified
+ 325              		.thumb
+ 326              		.thumb_func
+ 328              	sht3x_read_temperature_and_humidity:
+ 329              	.LVL29:
+ 330              	.LFB72:
+  73:Core/Src/sht3x.c **** 
+  74:Core/Src/sht3x.c **** bool sht3x_read_temperature_and_humidity(sht3x_handle_t *handle, float *temperature, float *humidit
+  75:Core/Src/sht3x.c **** {
+ 331              		.loc 1 75 1 is_stmt 1 view -0
+ 332              		.cfi_startproc
+ 333              		@ args = 0, pretend = 0, frame = 8
+ 334              		@ frame_needed = 0, uses_anonymous_args = 0
+ 335              		.loc 1 75 1 is_stmt 0 view .LVU74
+ 336 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 337              	.LCFI8:
+ 338              		.cfi_def_cfa_offset 20
+ 339              		.cfi_offset 4, -20
+ 340              		.cfi_offset 5, -16
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s 			page 9
+
+
+ 341              		.cfi_offset 6, -12
+ 342              		.cfi_offset 7, -8
+ 343              		.cfi_offset 14, -4
+ 344 0002 85B0     		sub	sp, sp, #20
+ 345              	.LCFI9:
+ 346              		.cfi_def_cfa_offset 40
+ 347 0004 0446     		mov	r4, r0
+ 348 0006 0E46     		mov	r6, r1
+ 349 0008 1546     		mov	r5, r2
+  76:Core/Src/sht3x.c **** 	sht3x_send_command(handle, SHT3X_COMMAND_MEASURE_HIGHREP_STRETCH);
+ 350              		.loc 1 76 2 is_stmt 1 view .LVU75
+ 351 000a 42F60641 		movw	r1, #11270
+ 352              	.LVL30:
+ 353              		.loc 1 76 2 is_stmt 0 view .LVU76
+ 354 000e FFF7FEFF 		bl	sht3x_send_command
+ 355              	.LVL31:
+  77:Core/Src/sht3x.c **** 
+  78:Core/Src/sht3x.c **** 	HAL_Delay(1);
+ 356              		.loc 1 78 2 is_stmt 1 view .LVU77
+ 357 0012 0120     		movs	r0, #1
+ 358 0014 FFF7FEFF 		bl	HAL_Delay
+ 359              	.LVL32:
+  79:Core/Src/sht3x.c **** 
+  80:Core/Src/sht3x.c **** 	uint8_t buffer[6];
+ 360              		.loc 1 80 2 view .LVU78
+  81:Core/Src/sht3x.c **** 	if (HAL_I2C_Master_Receive(handle->i2c_handle, handle->device_address << 1u, buffer, sizeof(buffer
+ 361              		.loc 1 81 2 view .LVU79
+ 362              		.loc 1 81 55 is_stmt 0 view .LVU80
+ 363 0018 A388     		ldrh	r3, [r4, #4]
+ 364              		.loc 1 81 6 view .LVU81
+ 365 001a 5B00     		lsls	r3, r3, #1
+ 366 001c 99B2     		uxth	r1, r3
+ 367 001e 1E23     		movs	r3, #30
+ 368 0020 0093     		str	r3, [sp]
+ 369 0022 0623     		movs	r3, #6
+ 370 0024 02AA     		add	r2, sp, #8
+ 371 0026 2068     		ldr	r0, [r4]
+ 372 0028 FFF7FEFF 		bl	HAL_I2C_Master_Receive
+ 373              	.LVL33:
+ 374              		.loc 1 81 5 discriminator 1 view .LVU82
+ 375 002c 0028     		cmp	r0, #0
+ 376 002e 38D1     		bne	.L26
+  82:Core/Src/sht3x.c **** 		return false;
+  83:Core/Src/sht3x.c **** 	}
+  84:Core/Src/sht3x.c **** 
+  85:Core/Src/sht3x.c **** 	uint8_t temperature_crc = calculate_crc(buffer, 2);
+ 377              		.loc 1 85 2 is_stmt 1 view .LVU83
+ 378              		.loc 1 85 28 is_stmt 0 view .LVU84
+ 379 0030 0221     		movs	r1, #2
+ 380 0032 02A8     		add	r0, sp, #8
+ 381 0034 FFF7FEFF 		bl	calculate_crc
+ 382              	.LVL34:
+ 383 0038 0446     		mov	r4, r0
+ 384              	.LVL35:
+  86:Core/Src/sht3x.c **** 	uint8_t humidity_crc = calculate_crc(buffer + 3, 2);
+ 385              		.loc 1 86 2 is_stmt 1 view .LVU85
+ 386              		.loc 1 86 25 is_stmt 0 view .LVU86
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s 			page 10
+
+
+ 387 003a 0221     		movs	r1, #2
+ 388 003c 0DF10B00 		add	r0, sp, #11
+ 389 0040 FFF7FEFF 		bl	calculate_crc
+ 390              	.LVL36:
+  87:Core/Src/sht3x.c **** 	if (temperature_crc != buffer[2] || humidity_crc != buffer[5]) {
+ 391              		.loc 1 87 2 is_stmt 1 view .LVU87
+ 392              		.loc 1 87 31 is_stmt 0 view .LVU88
+ 393 0044 9DF80A30 		ldrb	r3, [sp, #10]	@ zero_extendqisi2
+ 394              		.loc 1 87 5 view .LVU89
+ 395 0048 A342     		cmp	r3, r4
+ 396 004a 2DD1     		bne	.L27
+ 397              		.loc 1 87 60 discriminator 1 view .LVU90
+ 398 004c 9DF80D30 		ldrb	r3, [sp, #13]	@ zero_extendqisi2
+ 399              		.loc 1 87 35 discriminator 1 view .LVU91
+ 400 0050 8342     		cmp	r3, r0
+ 401 0052 2BD1     		bne	.L28
+  88:Core/Src/sht3x.c **** 		return false;
+  89:Core/Src/sht3x.c **** 	}
+  90:Core/Src/sht3x.c **** 
+  91:Core/Src/sht3x.c **** 	uint16_t temperature_raw = uint8_to_uint16(buffer[0], buffer[1]);
+ 402              		.loc 1 91 2 is_stmt 1 view .LVU92
+ 403              		.loc 1 91 29 is_stmt 0 view .LVU93
+ 404 0054 9DF80910 		ldrb	r1, [sp, #9]	@ zero_extendqisi2
+ 405 0058 9DF80800 		ldrb	r0, [sp, #8]	@ zero_extendqisi2
+ 406              	.LVL37:
+ 407              		.loc 1 91 29 view .LVU94
+ 408 005c FFF7FEFF 		bl	uint8_to_uint16
+ 409              	.LVL38:
+ 410 0060 0746     		mov	r7, r0
+ 411              	.LVL39:
+  92:Core/Src/sht3x.c **** 	uint16_t humidity_raw = uint8_to_uint16(buffer[3], buffer[4]);
+ 412              		.loc 1 92 2 is_stmt 1 view .LVU95
+ 413              		.loc 1 92 26 is_stmt 0 view .LVU96
+ 414 0062 9DF80C10 		ldrb	r1, [sp, #12]	@ zero_extendqisi2
+ 415 0066 9DF80B00 		ldrb	r0, [sp, #11]	@ zero_extendqisi2
+ 416 006a FFF7FEFF 		bl	uint8_to_uint16
+ 417              	.LVL40:
+ 418 006e 0446     		mov	r4, r0
+ 419              	.LVL41:
+  93:Core/Src/sht3x.c **** 
+  94:Core/Src/sht3x.c **** 	*temperature = -45.0f + 175.0f * (float)temperature_raw / 65535.0f;
+ 420              		.loc 1 94 2 is_stmt 1 view .LVU97
+ 421              		.loc 1 94 35 is_stmt 0 view .LVU98
+ 422 0070 3846     		mov	r0, r7
+ 423 0072 FFF7FEFF 		bl	__aeabi_ui2f
+ 424              	.LVL42:
+ 425              		.loc 1 94 33 view .LVU99
+ 426 0076 0E49     		ldr	r1, .L30
+ 427 0078 FFF7FEFF 		bl	__aeabi_fmul
+ 428              	.LVL43:
+ 429              		.loc 1 94 58 view .LVU100
+ 430 007c 0D49     		ldr	r1, .L30+4
+ 431 007e FFF7FEFF 		bl	__aeabi_fdiv
+ 432              	.LVL44:
+ 433              		.loc 1 94 24 view .LVU101
+ 434 0082 0D49     		ldr	r1, .L30+8
+ 435 0084 FFF7FEFF 		bl	__aeabi_fsub
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s 			page 11
+
+
+ 436              	.LVL45:
+ 437              		.loc 1 94 15 view .LVU102
+ 438 0088 3060     		str	r0, [r6]	@ float
+  95:Core/Src/sht3x.c **** 	*humidity = 100.0f * (float)humidity_raw / 65535.0f;
+ 439              		.loc 1 95 2 is_stmt 1 view .LVU103
+ 440              		.loc 1 95 23 is_stmt 0 view .LVU104
+ 441 008a 2046     		mov	r0, r4
+ 442 008c FFF7FEFF 		bl	__aeabi_ui2f
+ 443              	.LVL46:
+ 444              		.loc 1 95 21 view .LVU105
+ 445 0090 0A49     		ldr	r1, .L30+12
+ 446 0092 FFF7FEFF 		bl	__aeabi_fmul
+ 447              	.LVL47:
+ 448              		.loc 1 95 43 view .LVU106
+ 449 0096 0749     		ldr	r1, .L30+4
+ 450 0098 FFF7FEFF 		bl	__aeabi_fdiv
+ 451              	.LVL48:
+ 452              		.loc 1 95 12 view .LVU107
+ 453 009c 2860     		str	r0, [r5]	@ float
+  96:Core/Src/sht3x.c **** 
+  97:Core/Src/sht3x.c **** 	return true;
+ 454              		.loc 1 97 2 is_stmt 1 view .LVU108
+ 455              		.loc 1 97 9 is_stmt 0 view .LVU109
+ 456 009e 0120     		movs	r0, #1
+ 457 00a0 00E0     		b	.L25
+ 458              	.LVL49:
+ 459              	.L26:
+  82:Core/Src/sht3x.c **** 	}
+ 460              		.loc 1 82 10 view .LVU110
+ 461 00a2 0020     		movs	r0, #0
+ 462              	.LVL50:
+ 463              	.L25:
+  98:Core/Src/sht3x.c **** }
+ 464              		.loc 1 98 1 view .LVU111
+ 465 00a4 05B0     		add	sp, sp, #20
+ 466              	.LCFI10:
+ 467              		.cfi_remember_state
+ 468              		.cfi_def_cfa_offset 20
+ 469              		@ sp needed
+ 470 00a6 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 471              	.LVL51:
+ 472              	.L27:
+ 473              	.LCFI11:
+ 474              		.cfi_restore_state
+  88:Core/Src/sht3x.c **** 	}
+ 475              		.loc 1 88 10 view .LVU112
+ 476 00a8 0020     		movs	r0, #0
+ 477              	.LVL52:
+  88:Core/Src/sht3x.c **** 	}
+ 478              		.loc 1 88 10 view .LVU113
+ 479 00aa FBE7     		b	.L25
+ 480              	.LVL53:
+ 481              	.L28:
+  88:Core/Src/sht3x.c **** 	}
+ 482              		.loc 1 88 10 view .LVU114
+ 483 00ac 0020     		movs	r0, #0
+ 484              	.LVL54:
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s 			page 12
+
+
+  88:Core/Src/sht3x.c **** 	}
+ 485              		.loc 1 88 10 view .LVU115
+ 486 00ae F9E7     		b	.L25
+ 487              	.L31:
+ 488              		.align	2
+ 489              	.L30:
+ 490 00b0 00002F43 		.word	1127153664
+ 491 00b4 00FF7F47 		.word	1199570688
+ 492 00b8 00003442 		.word	1110704128
+ 493 00bc 0000C842 		.word	1120403456
+ 494              		.cfi_endproc
+ 495              	.LFE72:
+ 497              		.section	.text.sht3x_set_header_enable,"ax",%progbits
+ 498              		.align	1
+ 499              		.global	sht3x_set_header_enable
+ 500              		.syntax unified
+ 501              		.thumb
+ 502              		.thumb_func
+ 504              	sht3x_set_header_enable:
+ 505              	.LVL55:
+ 506              	.LFB73:
+  99:Core/Src/sht3x.c **** 
+ 100:Core/Src/sht3x.c **** bool sht3x_set_header_enable(sht3x_handle_t *handle, bool enable)
+ 101:Core/Src/sht3x.c **** {
+ 507              		.loc 1 101 1 is_stmt 1 view -0
+ 508              		.cfi_startproc
+ 509              		@ args = 0, pretend = 0, frame = 0
+ 510              		@ frame_needed = 0, uses_anonymous_args = 0
+ 511              		.loc 1 101 1 is_stmt 0 view .LVU117
+ 512 0000 08B5     		push	{r3, lr}
+ 513              	.LCFI12:
+ 514              		.cfi_def_cfa_offset 8
+ 515              		.cfi_offset 3, -8
+ 516              		.cfi_offset 14, -4
+ 102:Core/Src/sht3x.c **** 	if (enable) {
+ 517              		.loc 1 102 2 is_stmt 1 view .LVU118
+ 518              		.loc 1 102 5 is_stmt 0 view .LVU119
+ 519 0002 21B1     		cbz	r1, .L33
+ 103:Core/Src/sht3x.c **** 		return sht3x_send_command(handle, SHT3X_COMMAND_HEATER_ENABLE);
+ 520              		.loc 1 103 3 is_stmt 1 view .LVU120
+ 521              		.loc 1 103 10 is_stmt 0 view .LVU121
+ 522 0004 43F26D01 		movw	r1, #12397
+ 523              	.LVL56:
+ 524              		.loc 1 103 10 view .LVU122
+ 525 0008 FFF7FEFF 		bl	sht3x_send_command
+ 526              	.LVL57:
+ 527              	.L34:
+ 104:Core/Src/sht3x.c **** 	} else {
+ 105:Core/Src/sht3x.c **** 		return sht3x_send_command(handle, SHT3X_COMMAND_HEATER_DISABLE);
+ 106:Core/Src/sht3x.c **** 	}
+ 107:Core/Src/sht3x.c **** }...
+ 528              		.loc 1 107 1 view .LVU123
+ 529 000c 08BD     		pop	{r3, pc}
+ 530              	.LVL58:
+ 531              	.L33:
+ 105:Core/Src/sht3x.c **** 		return sht3x_send_command(handle, SHT3X_COMMAND_HEATER_DISABLE);
+ 532              		.loc 1 105 3 is_stmt 1 view .LVU124
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s 			page 13
+
+
+ 105:Core/Src/sht3x.c **** 		return sht3x_send_command(handle, SHT3X_COMMAND_HEATER_DISABLE);
+ 533              		.loc 1 105 10 is_stmt 0 view .LVU125
+ 534 000e 43F26601 		movw	r1, #12390
+ 535              	.LVL59:
+ 105:Core/Src/sht3x.c **** 		return sht3x_send_command(handle, SHT3X_COMMAND_HEATER_DISABLE);
+ 536              		.loc 1 105 10 view .LVU126
+ 537 0012 FFF7FEFF 		bl	sht3x_send_command
+ 538              	.LVL60:
+ 105:Core/Src/sht3x.c **** 		return sht3x_send_command(handle, SHT3X_COMMAND_HEATER_DISABLE);
+ 539              		.loc 1 105 10 view .LVU127
+ 540 0016 F9E7     		b	.L34
+ 541              		.cfi_endproc
+ 542              	.LFE73:
+ 544              		.section	.rodata.__func__.0,"a"
+ 545              		.align	2
+ 548              	__func__.0:
+ 549 0000 73687433 		.ascii	"sht3x_init\000"
+ 549      785F696E 
+ 549      697400
+ 550              		.text
+ 551              	.Letext0:
+ 552              		.file 2 "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.2 Rel1/arm-none-eabi/include/ma
+ 553              		.file 3 "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.2 Rel1/arm-none-eabi/include/sy
+ 554              		.file 4 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 555              		.file 5 "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.2 Rel1/lib/gcc/arm-none-eabi/13
+ 556              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 557              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 558              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h"
+ 559              		.file 9 "Core/Inc/sht3x.h"
+ 560              		.file 10 "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.2 Rel1/arm-none-eabi/include/a
+ 561              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 sht3x.c
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:19     .text.calculate_crc:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:24     .text.calculate_crc:00000000 calculate_crc
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:116    .text.uint8_to_uint16:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:121    .text.uint8_to_uint16:00000000 uint8_to_uint16
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:139    .text.sht3x_send_command:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:144    .text.sht3x_send_command:00000000 sht3x_send_command
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:203    .rodata.sht3x_init.str1.4:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:211    .text.sht3x_init:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:217    .text.sht3x_init:00000000 sht3x_init
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:311    .text.sht3x_init:00000058 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:548    .rodata.__func__.0:00000000 __func__.0
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:322    .text.sht3x_read_temperature_and_humidity:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:328    .text.sht3x_read_temperature_and_humidity:00000000 sht3x_read_temperature_and_humidity
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:490    .text.sht3x_read_temperature_and_humidity:000000b0 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:498    .text.sht3x_set_header_enable:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:504    .text.sht3x_set_header_enable:00000000 sht3x_set_header_enable
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cckU1plr.s:545    .rodata.__func__.0:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_I2C_Master_Transmit
+HAL_I2C_Mem_Read
+__assert_func
+__aeabi_ui2f
+__aeabi_fmul
+__aeabi_fdiv
+__aeabi_fsub
+HAL_Delay
+HAL_I2C_Master_Receive

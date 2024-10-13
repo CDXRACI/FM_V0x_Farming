@@ -1,0 +1,773 @@
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s 			page 1
+
+
+   1              		.cpu cortex-m3
+   2              		.arch armv7-m
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"fm_sht30_sensor.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.file 1 "Core/Src/fm_sht30_sensor.c"
+  18              		.section	.text.FM_V0x_SHT30_Calc_CRC,"ax",%progbits
+  19              		.align	1
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  24              	FM_V0x_SHT30_Calc_CRC:
+  25              	.LVL0:
+  26              	.LFB68:
+   1:Core/Src/fm_sht30_sensor.c **** #include "fm_sht30_sensor.h"
+   2:Core/Src/fm_sht30_sensor.c **** 
+   3:Core/Src/fm_sht30_sensor.c **** 
+   4:Core/Src/fm_sht30_sensor.c **** 
+   5:Core/Src/fm_sht30_sensor.c **** static uint8_t FM_V0x_SHT30_Calc_CRC(const uint8_t *data, size_t length)
+   6:Core/Src/fm_sht30_sensor.c **** {
+  27              		.loc 1 6 1 view -0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 0, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32              		.loc 1 6 1 is_stmt 0 view .LVU1
+  33 0000 8446     		mov	ip, r0
+   7:Core/Src/fm_sht30_sensor.c **** 	uint8_t crc = 0xff;
+  34              		.loc 1 7 2 is_stmt 1 view .LVU2
+  35              	.LVL1:
+   8:Core/Src/fm_sht30_sensor.c **** 	for (size_t i = 0; i < length; i++) {
+  36              		.loc 1 8 2 view .LVU3
+  37              	.LBB2:
+  38              		.loc 1 8 7 view .LVU4
+  39              		.loc 1 8 14 is_stmt 0 view .LVU5
+  40 0002 0022     		movs	r2, #0
+  41              	.LBE2:
+   7:Core/Src/fm_sht30_sensor.c **** 	uint8_t crc = 0xff;
+  42              		.loc 1 7 10 view .LVU6
+  43 0004 FF20     		movs	r0, #255
+  44              	.LVL2:
+  45              	.LBB5:
+  46              		.loc 1 8 2 view .LVU7
+  47 0006 0DE0     		b	.L2
+  48              	.LVL3:
+  49              	.L4:
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s 			page 2
+
+
+  50              	.LBB3:
+   9:Core/Src/fm_sht30_sensor.c **** 		crc ^= data[i];
+  10:Core/Src/fm_sht30_sensor.c **** 		for (size_t j = 0; j < 8; j++) {
+  11:Core/Src/fm_sht30_sensor.c **** 			if ((crc & 0x80u) != 0) {
+  12:Core/Src/fm_sht30_sensor.c **** 				crc = (uint8_t)((uint8_t)(crc << 1u) ^ 0x31u);
+  13:Core/Src/fm_sht30_sensor.c **** 			} else {
+  14:Core/Src/fm_sht30_sensor.c **** 				crc <<= 1u;
+  51              		.loc 1 14 5 is_stmt 1 view .LVU8
+  52              		.loc 1 14 9 is_stmt 0 view .LVU9
+  53 0008 4000     		lsls	r0, r0, #1
+  54              	.LVL4:
+  55              		.loc 1 14 9 view .LVU10
+  56 000a C0B2     		uxtb	r0, r0
+  57              	.LVL5:
+  58              	.L5:
+  10:Core/Src/fm_sht30_sensor.c **** 			if ((crc & 0x80u) != 0) {
+  59              		.loc 1 10 30 is_stmt 1 discriminator 2 view .LVU11
+  60 000c 0133     		adds	r3, r3, #1
+  61              	.LVL6:
+  62              	.L3:
+  10:Core/Src/fm_sht30_sensor.c **** 			if ((crc & 0x80u) != 0) {
+  63              		.loc 1 10 24 discriminator 1 view .LVU12
+  64 000e 072B     		cmp	r3, #7
+  65 0010 07D8     		bhi	.L8
+  11:Core/Src/fm_sht30_sensor.c **** 				crc = (uint8_t)((uint8_t)(crc << 1u) ^ 0x31u);
+  66              		.loc 1 11 4 view .LVU13
+  11:Core/Src/fm_sht30_sensor.c **** 				crc = (uint8_t)((uint8_t)(crc << 1u) ^ 0x31u);
+  67              		.loc 1 11 7 is_stmt 0 view .LVU14
+  68 0012 10F0800F 		tst	r0, #128
+  69 0016 F7D0     		beq	.L4
+  12:Core/Src/fm_sht30_sensor.c **** 			} else {
+  70              		.loc 1 12 5 is_stmt 1 view .LVU15
+  12:Core/Src/fm_sht30_sensor.c **** 			} else {
+  71              		.loc 1 12 21 is_stmt 0 view .LVU16
+  72 0018 4000     		lsls	r0, r0, #1
+  73              	.LVL7:
+  12:Core/Src/fm_sht30_sensor.c **** 			} else {
+  74              		.loc 1 12 21 view .LVU17
+  75 001a C0B2     		uxtb	r0, r0
+  12:Core/Src/fm_sht30_sensor.c **** 			} else {
+  76              		.loc 1 12 9 view .LVU18
+  77 001c 80F03100 		eor	r0, r0, #49
+  78              	.LVL8:
+  12:Core/Src/fm_sht30_sensor.c **** 			} else {
+  79              		.loc 1 12 9 view .LVU19
+  80 0020 F4E7     		b	.L5
+  81              	.L8:
+  12:Core/Src/fm_sht30_sensor.c **** 			} else {
+  82              		.loc 1 12 9 view .LVU20
+  83              	.LBE3:
+   8:Core/Src/fm_sht30_sensor.c **** 		crc ^= data[i];
+  84              		.loc 1 8 34 is_stmt 1 discriminator 2 view .LVU21
+  85 0022 0132     		adds	r2, r2, #1
+  86              	.LVL9:
+  87              	.L2:
+   8:Core/Src/fm_sht30_sensor.c **** 		crc ^= data[i];
+  88              		.loc 1 8 23 discriminator 1 view .LVU22
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s 			page 3
+
+
+  89 0024 8A42     		cmp	r2, r1
+  90 0026 04D2     		bcs	.L9
+   9:Core/Src/fm_sht30_sensor.c **** 		for (size_t j = 0; j < 8; j++) {
+  91              		.loc 1 9 3 view .LVU23
+   9:Core/Src/fm_sht30_sensor.c **** 		for (size_t j = 0; j < 8; j++) {
+  92              		.loc 1 9 14 is_stmt 0 view .LVU24
+  93 0028 1CF80230 		ldrb	r3, [ip, r2]	@ zero_extendqisi2
+   9:Core/Src/fm_sht30_sensor.c **** 		for (size_t j = 0; j < 8; j++) {
+  94              		.loc 1 9 7 view .LVU25
+  95 002c 5840     		eors	r0, r0, r3
+  96              	.LVL10:
+  10:Core/Src/fm_sht30_sensor.c **** 			if ((crc & 0x80u) != 0) {
+  97              		.loc 1 10 3 is_stmt 1 view .LVU26
+  98              	.LBB4:
+  10:Core/Src/fm_sht30_sensor.c **** 			if ((crc & 0x80u) != 0) {
+  99              		.loc 1 10 8 view .LVU27
+  10:Core/Src/fm_sht30_sensor.c **** 			if ((crc & 0x80u) != 0) {
+ 100              		.loc 1 10 15 is_stmt 0 view .LVU28
+ 101 002e 0023     		movs	r3, #0
+  10:Core/Src/fm_sht30_sensor.c **** 			if ((crc & 0x80u) != 0) {
+ 102              		.loc 1 10 3 view .LVU29
+ 103 0030 EDE7     		b	.L3
+ 104              	.LVL11:
+ 105              	.L9:
+  10:Core/Src/fm_sht30_sensor.c **** 			if ((crc & 0x80u) != 0) {
+ 106              		.loc 1 10 3 view .LVU30
+ 107              	.LBE4:
+ 108              	.LBE5:
+  15:Core/Src/fm_sht30_sensor.c **** 			}
+  16:Core/Src/fm_sht30_sensor.c **** 		}
+  17:Core/Src/fm_sht30_sensor.c **** 	}
+  18:Core/Src/fm_sht30_sensor.c **** 	return crc;
+ 109              		.loc 1 18 2 is_stmt 1 view .LVU31
+  19:Core/Src/fm_sht30_sensor.c **** }
+ 110              		.loc 1 19 1 is_stmt 0 view .LVU32
+ 111 0032 7047     		bx	lr
+ 112              		.cfi_endproc
+ 113              	.LFE68:
+ 115              		.section	.text.FM_V0x_Conv_U8_2U16,"ax",%progbits
+ 116              		.align	1
+ 117              		.syntax unified
+ 118              		.thumb
+ 119              		.thumb_func
+ 121              	FM_V0x_Conv_U8_2U16:
+ 122              	.LVL12:
+ 123              	.LFB70:
+  20:Core/Src/fm_sht30_sensor.c **** 
+  21:Core/Src/fm_sht30_sensor.c **** static bool FM_V0x_SHT30_Send_Command(sht3x_handle_t *handle, sht3x_command_t command)
+  22:Core/Src/fm_sht30_sensor.c **** {
+  23:Core/Src/fm_sht30_sensor.c **** 	uint8_t command_buffer[2] = {(command & 0xff00u) >> 8u, command & 0xffu};
+  24:Core/Src/fm_sht30_sensor.c **** 
+  25:Core/Src/fm_sht30_sensor.c **** 	if (HAL_I2C_Master_Transmit(handle->i2c_handle, handle->device_address << 1u, command_buffer, size
+  26:Core/Src/fm_sht30_sensor.c **** 	                            SHT3X_I2C_TIMEOUT) != HAL_OK) {
+  27:Core/Src/fm_sht30_sensor.c **** 		return false;
+  28:Core/Src/fm_sht30_sensor.c **** 	}
+  29:Core/Src/fm_sht30_sensor.c **** 
+  30:Core/Src/fm_sht30_sensor.c **** 	return true;
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s 			page 4
+
+
+  31:Core/Src/fm_sht30_sensor.c **** }
+  32:Core/Src/fm_sht30_sensor.c **** 
+  33:Core/Src/fm_sht30_sensor.c **** static uint16_t FM_V0x_Conv_U8_2U16(uint8_t msb, uint8_t lsb)
+  34:Core/Src/fm_sht30_sensor.c **** {
+ 124              		.loc 1 34 1 is_stmt 1 view -0
+ 125              		.cfi_startproc
+ 126              		@ args = 0, pretend = 0, frame = 0
+ 127              		@ frame_needed = 0, uses_anonymous_args = 0
+ 128              		@ link register save eliminated.
+  35:Core/Src/fm_sht30_sensor.c **** 	return (uint16_t)((uint16_t)msb << 8u) | lsb;
+ 129              		.loc 1 35 2 view .LVU34
+  36:Core/Src/fm_sht30_sensor.c **** }
+ 130              		.loc 1 36 1 is_stmt 0 view .LVU35
+ 131 0000 41EA0020 		orr	r0, r1, r0, lsl #8
+ 132              	.LVL13:
+ 133              		.loc 1 36 1 view .LVU36
+ 134 0004 7047     		bx	lr
+ 135              		.cfi_endproc
+ 136              	.LFE70:
+ 138              		.section	.text.FM_V0x_SHT30_Send_Command,"ax",%progbits
+ 139              		.align	1
+ 140              		.syntax unified
+ 141              		.thumb
+ 142              		.thumb_func
+ 144              	FM_V0x_SHT30_Send_Command:
+ 145              	.LVL14:
+ 146              	.LFB69:
+  22:Core/Src/fm_sht30_sensor.c **** 	uint8_t command_buffer[2] = {(command & 0xff00u) >> 8u, command & 0xffu};
+ 147              		.loc 1 22 1 is_stmt 1 view -0
+ 148              		.cfi_startproc
+ 149              		@ args = 0, pretend = 0, frame = 8
+ 150              		@ frame_needed = 0, uses_anonymous_args = 0
+  22:Core/Src/fm_sht30_sensor.c **** 	uint8_t command_buffer[2] = {(command & 0xff00u) >> 8u, command & 0xffu};
+ 151              		.loc 1 22 1 is_stmt 0 view .LVU38
+ 152 0000 00B5     		push	{lr}
+ 153              	.LCFI0:
+ 154              		.cfi_def_cfa_offset 4
+ 155              		.cfi_offset 14, -4
+ 156 0002 85B0     		sub	sp, sp, #20
+ 157              	.LCFI1:
+ 158              		.cfi_def_cfa_offset 24
+  23:Core/Src/fm_sht30_sensor.c **** 
+ 159              		.loc 1 23 2 is_stmt 1 view .LVU39
+  23:Core/Src/fm_sht30_sensor.c **** 
+ 160              		.loc 1 23 51 is_stmt 0 view .LVU40
+ 161 0004 0B0A     		lsrs	r3, r1, #8
+  23:Core/Src/fm_sht30_sensor.c **** 
+ 162              		.loc 1 23 10 view .LVU41
+ 163 0006 8DF80C30 		strb	r3, [sp, #12]
+ 164 000a 8DF80D10 		strb	r1, [sp, #13]
+  25:Core/Src/fm_sht30_sensor.c **** 	                            SHT3X_I2C_TIMEOUT) != HAL_OK) {
+ 165              		.loc 1 25 2 is_stmt 1 view .LVU42
+  25:Core/Src/fm_sht30_sensor.c **** 	                            SHT3X_I2C_TIMEOUT) != HAL_OK) {
+ 166              		.loc 1 25 56 is_stmt 0 view .LVU43
+ 167 000e 8188     		ldrh	r1, [r0, #4]
+ 168              	.LVL15:
+  25:Core/Src/fm_sht30_sensor.c **** 	                            SHT3X_I2C_TIMEOUT) != HAL_OK) {
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s 			page 5
+
+
+ 169              		.loc 1 25 6 view .LVU44
+ 170 0010 4900     		lsls	r1, r1, #1
+ 171 0012 89B2     		uxth	r1, r1
+ 172 0014 1E23     		movs	r3, #30
+ 173 0016 0093     		str	r3, [sp]
+ 174 0018 0223     		movs	r3, #2
+ 175 001a 03AA     		add	r2, sp, #12
+ 176 001c 0068     		ldr	r0, [r0]
+ 177              	.LVL16:
+  25:Core/Src/fm_sht30_sensor.c **** 	                            SHT3X_I2C_TIMEOUT) != HAL_OK) {
+ 178              		.loc 1 25 6 view .LVU45
+ 179 001e FFF7FEFF 		bl	HAL_I2C_Master_Transmit
+ 180              	.LVL17:
+  25:Core/Src/fm_sht30_sensor.c **** 	                            SHT3X_I2C_TIMEOUT) != HAL_OK) {
+ 181              		.loc 1 25 5 discriminator 1 view .LVU46
+ 182 0022 18B9     		cbnz	r0, .L13
+  30:Core/Src/fm_sht30_sensor.c **** }
+ 183              		.loc 1 30 9 view .LVU47
+ 184 0024 0120     		movs	r0, #1
+ 185              	.L12:
+  31:Core/Src/fm_sht30_sensor.c **** 
+ 186              		.loc 1 31 1 view .LVU48
+ 187 0026 05B0     		add	sp, sp, #20
+ 188              	.LCFI2:
+ 189              		.cfi_remember_state
+ 190              		.cfi_def_cfa_offset 4
+ 191              		@ sp needed
+ 192 0028 5DF804FB 		ldr	pc, [sp], #4
+ 193              	.L13:
+ 194              	.LCFI3:
+ 195              		.cfi_restore_state
+  27:Core/Src/fm_sht30_sensor.c **** 	}
+ 196              		.loc 1 27 10 view .LVU49
+ 197 002c 0020     		movs	r0, #0
+ 198 002e FAE7     		b	.L12
+ 199              		.cfi_endproc
+ 200              	.LFE69:
+ 202              		.section	.rodata.FM_V0x_SHT30_Sensor_Init.str1.4,"aMS",%progbits,1
+ 203              		.align	2
+ 204              	.LC0:
+ 205 0000 68616E64 		.ascii	"handle->i2c_handle->Init.NoStretchMode == I2C_NOSTR"
+ 205      6C652D3E 
+ 205      6932635F 
+ 205      68616E64 
+ 205      6C652D3E 
+ 206 0033 45544348 		.ascii	"ETCH_DISABLE\000"
+ 206      5F444953 
+ 206      41424C45 
+ 206      00
+ 207              		.align	2
+ 208              	.LC1:
+ 209 0040 436F7265 		.ascii	"Core/Src/fm_sht30_sensor.c\000"
+ 209      2F537263 
+ 209      2F666D5F 
+ 209      73687433 
+ 209      305F7365 
+ 210              		.section	.text.FM_V0x_SHT30_Sensor_Init,"ax",%progbits
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s 			page 6
+
+
+ 211              		.align	1
+ 212              		.global	FM_V0x_SHT30_Sensor_Init
+ 213              		.syntax unified
+ 214              		.thumb
+ 215              		.thumb_func
+ 217              	FM_V0x_SHT30_Sensor_Init:
+ 218              	.LVL18:
+ 219              	.LFB71:
+  37:Core/Src/fm_sht30_sensor.c **** 
+  38:Core/Src/fm_sht30_sensor.c **** 
+  39:Core/Src/fm_sht30_sensor.c **** bool FM_V0x_SHT30_Sensor_Init(sht3x_handle_t *handle)
+  40:Core/Src/fm_sht30_sensor.c **** {
+ 220              		.loc 1 40 1 is_stmt 1 view -0
+ 221              		.cfi_startproc
+ 222              		@ args = 0, pretend = 0, frame = 8
+ 223              		@ frame_needed = 0, uses_anonymous_args = 0
+ 224              		.loc 1 40 1 is_stmt 0 view .LVU51
+ 225 0000 00B5     		push	{lr}
+ 226              	.LCFI4:
+ 227              		.cfi_def_cfa_offset 4
+ 228              		.cfi_offset 14, -4
+ 229 0002 87B0     		sub	sp, sp, #28
+ 230              	.LCFI5:
+ 231              		.cfi_def_cfa_offset 32
+ 232 0004 0346     		mov	r3, r0
+  41:Core/Src/fm_sht30_sensor.c **** 	assert(handle->i2c_handle->Init.NoStretchMode == I2C_NOSTRETCH_DISABLE);
+ 233              		.loc 1 41 2 is_stmt 1 view .LVU52
+ 234 0006 0068     		ldr	r0, [r0]
+ 235              	.LVL19:
+ 236              		.loc 1 41 2 is_stmt 0 view .LVU53
+ 237 0008 026A     		ldr	r2, [r0, #32]
+ 238 000a C2B9     		cbnz	r2, .L21
+  42:Core/Src/fm_sht30_sensor.c **** 	
+  43:Core/Src/fm_sht30_sensor.c **** 
+  44:Core/Src/fm_sht30_sensor.c **** 	uint8_t status_reg_and_checksum[3];
+ 239              		.loc 1 44 2 is_stmt 1 view .LVU54
+  45:Core/Src/fm_sht30_sensor.c **** 	if (HAL_I2C_Mem_Read(handle->i2c_handle, handle->device_address << 1u, SHT3X_COMMAND_READ_STATUS, 
+ 240              		.loc 1 45 2 view .LVU55
+ 241              		.loc 1 45 49 is_stmt 0 view .LVU56
+ 242 000c 9988     		ldrh	r1, [r3, #4]
+ 243              		.loc 1 45 6 view .LVU57
+ 244 000e 4900     		lsls	r1, r1, #1
+ 245 0010 89B2     		uxth	r1, r1
+ 246 0012 1E23     		movs	r3, #30
+ 247              	.LVL20:
+ 248              		.loc 1 45 6 view .LVU58
+ 249 0014 0293     		str	r3, [sp, #8]
+ 250 0016 0323     		movs	r3, #3
+ 251 0018 0193     		str	r3, [sp, #4]
+ 252 001a 05AB     		add	r3, sp, #20
+ 253 001c 0093     		str	r3, [sp]
+ 254 001e 0223     		movs	r3, #2
+ 255 0020 4FF22D32 		movw	r2, #62253
+ 256 0024 FFF7FEFF 		bl	HAL_I2C_Mem_Read
+ 257              	.LVL21:
+ 258              		.loc 1 45 5 discriminator 1 view .LVU59
+ 259 0028 78B9     		cbnz	r0, .L18
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s 			page 7
+
+
+  46:Core/Src/fm_sht30_sensor.c **** 					  sizeof(status_reg_and_checksum), SHT3X_I2C_TIMEOUT) != HAL_OK) {
+  47:Core/Src/fm_sht30_sensor.c **** 		return false;
+  48:Core/Src/fm_sht30_sensor.c **** 	}
+  49:Core/Src/fm_sht30_sensor.c **** 
+  50:Core/Src/fm_sht30_sensor.c **** 	uint8_t calculated_crc = FM_V0x_SHT30_Calc_CRC(status_reg_and_checksum, 2);
+ 260              		.loc 1 50 2 is_stmt 1 view .LVU60
+ 261              		.loc 1 50 27 is_stmt 0 view .LVU61
+ 262 002a 0221     		movs	r1, #2
+ 263 002c 05A8     		add	r0, sp, #20
+ 264 002e FFF7FEFF 		bl	FM_V0x_SHT30_Calc_CRC
+ 265              	.LVL22:
+  51:Core/Src/fm_sht30_sensor.c **** 
+  52:Core/Src/fm_sht30_sensor.c **** 	if (calculated_crc != status_reg_and_checksum[2]) {
+ 266              		.loc 1 52 2 is_stmt 1 view .LVU62
+ 267              		.loc 1 52 47 is_stmt 0 view .LVU63
+ 268 0032 9DF81630 		ldrb	r3, [sp, #22]	@ zero_extendqisi2
+ 269              		.loc 1 52 5 view .LVU64
+ 270 0036 8342     		cmp	r3, r0
+ 271 0038 0BD1     		bne	.L19
+  53:Core/Src/fm_sht30_sensor.c **** 		return false;
+  54:Core/Src/fm_sht30_sensor.c **** 	}
+  55:Core/Src/fm_sht30_sensor.c **** 
+  56:Core/Src/fm_sht30_sensor.c **** 	return true;
+ 272              		.loc 1 56 9 view .LVU65
+ 273 003a 0120     		movs	r0, #1
+ 274              	.LVL23:
+ 275              		.loc 1 56 9 view .LVU66
+ 276 003c 06E0     		b	.L17
+ 277              	.LVL24:
+ 278              	.L21:
+  41:Core/Src/fm_sht30_sensor.c **** 	
+ 279              		.loc 1 41 2 discriminator 1 view .LVU67
+ 280 003e 064B     		ldr	r3, .L22
+ 281              	.LVL25:
+  41:Core/Src/fm_sht30_sensor.c **** 	
+ 282              		.loc 1 41 2 discriminator 1 view .LVU68
+ 283 0040 064A     		ldr	r2, .L22+4
+ 284 0042 2921     		movs	r1, #41
+ 285 0044 0648     		ldr	r0, .L22+8
+ 286 0046 FFF7FEFF 		bl	__assert_func
+ 287              	.LVL26:
+ 288              	.L18:
+  47:Core/Src/fm_sht30_sensor.c **** 	}
+ 289              		.loc 1 47 10 view .LVU69
+ 290 004a 0020     		movs	r0, #0
+ 291              	.L17:
+  57:Core/Src/fm_sht30_sensor.c **** }
+ 292              		.loc 1 57 1 view .LVU70
+ 293 004c 07B0     		add	sp, sp, #28
+ 294              	.LCFI6:
+ 295              		.cfi_remember_state
+ 296              		.cfi_def_cfa_offset 4
+ 297              		@ sp needed
+ 298 004e 5DF804FB 		ldr	pc, [sp], #4
+ 299              	.LVL27:
+ 300              	.L19:
+ 301              	.LCFI7:
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s 			page 8
+
+
+ 302              		.cfi_restore_state
+  53:Core/Src/fm_sht30_sensor.c **** 	}
+ 303              		.loc 1 53 10 view .LVU71
+ 304 0052 0020     		movs	r0, #0
+ 305              	.LVL28:
+  53:Core/Src/fm_sht30_sensor.c **** 	}
+ 306              		.loc 1 53 10 view .LVU72
+ 307 0054 FAE7     		b	.L17
+ 308              	.L23:
+ 309 0056 00BF     		.align	2
+ 310              	.L22:
+ 311 0058 00000000 		.word	.LC0
+ 312 005c 00000000 		.word	__func__.0
+ 313 0060 40000000 		.word	.LC1
+ 314              		.cfi_endproc
+ 315              	.LFE71:
+ 317              		.global	__aeabi_ui2f
+ 318              		.global	__aeabi_fmul
+ 319              		.global	__aeabi_fdiv
+ 320              		.global	__aeabi_fsub
+ 321              		.section	.text.FM_V0x_SHT30_Read_Temp_Humid,"ax",%progbits
+ 322              		.align	1
+ 323              		.global	FM_V0x_SHT30_Read_Temp_Humid
+ 324              		.syntax unified
+ 325              		.thumb
+ 326              		.thumb_func
+ 328              	FM_V0x_SHT30_Read_Temp_Humid:
+ 329              	.LVL29:
+ 330              	.LFB72:
+  58:Core/Src/fm_sht30_sensor.c **** 
+  59:Core/Src/fm_sht30_sensor.c **** bool FM_V0x_SHT30_Read_Temp_Humid(sht3x_handle_t *handle, float *temp, float *humid){
+ 331              		.loc 1 59 85 is_stmt 1 view -0
+ 332              		.cfi_startproc
+ 333              		@ args = 0, pretend = 0, frame = 8
+ 334              		@ frame_needed = 0, uses_anonymous_args = 0
+ 335              		.loc 1 59 85 is_stmt 0 view .LVU74
+ 336 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 337              	.LCFI8:
+ 338              		.cfi_def_cfa_offset 20
+ 339              		.cfi_offset 4, -20
+ 340              		.cfi_offset 5, -16
+ 341              		.cfi_offset 6, -12
+ 342              		.cfi_offset 7, -8
+ 343              		.cfi_offset 14, -4
+ 344 0002 85B0     		sub	sp, sp, #20
+ 345              	.LCFI9:
+ 346              		.cfi_def_cfa_offset 40
+ 347 0004 0446     		mov	r4, r0
+ 348 0006 0E46     		mov	r6, r1
+ 349 0008 1546     		mov	r5, r2
+  60:Core/Src/fm_sht30_sensor.c **** 	 FM_V0x_SHT30_Send_Command(handle, SHT3X_COMMAND_MEASURE_HIGHREP_STRETCH);
+ 350              		.loc 1 60 3 is_stmt 1 view .LVU75
+ 351 000a 42F60641 		movw	r1, #11270
+ 352              	.LVL30:
+ 353              		.loc 1 60 3 is_stmt 0 view .LVU76
+ 354 000e FFF7FEFF 		bl	FM_V0x_SHT30_Send_Command
+ 355              	.LVL31:
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s 			page 9
+
+
+  61:Core/Src/fm_sht30_sensor.c **** 
+  62:Core/Src/fm_sht30_sensor.c **** 	HAL_Delay(1);
+ 356              		.loc 1 62 2 is_stmt 1 view .LVU77
+ 357 0012 0120     		movs	r0, #1
+ 358 0014 FFF7FEFF 		bl	HAL_Delay
+ 359              	.LVL32:
+  63:Core/Src/fm_sht30_sensor.c **** 
+  64:Core/Src/fm_sht30_sensor.c **** 	uint8_t buffer[6];
+ 360              		.loc 1 64 2 view .LVU78
+  65:Core/Src/fm_sht30_sensor.c **** 	if (HAL_I2C_Master_Receive(handle->i2c_handle, handle->device_address << 1u, buffer, sizeof(buffer
+ 361              		.loc 1 65 2 view .LVU79
+ 362              		.loc 1 65 55 is_stmt 0 view .LVU80
+ 363 0018 A388     		ldrh	r3, [r4, #4]
+ 364              		.loc 1 65 6 view .LVU81
+ 365 001a 5B00     		lsls	r3, r3, #1
+ 366 001c 99B2     		uxth	r1, r3
+ 367 001e 1E23     		movs	r3, #30
+ 368 0020 0093     		str	r3, [sp]
+ 369 0022 0623     		movs	r3, #6
+ 370 0024 02AA     		add	r2, sp, #8
+ 371 0026 2068     		ldr	r0, [r4]
+ 372 0028 FFF7FEFF 		bl	HAL_I2C_Master_Receive
+ 373              	.LVL33:
+ 374              		.loc 1 65 5 discriminator 1 view .LVU82
+ 375 002c 0028     		cmp	r0, #0
+ 376 002e 38D1     		bne	.L26
+  66:Core/Src/fm_sht30_sensor.c **** 		return false;
+  67:Core/Src/fm_sht30_sensor.c **** 	}
+  68:Core/Src/fm_sht30_sensor.c **** 
+  69:Core/Src/fm_sht30_sensor.c **** 	uint8_t temp_crc = FM_V0x_SHT30_Calc_CRC(buffer, 2);
+ 377              		.loc 1 69 2 is_stmt 1 view .LVU83
+ 378              		.loc 1 69 21 is_stmt 0 view .LVU84
+ 379 0030 0221     		movs	r1, #2
+ 380 0032 02A8     		add	r0, sp, #8
+ 381 0034 FFF7FEFF 		bl	FM_V0x_SHT30_Calc_CRC
+ 382              	.LVL34:
+ 383 0038 0446     		mov	r4, r0
+ 384              	.LVL35:
+  70:Core/Src/fm_sht30_sensor.c **** 	uint8_t humid_crc = FM_V0x_SHT30_Calc_CRC(buffer + 3, 2);
+ 385              		.loc 1 70 2 is_stmt 1 view .LVU85
+ 386              		.loc 1 70 22 is_stmt 0 view .LVU86
+ 387 003a 0221     		movs	r1, #2
+ 388 003c 0DF10B00 		add	r0, sp, #11
+ 389 0040 FFF7FEFF 		bl	FM_V0x_SHT30_Calc_CRC
+ 390              	.LVL36:
+  71:Core/Src/fm_sht30_sensor.c **** 	if (temp_crc != buffer[2] || humid_crc != buffer[5]) {
+ 391              		.loc 1 71 2 is_stmt 1 view .LVU87
+ 392              		.loc 1 71 24 is_stmt 0 view .LVU88
+ 393 0044 9DF80A30 		ldrb	r3, [sp, #10]	@ zero_extendqisi2
+ 394              		.loc 1 71 5 view .LVU89
+ 395 0048 A342     		cmp	r3, r4
+ 396 004a 2DD1     		bne	.L27
+ 397              		.loc 1 71 50 discriminator 1 view .LVU90
+ 398 004c 9DF80D30 		ldrb	r3, [sp, #13]	@ zero_extendqisi2
+ 399              		.loc 1 71 28 discriminator 1 view .LVU91
+ 400 0050 8342     		cmp	r3, r0
+ 401 0052 2BD1     		bne	.L28
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s 			page 10
+
+
+  72:Core/Src/fm_sht30_sensor.c **** 		return false;
+  73:Core/Src/fm_sht30_sensor.c **** 	}
+  74:Core/Src/fm_sht30_sensor.c **** 
+  75:Core/Src/fm_sht30_sensor.c **** 	uint16_t temp_raw = FM_V0x_Conv_U8_2U16(buffer[0], buffer[1]);
+ 402              		.loc 1 75 2 is_stmt 1 view .LVU92
+ 403              		.loc 1 75 22 is_stmt 0 view .LVU93
+ 404 0054 9DF80910 		ldrb	r1, [sp, #9]	@ zero_extendqisi2
+ 405 0058 9DF80800 		ldrb	r0, [sp, #8]	@ zero_extendqisi2
+ 406              	.LVL37:
+ 407              		.loc 1 75 22 view .LVU94
+ 408 005c FFF7FEFF 		bl	FM_V0x_Conv_U8_2U16
+ 409              	.LVL38:
+ 410 0060 0746     		mov	r7, r0
+ 411              	.LVL39:
+  76:Core/Src/fm_sht30_sensor.c **** 	uint16_t humid_raw = FM_V0x_Conv_U8_2U16(buffer[3], buffer[4]);
+ 412              		.loc 1 76 2 is_stmt 1 view .LVU95
+ 413              		.loc 1 76 23 is_stmt 0 view .LVU96
+ 414 0062 9DF80C10 		ldrb	r1, [sp, #12]	@ zero_extendqisi2
+ 415 0066 9DF80B00 		ldrb	r0, [sp, #11]	@ zero_extendqisi2
+ 416 006a FFF7FEFF 		bl	FM_V0x_Conv_U8_2U16
+ 417              	.LVL40:
+ 418 006e 0446     		mov	r4, r0
+ 419              	.LVL41:
+  77:Core/Src/fm_sht30_sensor.c **** 
+  78:Core/Src/fm_sht30_sensor.c **** 	*temp = -45.0f + 175.0f * (float)temp_raw / 65535.0f;
+ 420              		.loc 1 78 2 is_stmt 1 view .LVU97
+ 421              		.loc 1 78 28 is_stmt 0 view .LVU98
+ 422 0070 3846     		mov	r0, r7
+ 423 0072 FFF7FEFF 		bl	__aeabi_ui2f
+ 424              	.LVL42:
+ 425              		.loc 1 78 26 view .LVU99
+ 426 0076 0E49     		ldr	r1, .L30
+ 427 0078 FFF7FEFF 		bl	__aeabi_fmul
+ 428              	.LVL43:
+ 429              		.loc 1 78 44 view .LVU100
+ 430 007c 0D49     		ldr	r1, .L30+4
+ 431 007e FFF7FEFF 		bl	__aeabi_fdiv
+ 432              	.LVL44:
+ 433              		.loc 1 78 17 view .LVU101
+ 434 0082 0D49     		ldr	r1, .L30+8
+ 435 0084 FFF7FEFF 		bl	__aeabi_fsub
+ 436              	.LVL45:
+ 437              		.loc 1 78 8 view .LVU102
+ 438 0088 3060     		str	r0, [r6]	@ float
+  79:Core/Src/fm_sht30_sensor.c **** 	*humid = 100.0f * (float)humid_raw / 65535.0f;
+ 439              		.loc 1 79 2 is_stmt 1 view .LVU103
+ 440              		.loc 1 79 20 is_stmt 0 view .LVU104
+ 441 008a 2046     		mov	r0, r4
+ 442 008c FFF7FEFF 		bl	__aeabi_ui2f
+ 443              	.LVL46:
+ 444              		.loc 1 79 18 view .LVU105
+ 445 0090 0A49     		ldr	r1, .L30+12
+ 446 0092 FFF7FEFF 		bl	__aeabi_fmul
+ 447              	.LVL47:
+ 448              		.loc 1 79 37 view .LVU106
+ 449 0096 0749     		ldr	r1, .L30+4
+ 450 0098 FFF7FEFF 		bl	__aeabi_fdiv
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s 			page 11
+
+
+ 451              	.LVL48:
+ 452              		.loc 1 79 9 view .LVU107
+ 453 009c 2860     		str	r0, [r5]	@ float
+  80:Core/Src/fm_sht30_sensor.c **** 
+  81:Core/Src/fm_sht30_sensor.c **** 	return true;
+ 454              		.loc 1 81 2 is_stmt 1 view .LVU108
+ 455              		.loc 1 81 9 is_stmt 0 view .LVU109
+ 456 009e 0120     		movs	r0, #1
+ 457 00a0 00E0     		b	.L25
+ 458              	.LVL49:
+ 459              	.L26:
+  66:Core/Src/fm_sht30_sensor.c **** 	}
+ 460              		.loc 1 66 10 view .LVU110
+ 461 00a2 0020     		movs	r0, #0
+ 462              	.LVL50:
+ 463              	.L25:
+  82:Core/Src/fm_sht30_sensor.c **** }
+ 464              		.loc 1 82 1 view .LVU111
+ 465 00a4 05B0     		add	sp, sp, #20
+ 466              	.LCFI10:
+ 467              		.cfi_remember_state
+ 468              		.cfi_def_cfa_offset 20
+ 469              		@ sp needed
+ 470 00a6 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 471              	.LVL51:
+ 472              	.L27:
+ 473              	.LCFI11:
+ 474              		.cfi_restore_state
+  72:Core/Src/fm_sht30_sensor.c **** 	}
+ 475              		.loc 1 72 10 view .LVU112
+ 476 00a8 0020     		movs	r0, #0
+ 477              	.LVL52:
+  72:Core/Src/fm_sht30_sensor.c **** 	}
+ 478              		.loc 1 72 10 view .LVU113
+ 479 00aa FBE7     		b	.L25
+ 480              	.LVL53:
+ 481              	.L28:
+  72:Core/Src/fm_sht30_sensor.c **** 	}
+ 482              		.loc 1 72 10 view .LVU114
+ 483 00ac 0020     		movs	r0, #0
+ 484              	.LVL54:
+  72:Core/Src/fm_sht30_sensor.c **** 	}
+ 485              		.loc 1 72 10 view .LVU115
+ 486 00ae F9E7     		b	.L25
+ 487              	.L31:
+ 488              		.align	2
+ 489              	.L30:
+ 490 00b0 00002F43 		.word	1127153664
+ 491 00b4 00FF7F47 		.word	1199570688
+ 492 00b8 00003442 		.word	1110704128
+ 493 00bc 0000C842 		.word	1120403456
+ 494              		.cfi_endproc
+ 495              	.LFE72:
+ 497              		.section	.text.FM_V0x_SHT30_Set_Header_Enable,"ax",%progbits
+ 498              		.align	1
+ 499              		.global	FM_V0x_SHT30_Set_Header_Enable
+ 500              		.syntax unified
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s 			page 12
+
+
+ 501              		.thumb
+ 502              		.thumb_func
+ 504              	FM_V0x_SHT30_Set_Header_Enable:
+ 505              	.LVL55:
+ 506              	.LFB73:
+  83:Core/Src/fm_sht30_sensor.c **** 
+  84:Core/Src/fm_sht30_sensor.c **** bool FM_V0x_SHT30_Set_Header_Enable(sht3x_handle_t *handle, bool enable)
+  85:Core/Src/fm_sht30_sensor.c **** {
+ 507              		.loc 1 85 1 is_stmt 1 view -0
+ 508              		.cfi_startproc
+ 509              		@ args = 0, pretend = 0, frame = 0
+ 510              		@ frame_needed = 0, uses_anonymous_args = 0
+ 511              		.loc 1 85 1 is_stmt 0 view .LVU117
+ 512 0000 08B5     		push	{r3, lr}
+ 513              	.LCFI12:
+ 514              		.cfi_def_cfa_offset 8
+ 515              		.cfi_offset 3, -8
+ 516              		.cfi_offset 14, -4
+  86:Core/Src/fm_sht30_sensor.c **** 	if (enable) {
+ 517              		.loc 1 86 2 is_stmt 1 view .LVU118
+ 518              		.loc 1 86 5 is_stmt 0 view .LVU119
+ 519 0002 21B1     		cbz	r1, .L33
+  87:Core/Src/fm_sht30_sensor.c **** 		return FM_V0x_SHT30_Send_Command(handle, SHT3X_COMMAND_HEATER_ENABLE);
+ 520              		.loc 1 87 3 is_stmt 1 view .LVU120
+ 521              		.loc 1 87 10 is_stmt 0 view .LVU121
+ 522 0004 43F26D01 		movw	r1, #12397
+ 523              	.LVL56:
+ 524              		.loc 1 87 10 view .LVU122
+ 525 0008 FFF7FEFF 		bl	FM_V0x_SHT30_Send_Command
+ 526              	.LVL57:
+ 527              	.L34:
+  88:Core/Src/fm_sht30_sensor.c **** 	} else {
+  89:Core/Src/fm_sht30_sensor.c **** 		return FM_V0x_SHT30_Send_Command(handle, SHT3X_COMMAND_HEATER_DISABLE);
+  90:Core/Src/fm_sht30_sensor.c **** 	}
+  91:Core/Src/fm_sht30_sensor.c **** }
+ 528              		.loc 1 91 1 view .LVU123
+ 529 000c 08BD     		pop	{r3, pc}
+ 530              	.LVL58:
+ 531              	.L33:
+  89:Core/Src/fm_sht30_sensor.c **** 	}
+ 532              		.loc 1 89 3 is_stmt 1 view .LVU124
+  89:Core/Src/fm_sht30_sensor.c **** 	}
+ 533              		.loc 1 89 10 is_stmt 0 view .LVU125
+ 534 000e 43F26601 		movw	r1, #12390
+ 535              	.LVL59:
+  89:Core/Src/fm_sht30_sensor.c **** 	}
+ 536              		.loc 1 89 10 view .LVU126
+ 537 0012 FFF7FEFF 		bl	FM_V0x_SHT30_Send_Command
+ 538              	.LVL60:
+  89:Core/Src/fm_sht30_sensor.c **** 	}
+ 539              		.loc 1 89 10 view .LVU127
+ 540 0016 F9E7     		b	.L34
+ 541              		.cfi_endproc
+ 542              	.LFE73:
+ 544              		.section	.rodata.__func__.0,"a"
+ 545              		.align	2
+ 548              	__func__.0:
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s 			page 13
+
+
+ 549 0000 464D5F56 		.ascii	"FM_V0x_SHT30_Sensor_Init\000"
+ 549      30785F53 
+ 549      48543330 
+ 549      5F53656E 
+ 549      736F725F 
+ 550              		.text
+ 551              	.Letext0:
+ 552              		.file 2 "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.2 Rel1/arm-none-eabi/include/ma
+ 553              		.file 3 "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.2 Rel1/arm-none-eabi/include/sy
+ 554              		.file 4 "Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h"
+ 555              		.file 5 "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.2 Rel1/lib/gcc/arm-none-eabi/13
+ 556              		.file 6 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h"
+ 557              		.file 7 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h"
+ 558              		.file 8 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h"
+ 559              		.file 9 "Core/Inc/fm_sht30_sensor.h"
+ 560              		.file 10 "C:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.2 Rel1/arm-none-eabi/include/a
+ 561              		.file 11 "Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h"
+ARM GAS  C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 fm_sht30_sensor.c
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:19     .text.FM_V0x_SHT30_Calc_CRC:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:24     .text.FM_V0x_SHT30_Calc_CRC:00000000 FM_V0x_SHT30_Calc_CRC
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:116    .text.FM_V0x_Conv_U8_2U16:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:121    .text.FM_V0x_Conv_U8_2U16:00000000 FM_V0x_Conv_U8_2U16
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:139    .text.FM_V0x_SHT30_Send_Command:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:144    .text.FM_V0x_SHT30_Send_Command:00000000 FM_V0x_SHT30_Send_Command
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:203    .rodata.FM_V0x_SHT30_Sensor_Init.str1.4:00000000 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:211    .text.FM_V0x_SHT30_Sensor_Init:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:217    .text.FM_V0x_SHT30_Sensor_Init:00000000 FM_V0x_SHT30_Sensor_Init
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:311    .text.FM_V0x_SHT30_Sensor_Init:00000058 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:548    .rodata.__func__.0:00000000 __func__.0
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:322    .text.FM_V0x_SHT30_Read_Temp_Humid:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:328    .text.FM_V0x_SHT30_Read_Temp_Humid:00000000 FM_V0x_SHT30_Read_Temp_Humid
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:490    .text.FM_V0x_SHT30_Read_Temp_Humid:000000b0 $d
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:498    .text.FM_V0x_SHT30_Set_Header_Enable:00000000 $t
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:504    .text.FM_V0x_SHT30_Set_Header_Enable:00000000 FM_V0x_SHT30_Set_Header_Enable
+C:\Users\CDP~1.DAR\AppData\Local\Temp\cclxBZ6T.s:545    .rodata.__func__.0:00000000 $d
+
+UNDEFINED SYMBOLS
+HAL_I2C_Master_Transmit
+HAL_I2C_Mem_Read
+__assert_func
+__aeabi_ui2f
+__aeabi_fmul
+__aeabi_fdiv
+__aeabi_fsub
+HAL_Delay
+HAL_I2C_Master_Receive

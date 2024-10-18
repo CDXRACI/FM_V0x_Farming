@@ -1,0 +1,10 @@
+Removed Pin From Net: NetName=VCC_12V Pin=D6-K
+Removed Pin From Net: NetName=VCC_12V Pin=JP5-1
+Removed Pin From Net: NetName=VCC_12V Pin=RL2-5
+Added Pin To Net: NetName=NetC11_1 Pin=D6-K
+Added Pin To Net: NetName=NetC11_1 Pin=JP5-1
+Added Pin To Net: NetName=NetC11_1 Pin=RL2-5
+Added Room: Name=U_Comm_Sheet
+Added Room: Name=U_MCU_Sheet
+Added Room: Name=U_Power_Sheet
+Added Room: Name=U_Sensors_Sheet

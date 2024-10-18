@@ -1,0 +1,13 @@
+Output: NC Drill Files
+Type  : NC Drill
+From  : Project [FM_V03_BASE.PrjPcb]
+   Generated File[PCB_FM_V03_BASE.TXT]
+   Generated File[PCB_FM_V03_BASE-RectHoles.TXT]
+   Generated File[PCB_FM_V03_BASE.LDP]
+   Generated File[PCB_FM_V03_BASE.DRR]
+
+
+Files Generated   : 4
+Documents Printed : 0
+
+Finished Output Generation At 03:42:11 On 17/10/2024

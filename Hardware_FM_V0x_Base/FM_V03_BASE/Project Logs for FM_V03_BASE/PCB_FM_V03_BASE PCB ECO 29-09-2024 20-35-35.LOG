@@ -1,0 +1,45 @@
+Added Component: Designator=C11(CAP 6.3MMx5.4MM)
+Added Component: Designator=C26(CAP 6.3MMx5.4MM)
+Added Component: Designator=TP1(TestPoint)
+Added Component: Designator=TP2(TestPoint)
+Added Component: Designator=TP3(TestPoint)
+Added Component: Designator=TP4(TestPoint)
+Added Component: Designator=TP5(TestPoint)
+Added Component: Designator=TP6(TestPoint)
+Added Pin To Net: NetName=+VCC_12V Pin=C11-1
+Added Pin To Net: NetName=GND Pin=C11-2
+Added Pin To Net: NetName=+VCC_12V Pin=C26-1
+Added Pin To Net: NetName=GND Pin=C26-2
+Added Pin To Net: NetName=NetC41_2 Pin=TP4-1
+Added Pin To Net: NetName=NetTP1_1 Pin=TP1-1
+Added Pin To Net: NetName=NetTP1_1 Pin=U4-43
+Added Pin To Net: NetName=NetTP1_1 Pin=U7-20
+Added Net: Name=NetTP1_1
+Added Pin To Net: NetName=NetTP2_1 Pin=TP2-1
+Added Pin To Net: NetName=NetTP2_1 Pin=U4-42
+Added Pin To Net: NetName=NetTP2_1 Pin=U7-18
+Added Net: Name=NetTP2_1
+Added Pin To Net: NetName=NetTP3_1 Pin=TP3-1
+Added Pin To Net: NetName=NetTP3_1 Pin=U6-10
+Added Pin To Net: NetName=NetTP3_1 Pin=U7-3
+Added Net: Name=NetTP3_1
+Added Pin To Net: NetName=NetTP5_1 Pin=TP5-1
+Added Pin To Net: NetName=NetTP5_1 Pin=U6-9
+Added Pin To Net: NetName=NetTP5_1 Pin=U7-1
+Added Net: Name=NetTP5_1
+Added Pin To Net: NetName=NetTP6_1 Pin=TP6-1
+Added Pin To Net: NetName=NetTP6_1 Pin=U4-46
+Added Pin To Net: NetName=NetTP6_1 Pin=U7-17
+Added Net: Name=NetTP6_1
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component C11 100uF/16V
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component C26 100uF/16V
+Added Member To Class: ClassName=U_Comm_Sheet Member=Component TP1 Testpoint-1mm
+Added Member To Class: ClassName=U_Comm_Sheet Member=Component TP2 Testpoint-1mm
+Added Member To Class: ClassName=U_Comm_Sheet Member=Component TP3 Testpoint-1mm
+Added Member To Class: ClassName=U_Comm_Sheet Member=Component TP4 Testpoint-1mm
+Added Member To Class: ClassName=U_Comm_Sheet Member=Component TP5 Testpoint-1mm
+Added Member To Class: ClassName=U_Comm_Sheet Member=Component TP6 Testpoint-1mm
+Added Room: Name=U_Comm_Sheet
+Added Room: Name=U_MCU_Sheet
+Added Room: Name=U_Power_Sheet
+Added Room: Name=U_Sensors_Sheet

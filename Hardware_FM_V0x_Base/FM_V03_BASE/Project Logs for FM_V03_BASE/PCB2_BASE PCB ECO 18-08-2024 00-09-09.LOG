@@ -1,0 +1,131 @@
+Removed Pin From Net: NetName=GND Pin=C26-1
+Removed Pin From Net: NetName=VCC_12V Pin=C26-2
+Removed Pin From Net: NetName=VCC_12V Pin=C27-1
+Removed Pin From Net: NetName=GND Pin=C27-2
+Removed Pin From Net: NetName=VCC_12V Pin=C28-1
+Removed Pin From Net: NetName=GND Pin=C28-2
+Removed Pin From Net: NetName=GND Pin=C29-1
+Removed Pin From Net: NetName=VCC_12V Pin=C29-2
+Removed Pin From Net: NetName=VCC_12V Pin=D1-1
+Removed Pin From Net: NetName=VCC_12V Pin=D6-K
+Removed Pin From Net: NetName=VCC_12V Pin=D7-1
+Removed Pin From Net: NetName=VCC_12V Pin=JP1-1
+Removed Pin From Net: NetName=NetD9_A Pin=JP2-2
+Removed Pin From Net: NetName=NetD10_A Pin=JP3-2
+Removed Pin From Net: NetName=VCC_12V Pin=JP5-1
+Removed Pin From Net: NetName=NetD9_A Pin=M1-2
+Removed Pin From Net: NetName=NetD10_A Pin=M2-2
+Removed Pin From Net: NetName=GND Pin=Q9-2
+Removed Pin From Net: NetName=VCC_12V Pin=R11-2
+Removed Pin From Net: NetName=VCC_3V3_MCU Pin=R12-2
+Removed Pin From Net: NetName=NetR12_1 Pin=R13-1
+Removed Pin From Net: NetName=NetQ6_1 Pin=R13-2
+Removed Pin From Net: NetName=VCC_12V Pin=R43-2
+Removed Pin From Net: NetName=VCC_3V3_MCU Pin=R44-2
+Removed Pin From Net: NetName=GND Pin=RL1-1
+Removed Pin From Net: NetName=GND Pin=RL2-1
+Removed Pin From Net: NetName=VCC_12V Pin=RL2-5
+Removed Pin From Net: NetName=NetR12_1 Pin=U4-15
+Removed Member From Class: ClassName=U_MCU_Sheet Member=C26
+Removed Member From Class: ClassName=U_MCU_Sheet Member=C27
+Removed Member From Class: ClassName=U_MCU_Sheet Member=C28
+Removed Member From Class: ClassName=U_MCU_Sheet Member=C29
+Removed Member From Class: ClassName=U_MCU_Sheet Member=M1
+Removed Member From Class: ClassName=U_MCU_Sheet Member=M2
+Removed Member From Class: ClassName=U_MCU_Sheet Member=Q9
+Removed Member From Class: ClassName=U_MCU_Sheet Member=R43
+Removed Member From Class: ClassName=U_MCU_Sheet Member=R44
+Change Component Footprint: Designator=R13 Old Footprint=RESC-0603 (1608) New Footprint=SM-RES-1206
+Change Component Footprint: Designator=R14 Old Footprint=RESC-0603 (1608) New Footprint=SM-RES-1206
+Change Component Comment : Designator=Q6 Old Comment=2N222A New Comment=2SC1815
+Change Component Comment : Designator=R12 Old Comment=4K7 New Comment=1K
+Change Component Comment : Designator=R11 Old Comment=10K New Comment=1K
+Change Component Comment : Designator=R13 Old Comment=100R New Comment=0R
+Change Component Comment : Designator=R14 Old Comment=100R New Comment=0R
+Change Component Designator: OldDesignator= NewDesignator=P1
+Change Component Designator: OldDesignator= NewDesignator=P3
+Change Component Designator: OldDesignator= NewDesignator=P4
+Change Component Designator: OldDesignator= NewDesignator=P5
+Change component parameters: Designator = "R13" ("R13"); Footprint = "RESC-0603 (1608)"; UniqueID = "\TKQTEZVT" ("\TKQTEZVT")
+Change component parameters (AddParameter): Name = "Value"; Value = "R1/4W - 1K"; VariantName = "[No Variations]"
+Change component parameters: Designator = "R14" ("R14"); Footprint = "RESC-0603 (1608)"; UniqueID = "\QUMSBCYL" ("\QUMSBCYL")
+Change component parameters (AddParameter): Name = "Value"; Value = "R1/4W - 1K"; VariantName = "[No Variations]"
+Added Component: Designator=JP6(HED2)
+Add component (AddParameter): Name = "Class"; Value = "Connector"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Generic Components"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "Header 2"; VariantName = "[No Variations]"
+Added Component: Designator=Q7(SOT23_3)
+Add component (AddParameter): Name = "Category"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "CompanyID"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MPN"; Value = "2SC1815"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PinCount"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Solder"; Value = "SMT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "2SC1815"; VariantName = "[No Variations]"
+Added Component: Designator=R?(SM-RES-1206)
+Add component (AddParameter): Name = "Value"; Value = "R1/4W - 1K"; VariantName = "[No Variations]"
+Added Component: Designator=RL3(RL_SPDT_10A)
+Add component (AddParameter): Name = "Value"; Value = "Relay SPDT, 10A, 12V"; VariantName = "[No Variations]"
+Added Component: Designator=RL4(RL_SPDT_10A)
+Add component (AddParameter): Name = "Value"; Value = "Relay SPDT, 10A, 12V"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=VCC_12V Pin=JP6-1
+Added Pin To Net: NetName=NetD9_A Pin=Q6-3
+Added Pin To Net: NetName=GND Pin=Q7-2
+Added Pin To Net: NetName=NetD10_A Pin=Q7-3
+Added Pin To Net: NetName=NetQ6_1 Pin=R11-2
+Added Pin To Net: NetName=GND Pin=R13-1
+Added Pin To Net: NetName=GND Pin=R14-1
+Added Pin To Net: NetName=GND Pin=R?-2
+Added Pin To Net: NetName=NetD9_A Pin=RL3-4
+Added Pin To Net: NetName=VCC_12V Pin=RL3-5
+Added Pin To Net: NetName=NetD10_A Pin=RL4-4
+Added Pin To Net: NetName=VCC_12V Pin=RL4-5
+Added Pin To Net: NetName=NetR12_1 Pin=U4-14
+Change Net Name : Old Net Name=VCC_12V New Net Name=NetC11_1
+Added Pin To Net: NetName=NetJP2_2 Pin=JP2-2
+Added Pin To Net: NetName=NetJP2_2 Pin=RL3-3
+Added Net: Name=NetJP2_2
+Added Pin To Net: NetName=NetJP3_2 Pin=JP3-2
+Added Pin To Net: NetName=NetJP3_2 Pin=RL4-3
+Added Net: Name=NetJP3_2
+Added Pin To Net: NetName=NetJP6_2 Pin=JP6-2
+Added Pin To Net: NetName=NetJP6_2 Pin=R?-1
+Added Net: Name=NetJP6_2
+Added Pin To Net: NetName=NetQ7_1 Pin=Q7-1
+Added Pin To Net: NetName=NetQ7_1 Pin=R12-2
+Added Net: Name=NetQ7_1
+Added Pin To Net: NetName=NetR11_1 Pin=R11-1
+Added Pin To Net: NetName=NetR11_1 Pin=U4-15
+Added Net: Name=NetR11_1
+Added Pin To Net: NetName=NetR13_2 Pin=R13-2
+Added Pin To Net: NetName=NetR13_2 Pin=RL3-1
+Added Net: Name=NetR13_2
+Added Pin To Net: NetName=NetR14_2 Pin=R14-2
+Added Pin To Net: NetName=NetR14_2 Pin=RL4-1
+Added Net: Name=NetR14_2
+Added Pin To Net: NetName=NetR17_2 Pin=R17-2
+Added Pin To Net: NetName=NetR17_2 Pin=RL1-1
+Added Net: Name=NetR17_2
+Added Pin To Net: NetName=NetR18_2 Pin=R18-2
+Added Pin To Net: NetName=NetR18_2 Pin=RL2-1
+Added Net: Name=NetR18_2
+Added Pin To Net: NetName=VCC_12V Pin=D1-1
+Added Pin To Net: NetName=VCC_12V Pin=D6-K
+Added Pin To Net: NetName=VCC_12V Pin=D7-1
+Added Pin To Net: NetName=VCC_12V Pin=JP1-1
+Added Pin To Net: NetName=VCC_12V Pin=JP5-1
+Added Pin To Net: NetName=VCC_12V Pin=RL2-5
+Added Net: Name=VCC_12V
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component JP6 Header 2_1
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component P1 Header 4P
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component P3 Header 3X2A
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component P4 Header 4X2A
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component P5 Header 6
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component Q7 2SC1815
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component R? 0R
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component RL3 Relay
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component RL4 Relay
+Added Room: Name=U_Comm_Sheet
+Added Room: Name=U_MCU_Sheet
+Added Room: Name=U_Power_Sheet
+Added Room: Name=U_Sensors_Sheet

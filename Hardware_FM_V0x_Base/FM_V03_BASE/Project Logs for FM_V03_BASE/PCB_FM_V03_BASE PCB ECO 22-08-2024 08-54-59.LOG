@@ -1,0 +1,16 @@
+Added Component: Designator=C26(CAP 6.3MMx5.4MM)
+Added Component: Designator=C27(CAP 6.3MMx5.4MM)
+Added Component: Designator=C28(CAP 6.3MMx5.4MM)
+Added Pin To Net: NetName=VC_DK Pin=C26-1
+Added Pin To Net: NetName=GND Pin=C26-2
+Added Pin To Net: NetName=VC_DK Pin=C27-1
+Added Pin To Net: NetName=GND Pin=C27-2
+Added Pin To Net: NetName=VC_DK Pin=C28-1
+Added Pin To Net: NetName=GND Pin=C28-2
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component C26 100uF/16V
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component C27 100uF/16V
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component C28 100uF/16V
+Added Room: Name=U_Comm_Sheet
+Added Room: Name=U_MCU_Sheet
+Added Room: Name=U_Power_Sheet
+Added Room: Name=U_Sensors_Sheet

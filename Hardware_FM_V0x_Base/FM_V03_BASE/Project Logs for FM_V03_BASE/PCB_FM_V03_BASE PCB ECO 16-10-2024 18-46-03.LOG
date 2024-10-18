@@ -1,0 +1,30 @@
+Removed Pin From Net: NetName=GND Pin=C47-1
+Removed Member From Class: ClassName=U_MCU_Sheet Member=C47
+Added Component: Designator=C11(CAP 6.3MMx5.4MM)
+Added Component: Designator=C26(CAP 6.3MMx5.4MM)
+Added Component: Designator=C?(CAPC-0603 (1608))
+Add component (AddParameter): Name = "Category"; Value = "CAPACITOR"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "CompanyID"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR_URL"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MPN"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PinCount"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Solder"; Value = "Not Fill"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "NF"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=+VCC_12V Pin=C11-1
+Added Pin To Net: NetName=GND Pin=C11-2
+Added Pin To Net: NetName=+VCC_12V Pin=C26-1
+Added Pin To Net: NetName=GND Pin=C26-2
+Added Pin To Net: NetName=GND Pin=C?-1
+Added Pin To Net: NetName=VCC_3V3_MCU Pin=C?-2
+Added Pin To Net: NetName=NetCR1_1 Pin=CR1-1
+Added Pin To Net: NetName=NetCR1_1 Pin=U4-1
+Added Net: Name=NetCR1_1
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component C11 100uF/16V
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component C26 100uF/16V
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component C60 30pF
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component C? NF
+Added Room: Name=U_Comm_Sheet
+Added Room: Name=U_MCU_Sheet
+Added Room: Name=U_Power_Sheet
+Added Room: Name=U_Sensors_Sheet

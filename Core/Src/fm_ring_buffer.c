@@ -12,12 +12,6 @@ RBuffer_Def_t     TX_Buffer = { {0},  0, 0};
 RBuffer_Def_t     *__RX_RBuffer;
 RBuffer_Def_t     *__TX_RBuffer;
 
-int _write(int file, char *ptr, int len)
-{
-    HAL_UART_Transmit(&huart2, (uint8_t*)ptr, len, HAL_MAX_DELAY);
-    return len;
-}
-
 void    FM_RBuffer_Int( void ){
 
           __RX_RBuffer = &RX_Buffer;

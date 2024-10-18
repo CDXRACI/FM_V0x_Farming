@@ -1,0 +1,49 @@
+Removed Pin From Net: NetName=GND Pin=R14-1
+Removed Pin From Net: NetName=GND Pin=R18-1
+Removed Member From Class: ClassName=U_MCU_Sheet Member=R14
+Removed Member From Class: ClassName=U_MCU_Sheet Member=R18
+Added Component: Designator=Q6(SOT23_3)
+Add component (AddParameter): Name = "Category"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "CompanyID"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MPN"; Value = "2SC1815"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PinCount"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Solder"; Value = "SMT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "2SC1815"; VariantName = "[No Variations]"
+Added Component: Designator=R11(RESC-0603 (1608))
+Add component (AddParameter): Name = "Category"; Value = "RESISTOR"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "CompanyID"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR"; Value = "Vishay Dale"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR_URL"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MPN"; Value = "CRCW06035R10FKEA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PinCount"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Solder"; Value = "SMT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "5.1R"; VariantName = "[No Variations]"
+Added Component: Designator=R12(RESC-0603 (1608))
+Add component (AddParameter): Name = "Category"; Value = "RESISTOR"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "CompanyID"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR"; Value = "Vishay Dale"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR_URL"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MPN"; Value = "CRCW06035R10FKEA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PinCount"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Solder"; Value = "SMT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "5.1R"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=NetQ6_1 Pin=Q6-1
+Added Pin To Net: NetName=GND Pin=Q6-2
+Added Pin To Net: NetName=NetD9_A Pin=Q6-3
+Added Pin To Net: NetName=NetR11_1 Pin=R11-1
+Added Pin To Net: NetName=NetQ6_1 Pin=R11-2
+Added Pin To Net: NetName=NetR12_1 Pin=R12-1
+Added Pin To Net: NetName=NetQ7_1 Pin=R12-2
+Added Pin To Net: NetName=GND Pin=RL1-1
+Added Pin To Net: NetName=GND Pin=RL2-1
+Added Pin To Net: NetName=GND Pin=RL3-1
+Added Pin To Net: NetName=GND Pin=RL4-1
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component JP2 Header 2_1
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component Q6 2SC1815
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component R11 1K
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component R12 1K
+Added Room: Name=U_Comm_Sheet
+Added Room: Name=U_MCU_Sheet
+Added Room: Name=U_Power_Sheet
+Added Room: Name=U_Sensors_Sheet

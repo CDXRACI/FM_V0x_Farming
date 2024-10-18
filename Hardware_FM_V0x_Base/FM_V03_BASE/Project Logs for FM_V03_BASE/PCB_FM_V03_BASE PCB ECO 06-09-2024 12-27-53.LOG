@@ -1,0 +1,29 @@
+Added Component: Designator=BT1(BAT_CR-1220/FCN)
+Add component (AddParameter): Name = "Availability"; Value = "In Stock"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/CR-1220/FCN/Panasonic%20-%20BSG/view-part/493674/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MF"; Value = "Panasonic -"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MP"; Value = "CR-1220/FCN"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Package"; Value = "Panasonic -"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Purchase-URL"; Value = "https://pricing.snapeda.com/search/part/CR-1220/FCN/?ref=eda"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/CR-1220/FCN/Panasonic%20-%20BSG/view-part/493674/?ref=snap"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=C11(CAP 6.3MMx5.4MM)
+Added Component: Designator=C26(CAP 6.3MMx5.4MM)
+Added Component: Designator=C48(100uF 1210 SMD)
+Added Pin To Net: NetName=GND Pin=BT1-NEG
+Added Pin To Net: NetName=NetBT1_POS Pin=BT1-POS
+Added Pin To Net: NetName=+VCC_12V Pin=C11-1
+Added Pin To Net: NetName=GND Pin=C11-2
+Added Pin To Net: NetName=+VCC_12V Pin=C26-1
+Added Pin To Net: NetName=GND Pin=C26-2
+Added Pin To Net: NetName=GND Pin=C48-1
+Added Pin To Net: NetName=VCC_5V_DC Pin=C48-2
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component BT1 CR-1220/FCN
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component C11 100uF/16V
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component C26 100uF/16V
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component C48 100uF
+Added Room: Name=U_Comm_Sheet
+Added Room: Name=U_MCU_Sheet
+Added Room: Name=U_Power_Sheet
+Added Room: Name=U_Sensors_Sheet

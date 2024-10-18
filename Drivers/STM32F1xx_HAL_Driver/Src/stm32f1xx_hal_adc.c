@@ -1008,7 +1008,7 @@ HAL_StatusTypeDef HAL_ADC_UnRegisterCallback(ADC_HandleTypeDef *hadc, HAL_ADC_Ca
 /** @defgroup ADC_Exported_Functions_Group2 IO operation functions
  *  @brief    Input and Output operation functions
  *
-@verbatim    
+@verbatim   
  ===============================================================================
                       ##### IO operation functions #####
  ===============================================================================

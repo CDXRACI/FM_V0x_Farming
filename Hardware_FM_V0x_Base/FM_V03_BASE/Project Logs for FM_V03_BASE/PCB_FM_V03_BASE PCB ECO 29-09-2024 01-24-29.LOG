@@ -1,0 +1,157 @@
+Removed Pin From Net: NetName=GND Pin=C4-2
+Removed Pin From Net: NetName=GND Pin=C6-1
+Removed Pin From Net: NetName=VCC_VBAT Pin=C6-2
+Removed Pin From Net: NetName=GND Pin=D3-1
+Removed Pin From Net: NetName=GND Pin=R3-1
+Change Component Footprint: Designator=C4 Old Footprint=CAP 6.3MMx5.4MM New Footprint=CAPC-0603 (1608)
+Change Component Footprint: Designator=C6 Old Footprint=CAPC-0603 (1608) New Footprint=CAP 6.3MMx5.4MM
+Change Component Footprint: Designator=D3 Old Footprint=DIODE_DO214AC_SMA New Footprint=LED_0805_PW
+Change Component Footprint: Designator=D1 Old Footprint=DIODE_DO214AC_SMA New Footprint=SS34
+Change Component Comment : Designator=R3 Old Comment=1K New Comment=100K
+Change Component Comment : Designator=R1 Old Comment=2.2K New Comment=470R
+Change Component Comment : Designator=C34 Old Comment=100nF New Comment=10pF
+Change Component Comment : Designator=C6 Old Comment=100nF New Comment=100uF/16V
+Change Component Comment : Designator=C4 Old Comment=100uF/16V New Comment=33pF
+Change Component Comment : Designator=D3 Old Comment=SS34 New Comment=LED_0805_PW
+Change component parameters: Designator = "D1" ("D1"); Footprint = "DIODE_DO214AC_SMA"; UniqueID = "\GRJOOEHD" ("\GRJOOEHD")
+Change component parameters: Designator = "D3" ("D3"); Footprint = "DIODE_DO214AC_SMA"; UniqueID = "\PEINGSZN" ("\PEINGSZN")
+Change component parameters: Designator = "C4" ("C4"); Footprint = "CAP 6.3MMx5.4MM"; UniqueID = "\QSPSRBPO" ("\QSPSRBPO")
+Change component parameters (AddParameter): Name = "Category"; Value = "CAPACITOR"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "CompanyID"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MFR"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MFR_URL"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MPN"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "PinCount"; Value = ""; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Solder"; Value = "Not Fill"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = "NF"; VariantName = "[No Variations]"
+Change component parameters: Designator = "C6" ("C6"); Footprint = "CAPC-0603 (1608)"; UniqueID = "\HHJLXEHG" ("\HHJLXEHG")
+Added Component: Designator=C11(CAP 6.3MMx5.4MM)
+Added Component: Designator=C26(CAP 6.3MMx5.4MM)
+Added Component: Designator=C27(CAPC-0603 (1608))
+Add component (AddParameter): Name = "Category"; Value = "CAPACITOR"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "CompanyID"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR_URL"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MPN"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PinCount"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Solder"; Value = "Not Fill"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "NF"; VariantName = "[No Variations]"
+Added Component: Designator=C28(CAPC-0603 (1608))
+Add component (AddParameter): Name = "Category"; Value = "CAPACITOR"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "CompanyID"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR_URL"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MPN"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PinCount"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Solder"; Value = "Not Fill"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "NF"; VariantName = "[No Variations]"
+Added Component: Designator=J1(USB_M)
+Added Component: Designator=R6(RESC-0603 (1608))
+Add component (AddParameter): Name = "Category"; Value = "RESISTOR"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "CompanyID"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR"; Value = "Vishay Dale"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR_URL"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MPN"; Value = "CRCW06035R10FKEA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PinCount"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Solder"; Value = "SMT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "5.1R"; VariantName = "[No Variations]"
+Added Component: Designator=R7(RESC-0603 (1608))
+Add component (AddParameter): Name = "Category"; Value = "RESISTOR"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "CompanyID"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR"; Value = "Vishay Dale"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR_URL"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MPN"; Value = "CRCW06035R10FKEA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PinCount"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Solder"; Value = "SMT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "5.1R"; VariantName = "[No Variations]"
+Added Component: Designator=R31(RESC-0603 (1608))
+Add component (AddParameter): Name = "Category"; Value = "RESISTOR"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "CompanyID"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR_URL"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MPN"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PinCount"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Solder"; Value = "Not Fill"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "NF"; VariantName = "[No Variations]"
+Added Component: Designator=R32(RESC-0603 (1608))
+Add component (AddParameter): Name = "Category"; Value = "RESISTOR"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "CompanyID"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR_URL"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MPN"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PinCount"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Solder"; Value = "Not Fill"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "NF"; VariantName = "[No Variations]"
+Added Component: Designator=R?(RESC-0603 (1608))
+Add component (AddParameter): Name = "Category"; Value = "RESISTOR"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "CompanyID"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR"; Value = "Vishay Dale"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MFR_URL"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MPN"; Value = "CRCW06035R10FKEA"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PinCount"; Value = "2"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Solder"; Value = "SMT"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "5.1R"; VariantName = "[No Variations]"
+Added Component: Designator=U1(MIC29302A)
+Added Pin To Net: NetName=GND Pin=C4-1
+Added Pin To Net: NetName=VCC_VBAT Pin=C4-2
+Added Pin To Net: NetName=VCC_VBAT Pin=C5-2
+Added Pin To Net: NetName=GND Pin=C6-2
+Added Pin To Net: NetName=+VCC_12V Pin=C11-1
+Added Pin To Net: NetName=GND Pin=C11-2
+Added Pin To Net: NetName=+VCC_12V Pin=C26-1
+Added Pin To Net: NetName=GND Pin=C26-2
+Added Pin To Net: NetName=GND Pin=C27-1
+Added Pin To Net: NetName=GND Pin=C28-1
+Added Pin To Net: NetName=VCC_VBAT Pin=C28-2
+Added Pin To Net: NetName=GND Pin=D3-2
+Added Pin To Net: NetName=VBUS Pin=J1-1
+Added Pin To Net: NetName=NetJ1_2 Pin=J1-2
+Added Pin To Net: NetName=NetJ1_3 Pin=J1-3
+Added Pin To Net: NetName=GND Pin=J1-5
+Added Pin To Net: NetName=GND Pin=J1-5
+Added Pin To Net: NetName=GND Pin=J1-5
+Added Pin To Net: NetName=GND Pin=R1-1
+Added Pin To Net: NetName=VCC_VBAT Pin=R3-1
+Added Pin To Net: NetName=VCC_VBAT Pin=R6-2
+Added Pin To Net: NetName=GND Pin=R7-1
+Added Pin To Net: NetName=NetJ1_2 Pin=R31-1
+Added Pin To Net: NetName=USB_N Pin=R31-2
+Added Pin To Net: NetName=NetJ1_3 Pin=R32-1
+Added Pin To Net: NetName=USB_P Pin=R32-2
+Added Pin To Net: NetName=GND Pin=U1-3
+Added Pin To Net: NetName=GND Pin=U1-3
+Added Pin To Net: NetName=VCC_VBAT Pin=U1-4
+Added Pin To Net: NetName=NetD3_1 Pin=D3-1
+Added Pin To Net: NetName=NetD3_1 Pin=R6-1
+Added Net: Name=NetD3_1
+Added Pin To Net: NetName=NetR3_2 Pin=R3-2
+Added Pin To Net: NetName=NetR3_2 Pin=R7-2
+Added Pin To Net: NetName=NetR3_2 Pin=U1-5
+Added Net: Name=NetR3_2
+Added Pin To Net: NetName=NetR?_2 Pin=R?-2
+Added Pin To Net: NetName=NetR?_2 Pin=U1-1
+Added Net: Name=NetR?_2
+Added Pin To Net: NetName=VCC_11XV Pin=C6-1
+Added Pin To Net: NetName=VCC_11XV Pin=C27-2
+Added Pin To Net: NetName=VCC_11XV Pin=D1-2
+Added Pin To Net: NetName=VCC_11XV Pin=R2-2
+Added Pin To Net: NetName=VCC_11XV Pin=R?-1
+Added Pin To Net: NetName=VCC_11XV Pin=U1-2
+Added Net: Name=VCC_11XV
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component C11 100uF/16V
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component C26 100uF/16V
+Added Member To Class: ClassName=U_Power_Sheet Member=Component C27 100nF
+Added Member To Class: ClassName=U_Power_Sheet Member=Component C28 100nF
+Added Member To Class: ClassName=U_Comm_Sheet Member=Component J1 USB_M
+Added Member To Class: ClassName=U_Power_Sheet Member=Component R6 330R
+Added Member To Class: ClassName=U_Power_Sheet Member=Component R7 47K
+Added Member To Class: ClassName=U_Comm_Sheet Member=Component R31 0R
+Added Member To Class: ClassName=U_Comm_Sheet Member=Component R32 0R
+Added Member To Class: ClassName=U_Power_Sheet Member=Component R? 100K
+Added Member To Class: ClassName=U_Power_Sheet Member=Component U1 MIC29302A
+Added Member To Class: ClassName=U_Comm_Sheet Member=Component U7 TXS0108E
+Added Member To Class: ClassName=VCC_POWER Member=Wire VCC_11XV
+Added Room: Name=U_Comm_Sheet
+Added Room: Name=U_MCU_Sheet
+Added Room: Name=U_Power_Sheet
+Added Room: Name=U_Sensors_Sheet

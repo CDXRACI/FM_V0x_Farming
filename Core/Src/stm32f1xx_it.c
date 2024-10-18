@@ -56,7 +56,6 @@
 
 /* External variables --------------------------------------------------------*/
 extern I2C_HandleTypeDef hi2c2;
-extern RTC_HandleTypeDef hrtc;
 extern UART_HandleTypeDef huart2;
 /* USER CODE BEGIN EV */
 extern void    FM_RBuffer_UART_ISR (UART_HandleTypeDef *huart );
@@ -201,20 +200,6 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
-  * @brief This function handles RTC global interrupt.
-  */
-void RTC_IRQHandler(void)
-{
-  /* USER CODE BEGIN RTC_IRQn 0 */
-
-  /* USER CODE END RTC_IRQn 0 */
-  HAL_RTCEx_RTCIRQHandler(&hrtc);
-  /* USER CODE BEGIN RTC_IRQn 1 */
-
-  /* USER CODE END RTC_IRQn 1 */
-}
-
-/**
   * @brief This function handles I2C2 event interrupt.
   */
 void I2C2_EV_IRQHandler(void)
@@ -254,20 +239,6 @@ void USART2_IRQHandler(void)
   /* USER CODE BEGIN USART2_IRQn 1 */
   FM_RBuffer_UART_ISR(&huart2);
   /* USER CODE END USART2_IRQn 1 */
-}
-
-/**
-  * @brief This function handles RTC alarm interrupt through EXTI line 17.
-  */
-void RTC_Alarm_IRQHandler(void)
-{
-  /* USER CODE BEGIN RTC_Alarm_IRQn 0 */
-
-  /* USER CODE END RTC_Alarm_IRQn 0 */
-  HAL_RTC_AlarmIRQHandler(&hrtc);
-  /* USER CODE BEGIN RTC_Alarm_IRQn 1 */
-
-  /* USER CODE END RTC_Alarm_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

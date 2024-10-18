@@ -1,0 +1,4 @@
+Removed Pin From Net: NetName=VC_DK Pin=C29-1
+Removed Pin From Net: NetName=GND Pin=C29-2
+Removed Member From Class: ClassName=U_MCU_Sheet Member=C29
+Added Room: Name=U_Power_Sheet

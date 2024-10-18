@@ -1,0 +1,20 @@
+Removed Pin From Net: NetName=VCC_12V Pin=D5-K
+Removed Pin From Net: NetName=VCC_12V Pin=JP2-1
+Removed Pin From Net: NetName=GND Pin=M1-3
+Removed Pin From Net: NetName=GND Pin=Q1-2
+Removed Pin From Net: NetName=VCC_12V Pin=R6-2
+Removed Pin From Net: NetName=VCC_3V3_MCU Pin=R7-2
+Removed Member From Class: ClassName=U_MCU_Sheet Member=D5
+Removed Member From Class: ClassName=U_MCU_Sheet Member=JP2
+Removed Member From Class: ClassName=U_MCU_Sheet Member=M1
+Removed Member From Class: ClassName=U_MCU_Sheet Member=Q1
+Removed Member From Class: ClassName=U_MCU_Sheet Member=R6
+Removed Member From Class: ClassName=U_MCU_Sheet Member=R7
+Removed Member From Class: ClassName=U_MCU_Sheet Member=R11
+Added Pin To Net: NetName=NetU4_10 Pin=U4-10
+Added Pin To Net: NetName=NetU4_10 Pin=U12-2
+Added Net: Name=NetU4_10
+Added Room: Name=U_Comm_Sheet
+Added Room: Name=U_MCU_Sheet
+Added Room: Name=U_Power_Sheet
+Added Room: Name=U_Sensors_Sheet

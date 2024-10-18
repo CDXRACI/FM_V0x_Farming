@@ -22,11 +22,11 @@ build/main.o: Core/Src/main.c Core/Inc/main.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h \
+ Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
+ Core/Inc/fm_init_project.h Core/Inc/fm_rtc.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h \
- Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h \
- Core/Inc/fm_init_project.h Core/Inc/fm_rtc.h Core/Inc/fm_sht30_sensor.h \
- Core/Inc/fm_multiADC.h \
+ Core/Inc/fm_sht30_sensor.h Core/Inc/fm_multiADC.h \
  Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h
 Core/Inc/main.h:
 Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h:
@@ -54,11 +54,11 @@ Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h:
 Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h:
 Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h:
 Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h:
-Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc.h:
-Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h:
 Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_uart.h:
 Core/Inc/fm_init_project.h:
 Core/Inc/fm_rtc.h:
+Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc.h:
+Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rtc_ex.h:
 Core/Inc/fm_sht30_sensor.h:
 Core/Inc/fm_multiADC.h:
 Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h:

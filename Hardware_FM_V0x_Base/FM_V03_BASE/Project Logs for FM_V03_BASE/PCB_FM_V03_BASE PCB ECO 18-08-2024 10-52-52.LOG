@@ -1,0 +1,18 @@
+Added Component: Designator=JP6(HED2)
+Add component (AddParameter): Name = "Class"; Value = "Connector"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manufacturer"; Value = "Generic Components"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "Header 2"; VariantName = "[No Variations]"
+Added Component: Designator=R13(SM-RES-1206)
+Add component (AddParameter): Name = "Value"; Value = "R1/4W - 1K"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=VC_DK Pin=JP6-1
+Added Pin To Net: NetName=GND Pin=R13-2
+Added Pin To Net: NetName=NetJP6_2 Pin=JP6-2
+Added Pin To Net: NetName=NetJP6_2 Pin=R13-1
+Added Net: Name=NetJP6_2
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component D5 1N4007
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component JP6 Header 2_1
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component R13 0R
+Added Room: Name=U_Comm_Sheet
+Added Room: Name=U_MCU_Sheet
+Added Room: Name=U_Power_Sheet
+Added Room: Name=U_Sensors_Sheet

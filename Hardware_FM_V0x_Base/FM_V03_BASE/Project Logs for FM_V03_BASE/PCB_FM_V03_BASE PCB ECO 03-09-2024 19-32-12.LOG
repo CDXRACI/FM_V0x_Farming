@@ -1,0 +1,26 @@
+Removed Pin From Net: NetName=NetBT1_1 Pin=BT1-1
+Removed Pin From Net: NetName=GND Pin=BT1-2
+Change Component Footprint: Designator=BT1 Old Footprint=BATERRY_CR1220 New Footprint=BAT_CR-1220/FCN
+Change Component Comment : Designator=BT1 Old Comment=35mAh New Comment=CR-1220/FCN
+Change component parameters: Designator = "BT1" ("BT1"); Footprint = "BATERRY_CR1220"; UniqueID = "\NVLIVKGA" ("\NVLIVKGA")
+Change component parameters (AddParameter): Name = "Availability"; Value = "In Stock"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Check_prices"; Value = "https://www.snapeda.com/parts/CR-1220/FCN/Panasonic%20-%20BSG/view-part/493674/?ref=eda"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MF"; Value = "Panasonic -"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "MP"; Value = "CR-1220/FCN"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Package"; Value = "Panasonic -"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Price"; Value = "None"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Purchase-URL"; Value = "https://pricing.snapeda.com/search/part/CR-1220/FCN/?ref=eda"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "SnapEDA_Link"; Value = "https://www.snapeda.com/parts/CR-1220/FCN/Panasonic%20-%20BSG/view-part/493674/?ref=snap"; VariantName = "[No Variations]"
+Change component parameters (AddParameter): Name = "Value"; Value = ""; VariantName = "[No Variations]"
+Added Component: Designator=C26(CAP 6.3MMx5.4MM)
+Added Pin To Net: NetName=GND Pin=BT1-NEG
+Added Pin To Net: NetName=NetBT1_1 Pin=BT1-POS
+Added Pin To Net: NetName=+VCC_12V Pin=C26-1
+Added Pin To Net: NetName=GND Pin=C26-2
+Change Net Name : Old Net Name=NetBT1_1 New Net Name=NetBT1_POS
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component C26 100uF/16V
+Added Member To Class: ClassName=U_MCU_Sheet Member=Component RL2 Relay
+Added Room: Name=U_Comm_Sheet
+Added Room: Name=U_MCU_Sheet
+Added Room: Name=U_Power_Sheet
+Added Room: Name=U_Sensors_Sheet

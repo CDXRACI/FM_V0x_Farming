@@ -64,7 +64,7 @@ def read_serial():
             current_timestamp = datetime.now()
             formatted_timestamp = current_timestamp.strftime("%H:%M:%S")
             received_data = ser.readline().decode().strip()
-            textbox.insert(tk.END, f"FM_V0x_LOG: {formatted_timestamp} {received_data}\n")
+            textbox.insert(tk.END, f"FM_V0x_LOG {formatted_timestamp} {received_data}\n")
             textbox.see(tk.END)  # Scroll to the end of the text
     except serial.SerialException as e:
         textbox.insert(tk.END, f"Error reading from serial port: {str(e)}\n")

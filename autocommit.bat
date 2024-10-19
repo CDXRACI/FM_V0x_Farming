@@ -73,7 +73,7 @@ REM define functions
 :FM_V0x_Commit_Files
 	if %Flag_git_commit% == %F_FALSE% (
 		Hastag = Hastag + 1
-		git commit -m "Auto_commit_str + {Hastag}"
+		git commit -m "Auto_commit_str + Hastag"
 		echo Add files to repository.
 	) else (
 		echo Failed to add files to repository. )

@@ -40,6 +40,14 @@ typedef enum {
 
 }   FM_V0x_multiADC_States_t;
 
+typedef enum {
+
+        FM_V0x_MULTIADC_CALIB_DATA_FOR_IDR_IS_DARK     =    400,
+        FM_V0x_MULTIADC_CALIB_DATA_FOR_IDR_IS_LIGHT    =   2000,
+        FM_V0x_MULTIADC_CALIB_DATA_FOR_IDR_IS_BRIGHT   =   3000        
+
+
+}   FM_V0x_multiADC_Calib_Data_t;
 
 typedef struct {
     
@@ -60,6 +68,7 @@ void FM_V0x_MultiADC_Init   ( );
 void FM_V0x_MultiADC_Reads_ADC_Signal (FM_V0x_MultiADC_Handle_t hadc );
 void FM_V0x_MultiADC_Starts ( FM_V0x_MultiADC_Handle_t hadc );
 bool FM_V0x_MultiADC_Stop   ( FM_V0x_MultiADC_Handle_t *hadc );
+bool FM_V0X_MultiADC_Calib_Data( FM_V0x_MultiADC_Handle_t hadc, FM_V0x_MultADC_Buffer_t *buffer );
 bool FM_V0x_MultiADC_Is_Pausing ( FM_V0x_MultiADC_Handle_t *hadc );
 
 #ifdef __cplusplus

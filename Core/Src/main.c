@@ -117,7 +117,7 @@ int main(void)
   FM_V0x_SHT30_Read_Temp_Humid(&handle, &temperature, &humidity);
   printf("LOG_ADC: SHT30x %.2fC, humidity: %.2f%%RH\n\r", temperature, humidity);
   FM_V0x_MultiADC_Init ( );
-  HAL_Delay(10000);
+  HAL_Delay(5000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */

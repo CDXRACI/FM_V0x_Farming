@@ -3,8 +3,10 @@ import tkinter as tk
 from tkinter import PhotoImage
 from tkinter import messagebox
 from tkinter import scrolledtext
+from tkinter import Button
 import serial.tools.list_ports
 from PIL import Image, ImageTk
+from datetime import datetime
 
 
 
@@ -18,6 +20,15 @@ def connect_serial():
     global after_id
     port = port_var.get()
     baud_rate = baud_rate_var.get()
+    if connect_button['state'] == 'normal':
+        connect_button.config(state ='disabled')
+        connect_button.config(text='Connected')
+        connect_button.config(bg='#c2d6d6')
+        connect_button.config(font=("Arial", 9, "bold"))
+    else:
+        connect_button.config(state='normal')
+        connect_button.config(text='Connect')
+        connect_button.config(bg='white')
     try:
         ser = serial.Serial(port, baud_rate)
         textbox.insert(tk.END, f"Connected to {port} at {baud_rate} baud\n")
@@ -28,6 +39,14 @@ def connect_serial():
 def disconnect_serial():
     global ser
     global after_id
+    if connect_button['state'] == 'disabled':
+        connect_button.config(state ='normal')
+        connect_button.config(text='Connect')
+        connect_button.config(bg='SystemButtonFace')
+        connect_button.config(font=("Arial", 9, "normal"))
+    else:
+        connect_button.config(state='normal')
+        connect_button.config(text='Connect')
     if ser is not None and ser.is_open:
         ser.close()
         textbox.after_cancel(after_id)  # Cancel the recurring calls
@@ -41,8 +60,10 @@ def read_serial():
     global after_id
     try:
         if ser is not None and ser.is_open and ser.in_waiting > 0:
+            current_timestamp = datetime.now()
+            formatted_timestamp = current_timestamp.strftime("%H:%M:%S")
             received_data = ser.readline().decode().strip()
-            textbox.insert(tk.END, f"Received: {received_data}\n")
+            textbox.insert(tk.END, f"FM_V0x_LOG: {formatted_timestamp} {received_data}\n")
             textbox.see(tk.END)  # Scroll to the end of the text
     except serial.SerialException as e:
         textbox.insert(tk.END, f"Error reading from serial port: {str(e)}\n")
@@ -69,16 +90,24 @@ window = tk.Tk()
 #window.iconbitmap("icon_round1.ico") # Optional icon.
 
 
-window.title("DP-Greens V0.1")
+window.title("DP-Greens V0.2")
 window.geometry("550x550")
 window.config(bg="white")
 image = Image.open('logo_dp.png') 
 image = image.resize((32, 32), Image.Resampling.LANCZOS)
 icon = ImageTk.PhotoImage(image)
 window.iconphoto(True, icon)
+
+
+image1 = Image.open('logo_dp.png') 
+bg_image1 = ImageTk.PhotoImage(image1)
+bg_label = tk.Label(window, image=bg_image1)
+bg_label.place(x=0, y=0, relwidth=1, relheight=1)  # Make the label cover the entire window
+
 # COM ports Selection
 top_frame = tk.Frame(window)
 top_frame.pack(padx=5, pady=5)
+top_frame.config(bg='#ebebe0')
 
 port_label = tk.Label(top_frame, text="Port:")
 port_label.pack(side=tk.LEFT)
@@ -98,14 +127,16 @@ baud_rate_dropdown = tk.OptionMenu(top_frame, baud_rate_var, "300", "600", "1200
 baud_rate_dropdown.pack(side=tk.LEFT)
 
 # Buttons top_frame, Connect button
-connect_button = tk.Button(top_frame, text="Connect", command=connect_serial)
+connect_button = tk.Button(top_frame, text="Connect", state='normal', command=connect_serial)    
 connect_button.pack(side=tk.LEFT, padx=5, pady=5)
+
+#connect_button.config(bg='brown', fg='red')
 # Disconnect button
 disconnect_button = tk.Button(top_frame, text="Disconnect", command=disconnect_serial)
 disconnect_button.pack(side=tk.LEFT, padx=5, pady=5)
 
 # Textbox
-textbox = scrolledtext.ScrolledText(window, height=20, width=60)
+textbox = scrolledtext.ScrolledText(window, height=30, width=120)
 textbox.pack(padx=10, pady=5)
 
 # One-line input textbox

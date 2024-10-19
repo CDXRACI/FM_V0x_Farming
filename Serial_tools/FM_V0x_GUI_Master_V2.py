@@ -5,6 +5,7 @@ from tkinter import messagebox
 from tkinter import scrolledtext
 from tkinter import Button
 import serial.tools.list_ports
+import ctypes
 from PIL import Image, ImageTk
 from datetime import datetime
 
@@ -85,7 +86,8 @@ def send_serial():
 
 # Create the main Tkinter window
 window = tk.Tk()
-
+myapp = 'mycompany.myproduct.subproduct.version'
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myapp)
 # Set the window icon
 #window.iconbitmap("icon_round1.ico") # Optional icon.
 

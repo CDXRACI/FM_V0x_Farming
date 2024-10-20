@@ -84,7 +84,8 @@ REM define functions
 			set minute=%%b
 			set second=%%c
 		)
-		set timestamp=%year%%month%%day%_%hour%h_%minute%m_%second%s
+		set timestamp=%year%%month%%day%_%hour%%minute%%second%
+		echo %timestamp%
 		git commit -m "FM_V0x_Farming commit with timestamp is: %timestamp%"
 		echo Add files to repository.
 		endlocal

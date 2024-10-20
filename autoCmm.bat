@@ -72,7 +72,6 @@ REM define functions
 :FM_V0x_Commit_Files
 	if %Flag_git_commit% == %F_FALSE% (
 		setlocal
-		
 		for /f "tokens=1-4 delims=/.- " %%a in ("%date%") do (
 			set year=%%c
 			set month=%%a
@@ -84,9 +83,9 @@ REM define functions
 			set second=%%c
 		)
 		set timestamp=%year%%month%%day%_%hour%%minute%%second%
-		echo %timestamp%
 		git commit -m "FM_V0x_Farming commit with timestamp is: %timestamp%"
 		echo Add files to repository.
+		endlocal
 	) else (
 		echo Failed to add files to repository. )
 	exit /b

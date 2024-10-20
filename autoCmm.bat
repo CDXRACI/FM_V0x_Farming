@@ -78,7 +78,12 @@ REM define functions
 			set month=%%a
 			set day=%%b
 		)
-		set timestamp=%year%%month%%day%
+		for /f "tokens=1-3 delims=:., " %%a in ("%time%") do (
+			set hour=%%a
+			set minute=%%b
+			set second=%%c
+		)
+		set timestamp=%year%%month%%day%_%hour%%minute%%second%
 		git commit -m "FM_V0x_Farming commit with timestamp is: %timestamp%"
 		echo Add files to repository.
 	) else (

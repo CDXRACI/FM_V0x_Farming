@@ -53,7 +53,7 @@ for /f "tokens=1-3 delims=:., " %%a in ("%time%") do (
 	set minute=%%b
 	set second=%%c
 )
-set timestamp=%year%%month%%day%_%hour%%minute%%second%
+set timestamp=%year%%month%%day%_%hour%h_%minute%m_%second%s
 echo %timestamp%
 call :FM_V0x_Go_Dir 0
 
@@ -68,7 +68,7 @@ REM define functions
 	if %Flag_git_pull% == %F_FALSE% (
 	    echo Pulling data from server
 		git pull	
-		echo To Pull Data completed from server
+		echo Pull Data completed from server
 	) else (
 		echo Failed to pull data from server 
 		)	
@@ -84,10 +84,8 @@ REM define functions
 
 :FM_V0x_Commit_Files
 	if %Flag_git_commit% == %F_FALSE% (
-		setlocal
 		git commit -m "FM_V0x_Farming commit with timestamp is: %timestamp%"
 		echo Add files to repository.
-		endlocal
 	) else (
 		echo Failed to add files to repository. )
 	exit /b

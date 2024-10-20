@@ -2,7 +2,7 @@
 # FM_V0x_Farming
 
 This repository will use for FM_V0x_HW which hardware is support for farming project.
-
+<a href="http://www.orangepi.org/"><img src="https://github.com/CDXRACI/FM_V0x_Farming/blob/master/Serial_tools/logo_dp.png" alt="Orange Pi Logo" align="left" style="margin-right: 25px" height=150></a>
 ## Brief function
 
 - To read temperature from sensor
@@ -13,7 +13,7 @@ This repository will use for FM_V0x_HW which hardware is support for farming pro
 
 ## Installation
 
-Install FM_V0x_Farming was builed by makefile on Visual studio code.
+Install FM_V0x_Farming was builded by makefile on Visual studio code.
 
 - Install arm-none-eabi-gcc
 ```bash

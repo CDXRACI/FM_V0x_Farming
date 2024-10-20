@@ -84,7 +84,7 @@ REM define functions
 
 :FM_V0x_Commit_Files
 	if %Flag_git_commit% == %F_FALSE% (
-		git commit -m "FM_V0x_Farming commit with timestamp is: %timestamp%"
+		git commit -m "FM_V0x_Farming auto commit. Timeis: %timestamp%"
 		echo Add files to repository.
 	) else (
 		echo Failed to add files to repository. )

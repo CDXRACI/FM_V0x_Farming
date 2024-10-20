@@ -23,23 +23,23 @@ Install FM_V0x_Farming was builded by makefile on Visual studio code.
 
 - Install arm-none-eabi-gcc
 ```bash
-  
+  sudo apt install gcc-arm-none-eabi
   
 ```
 - Install openocd
 
 ```bash
-  
+  sudo apt install openocd
   
 ```
 - Install makefile
 ```bash
-  
+  sudo apt install makefile
   
 ```
 - Install stlink
 ```bash
-  
+  sudo apt install stlink
   
 ```
 ## Authors

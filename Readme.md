@@ -2,7 +2,11 @@
 # FM_V0x_Farming
 
 This repository will use for FM_V0x_HW which hardware is support for farming project.
-<a href="http://www.orangepi.org/"><img src="https://github.com/CDXRACI/FM_V0x_Farming/blob/master/Serial_tools/logo_dp.png" alt="Orange Pi Logo" align="left" style="margin-right: 25px" height=150></a>
+<a href="https://www.facebook.com/profile.php?id=61566733655167"><img src="https://github.com/CDXRACI/FM_V0x_Farming/blob/master/Serial_tools/logo_dp.png" alt="DP-Greens" align="left" style="margin-right: 25px" height=150></a>
+
+
+
+
 ## Brief function
 
 - To read temperature from sensor

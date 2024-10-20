@@ -27,9 +27,6 @@ Install FM_V0x_Farming was builed by makefile on Visual studio code.
   
 ```
 - Install makefile
-``````bash
-  
-  
 ```bash
   
   

@@ -43,7 +43,18 @@ echo *=======================/Loading: 80% Call FM_V0x_Function (3)---*
 echo *========================/Loading: 90% Call FM_V0x_Function (4)--*
 echo *=========================/Loading: 100% Call FM_V0x_Function (5)*
 cd %Directory%
-
+for /f "tokens=1-4 delims=/.- " %%a in ("%date%") do (
+	set year=%%c
+	set month=%%a
+	set day=%%b
+)
+for /f "tokens=1-3 delims=:., " %%a in ("%time%") do (
+	set hour=%%a
+	set minute=%%b
+	set second=%%c
+)
+set timestamp=%year%%month%%day%_%hour%%minute%%second%
+echo %timestamp%
 call :FM_V0x_Go_Dir 0
 
 call :FM_V0x_Add_Files 0 
@@ -74,18 +85,6 @@ REM define functions
 :FM_V0x_Commit_Files
 	if %Flag_git_commit% == %F_FALSE% (
 		setlocal
-		for /f "tokens=1-4 delims=/.- " %%a in ("%date%") do (
-			set year=%%c
-			set month=%%a
-			set day=%%b
-		)
-		for /f "tokens=1-3 delims=:., " %%a in ("%time%") do (
-			set hour=%%a
-			set minute=%%b
-			set second=%%c
-		)
-		set timestamp=%year%%month%%day%_%hour%%minute%%second%
-		echo %timestamp%
 		git commit -m "FM_V0x_Farming commit with timestamp is: %timestamp%"
 		echo Add files to repository.
 		endlocal

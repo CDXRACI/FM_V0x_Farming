@@ -48,7 +48,9 @@ call :FM_V0x_Go_Dir 0
 
 call :FM_V0x_Add_Files 0 
 
-call :FM_V0x_Commit_Files 
+call :FM_V0x_Commit_Files 0
+
+call :FM_V0x_Push_2Repo 0
 REM define functions
 :FM_V0x_Go_Dir
 
@@ -82,10 +84,18 @@ REM define functions
 			set minute=%%b
 			set second=%%c
 		)
-		set timestamp=%year%%month%%day%_%hour%%minute%%second%
+		set timestamp=%year%%month%%day%_%hour%h_%minute%m_%second%s
 		git commit -m "FM_V0x_Farming commit with timestamp is: %timestamp%"
 		echo Add files to repository.
 		endlocal
+	) else (
+		echo Failed to add files to repository. )
+	exit /b
+	
+:FM_V0x_Push_2Repo
+	if %Flag_git_Push% == %F_FALSE% (
+		git push
+		echo Push file to repository.
 	) else (
 		echo Failed to add files to repository. )
 	exit /b

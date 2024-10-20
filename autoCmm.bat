@@ -33,8 +33,7 @@ set   Flag_git_Push   = %F_FALSE%
 set   Flag_git_pull   = %F_FALSE%
 echo *============/Loading: 40% define hastag commit------------------*
 REM define hastag 
-set Auto_commit_str = FM_V03_01_Commit with has tag #
-set Hastag = 15030197
+
 echo *===============/Loading: 50% define directory-------------------*
 REM Define Directory
 set Directory=C:\00_WorkSpace\FM_Master\FM_V03_01\FM_V03_01
@@ -49,7 +48,7 @@ call :FM_V0x_Go_Dir 0
 
 call :FM_V0x_Add_Files 0 
 
-call :FM_V0x_Commit_Files 0
+call :FM_V0x_Commit_Files 
 REM define functions
 :FM_V0x_Go_Dir
 
@@ -72,8 +71,15 @@ REM define functions
 
 :FM_V0x_Commit_Files
 	if %Flag_git_commit% == %F_FALSE% (
-		Hastag = Hastag + 1
-		git commit -m "%Auto_commit_str% + %Hastag%"
+		setlocal
+		
+		for /f "tokens=1-4 delims=/.- " %%a in ("%date%") do (
+			set year=%%c
+			set month=%%a
+			set day=%%b
+		)
+		set timestamp=%year%%month%%day%
+		git commit -m %timestamp%
 		echo Add files to repository.
 	) else (
 		echo Failed to add files to repository. )

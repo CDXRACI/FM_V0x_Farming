@@ -33,7 +33,7 @@ set   Flag_git_Push   = %F_FALSE%
 set   Flag_git_pull   = %F_FALSE%
 echo *============/Loading: 40% define hastag commit------------------*
 REM define hastag 
-set hihihehe=FM_V0x_Farming 
+
 echo *===============/Loading: 50% define directory-------------------*
 REM Define Directory
 set Directory=C:\00_WorkSpace\FM_Master\FM_V03_01\FM_V03_01
@@ -79,9 +79,10 @@ REM define functions
 			set day=%%b
 		)
 		set timestamp=%year%%month%%day%
-		echo %hihihehe%
-		set hohihi=%hihihehe% %timestamp%
-		git commit -m %hihihehe%
+		set hastagcm=FM_V0x_Farming
+		set new_cmm=%hastagcm% %timestamp%
+		echo %new_cmm%
+		git commit -m %new_cmm%
 		echo Add files to repository.
 	) else (
 		echo Failed to add files to repository. )
